@@ -7,8 +7,14 @@ import React from 'react'
 import {IoIosAddCircleOutline} from 'react-icons/io'
 import {FiBriefcase} from 'react-icons/fi'
 import {RiDeleteBin7Line} from 'react-icons/ri'
+import { EmployeeProps } from "@/types"
 
-const EmployeeSection = () => {
+interface EmployeeCardProps {
+  employee: EmployeeProps;
+}
+
+const EmployeeSection = ({employee}: EmployeeCardProps) => {
+  const {lastname, firstname, job, personality, teamId} = employee
   return (
     <div className='ml-5'>
       <div className='mb-3'>
@@ -19,7 +25,7 @@ const EmployeeSection = () => {
       </div>
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Employers</h3>
-        
+
         <Card className='w-[295px] h-[80px]'>
           <div className="flex items-center">
           <Avatar className="my-5 ml-4">
@@ -30,7 +36,7 @@ const EmployeeSection = () => {
             <div className="flex">
               <div className="my-4">
             <div className="ml-5 font-bold">
-              Marie Jean
+              {firstname}
             </div>
             <div className="ml-5 text-sm">
               UI/UX designer
