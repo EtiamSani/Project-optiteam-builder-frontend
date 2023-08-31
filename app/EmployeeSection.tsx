@@ -16,7 +16,7 @@ interface EmployeeCardProps {
 const EmployeeSection = ({employee}: EmployeeCardProps) => {
   const {lastname, firstname, job, personality, teamId, profilepicture} = employee
   return (
-    <aside className='ml-5'>
+    <div className='ml-5'>
       
 
         <Card className='w-[345px] h-[80px] mb-2 hover:bg-[#F1B92A]'>
@@ -44,7 +44,7 @@ const EmployeeSection = ({employee}: EmployeeCardProps) => {
           </div>
           </div>
         </Card>
-      </aside>
+      </div>
     
   )
 }
