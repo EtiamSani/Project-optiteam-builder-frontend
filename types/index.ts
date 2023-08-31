@@ -5,4 +5,5 @@ export interface EmployeeProps {
     job : String,
     personality: String
     teamId: number
+    profilepicture: String
 }
