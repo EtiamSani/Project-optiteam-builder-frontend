@@ -1,20 +1,20 @@
 "use client"
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import React from 'react'
 import {IoIosAddCircleOutline} from 'react-icons/io'
 import {FiBriefcase} from 'react-icons/fi'
 import {RiDeleteBin7Line} from 'react-icons/ri'
 import { EmployeeProps } from "@/types"
+import { deleteEmployee } from "@/utils"
 
 interface EmployeeCardProps {
   employee: EmployeeProps;
 }
 
 const EmployeeSection = ({employee}: EmployeeCardProps) => {
-  const {lastname, firstname, job, personality, teamId, profilepicture} = employee
+  const {id,lastname, firstname, job, personality, teamId, profilepicture} = employee
   return (
     <div className='ml-5'>
       
@@ -38,7 +38,9 @@ const EmployeeSection = ({employee}: EmployeeCardProps) => {
             <div className="my-7 flex ml-5">
             <IoIosAddCircleOutline className='text-2xl ml-2'/>
             <FiBriefcase className='text-2xl ml-2'/>
-            <RiDeleteBin7Line className='text-2xl ml-2'/>
+            <button>
+            <RiDeleteBin7Line className='text-2xl ml-2' onClick={() => deleteEmployee(id)}/>
+            </button>
             </div>
             </div>
           </div>
