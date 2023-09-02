@@ -7,7 +7,7 @@ import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const Modal = () => {
-
+    const [isModalOpen, setIsModalOpen] = useState(true);
       
     const [employeeData, setEmployeeData] = useState({
         lastname: "",

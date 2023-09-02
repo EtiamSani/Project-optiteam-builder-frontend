@@ -5,6 +5,7 @@ import { IoIosAddCircleOutline } from 'react-icons/io'
 import Modal from './Modal'
 
 const Buttons = () => {
+  
   return (
     <div className='ml-5'>
       <Dialog>
