@@ -1,3 +1,4 @@
+import { AddEmployeeProps, EmployeeProps } from "@/types";
 
 
 export async function fetchEmployee() {
@@ -37,6 +38,29 @@ export async function deleteEmployee(id: number) {
       console.error('Error deleting employee:', error);
     }
   }
+
+  export async function handleSubmit (employeeData : AddEmployeeProps, e:any) {
+    e.preventDefault();
+      try {
+        // Effectuez une requête POST vers l'URL de l'API (localhost:3001/employees)
+        const response = await fetch("http://localhost:3001/employees", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(employeeData),
+        });
+  
+        if (response.ok) {
+          // La requête a réussi, vous pouvez gérer la réponse ici
+        } else {
+          // La requête a échoué, gérer les erreurs ici
+        }
+      } catch (error) {
+        console.error("Erreur lors de la soumission du formulaire :", error);
+      }
+    }
+  
     
 
 

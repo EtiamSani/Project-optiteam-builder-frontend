@@ -7,3 +7,11 @@ export interface EmployeeProps {
     teamId: number
     profilepicture: String
 }
+
+export interface AddEmployeeProps {
+    lastname: String,
+    firstname: String,
+    job : String,
+    // personality: String
+    
+}

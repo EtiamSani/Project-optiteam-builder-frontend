@@ -1,9 +1,10 @@
 "use client"
-import { fetchEmployee } from "@/utils"
+import { deleteEmployee, fetchEmployee } from "@/utils"
 import EmployeeSection from "./EmployeeSection"
 import { EmployeeProps } from "@/types";
 import Buttons from "./Buttons";
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
   
 export default function Home() {
   const [allEmployees, setAllEmployees] = useState<EmployeeProps[]>([]);
@@ -13,7 +14,6 @@ export default function Home() {
     const fetchData = async () => {
       try {
         const employees = await fetchEmployee();
-        console.log(allEmployees)
         setAllEmployees(employees);
       } catch (error) {
         console.error('Error fetching employees:', error);
@@ -25,9 +25,7 @@ export default function Home() {
 
   const handleDeleteEmployee = async (employeeToDelete: EmployeeProps) => {
     try {
-      // Supprimez l'employé du serveur ici à l'aide de deleteEmployee
-      // ...
-      // Après la suppression réussie, mettez à jour le state allEmployees
+      deleteEmployee(employeeToDelete.id)
       const updatedEmployees = allEmployees.filter((e) => e.id !== employeeToDelete.id);
       setAllEmployees(updatedEmployees);
     } catch (error) {
