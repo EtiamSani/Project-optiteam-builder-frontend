@@ -6,11 +6,7 @@ import Modal from './Modal'
 
 const Buttons = () => {
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const closeModal = () => {
     setIsModalOpen(false);
@@ -27,8 +23,7 @@ const Buttons = () => {
       <div>
       <Button size="lg" variant="yellow">Ajouter des compétences <IoIosAddCircleOutline className='text-2xl ml-2'/></Button>
       </div>
-      {/* <Modal/> */}
-      {isModalOpen && <Modal onClose={closeModal} />}
+      {!isModalOpen && <Modal onClose={closeModal} />}
       </Dialog>
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Employers</h3>

@@ -11,7 +11,18 @@ interface ModalProps {
   }
 
   const Modal: React.FC<ModalProps> = ({ onClose }) => {
-    const [isModalOpen, setIsModalOpen] = useState(true);
+    
+
+    const resetModal = () => {
+        setEmployeeData({
+          lastname: "",
+          firstname: "",
+          job: "",
+          personality: "",
+          teamId: 1
+        });
+      };
+      
 
     const handleAddEmployee = async (e:any) => {
         try {
@@ -21,7 +32,7 @@ interface ModalProps {
           await handleSubmit(employeeData,e); // Appelez handleSubmit directement
           onClose();
           // Réinitialisez les données du formulaire, si nécessaire.
-          setIsModalOpen(false); // Ferme la modal
+          resetModal();
         } catch (error) {
           console.error('Error adding employee:', error);
         }
@@ -91,13 +102,17 @@ interface ModalProps {
             </Label>
             <Input id="job" value={employeeData.job} onChange={handleInputChange} className="col-span-3" />
             </div>
-            <div>
+            <div className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor="job" className="text-right">
+              Personalité
+            </Label>
             <Select onValueChange={handlePersonalityChange}>
                 <SelectTrigger className="w-[180px]">
                 <SelectValue placeholder="La personnalité" />
                 </SelectTrigger>
                 <SelectContent>
                 <SelectGroup>
+           
                 {selectItems.map((item) => (
           <SelectItem key={item.value} value={item.value}>
                     {item.label}

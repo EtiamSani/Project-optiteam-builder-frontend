@@ -2,24 +2,18 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card } from '@/components/ui/card'
-import React, { useState } from 'react'
+import React from 'react'
 import {IoIosAddCircleOutline} from 'react-icons/io'
 import {FiBriefcase} from 'react-icons/fi'
 import {RiDeleteBin7Line} from 'react-icons/ri'
 import { EmployeeProps } from "@/types"
-import { deleteEmployee } from "@/utils"
+
 
 interface EmployeeCardProps {
   employee: EmployeeProps;
   onDeleteEmployee: (employee: EmployeeProps) => void;
 }
 const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
-  // const {id,lastname, firstname, job, personality, teamId, profilepicture} = employee
-  
-  
-
-
-  
   
   return (
     <div className='ml-5'>
@@ -51,7 +45,6 @@ const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
             </div>
           </div>
         </Card>
-    
     </div>
   )
 }

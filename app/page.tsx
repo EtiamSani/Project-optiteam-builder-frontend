@@ -21,7 +21,7 @@ export default function Home() {
     };
 
     fetchData();
-  }, []); // Le tableau vide [] assure que cela s'exécute une seule fois au chargement initial.
+  }, [allEmployees]); // Le tableau vide [] assure que cela s'exécute une seule fois au chargement initial.
 
   const handleDeleteEmployee = async (employeeToDelete: EmployeeProps) => {
     try {
@@ -32,8 +32,7 @@ export default function Home() {
       console.error('Error deleting employee:', error);
     }
   };
-  
-  // const AllEmployee = await fetchEmployee();
+
   return (
     <main className="h-screen">
       <div className="flex justify-center items-center mt-20 font-bold text-4xl text-[#F1B92A]">
