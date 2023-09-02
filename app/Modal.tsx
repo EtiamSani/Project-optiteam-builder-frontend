@@ -6,8 +6,27 @@ import { handleSubmit } from '@/utils'
 import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 
-const Modal = () => {
+interface ModalProps {
+    onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
+  }
+
+  const Modal: React.FC<ModalProps> = ({ onClose }) => {
     const [isModalOpen, setIsModalOpen] = useState(true);
+
+    const handleAddEmployee = async (e:any) => {
+        try {
+            console.log("coucou")
+          // Effectuez ici l'ajout de l'employé (par exemple, en utilisant une API)
+          // Une fois l'employé ajouté avec succès, fermez le modal en mettant isModalOpen à false
+          await handleSubmit(employeeData,e); // Appelez handleSubmit directement
+          onClose();
+          // Réinitialisez les données du formulaire, si nécessaire.
+          setIsModalOpen(false); // Ferme la modal
+        } catch (error) {
+          console.error('Error adding employee:', error);
+        }
+      };
+      
       
     const [employeeData, setEmployeeData] = useState({
         lastname: "",
@@ -90,7 +109,7 @@ const Modal = () => {
             </div>
         </div>
         <DialogFooter>
-        <Button type="submit" variant="yellow" onClick={(e) => handleSubmit(employeeData , e)}>Ajouter</Button>
+        <Button type="submit" variant="yellow" onClick={handleAddEmployee}>Ajouter</Button>
         </DialogFooter>
       </DialogContent>
   )
