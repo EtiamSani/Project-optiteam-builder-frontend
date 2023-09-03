@@ -10,7 +10,6 @@ import {BsPencil} from 'react-icons/bs'
 import { EditEmployeeProps, EmployeeProps } from "@/types"
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import { Dialog } from "@/components/ui/dialog"
-import Modal from "./Modal"
 import ModalEditEmployee from "./ModalEditEmployee"
 
 
@@ -59,13 +58,12 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
                     <Dialog>
                       <DialogTrigger>
                   <BsPencil className='text-2xl ml-2' />
-                  {/* onClick={() => onEditEmployee(employee)} */}
                     </DialogTrigger>
                     <ModalEditEmployee onClose={closeModal}  />
                   </Dialog>
                   </button>
                   <button>
-                    <RiDeleteBin7Line className='text-2xl ml-2' onClick={() => onDeleteEmployee(employee)} />
+                    <RiDeleteBin7Line className='text-2xl ml-2 mb-1' onClick={() => onDeleteEmployee(employee)} />
                   </button>
                 </div>
               </div>

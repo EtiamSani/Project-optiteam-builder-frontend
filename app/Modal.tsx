@@ -5,6 +5,7 @@ import { Label } from '@/components/ui/label'
 import { handleSubmit } from '@/utils'
 import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
+import {selectItems} from '../constants/index'
 
 interface ModalProps {
     onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
@@ -64,11 +65,6 @@ interface ModalProps {
         }));
       };
 
-      const selectItems = [
-        { value: 'extravertie', label: 'Extravertie' },
-        { value: 'introverti', label: 'Introverti' },
-        { value: 'ambiverti', label: 'Ambiverti' },
-      ];
 
 
   return (
@@ -78,10 +74,6 @@ interface ModalProps {
           <DialogDescription>
             Make changes to your profile here. Click save when you're done.
           </DialogDescription>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="picture">Photo</Label>
-      <Input id="picture" type="file" />
-    </div>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">

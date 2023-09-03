@@ -2,20 +2,19 @@ import { Button } from '@/components/ui/button'
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { editEmployee, handleSubmit } from '@/utils'
+import { editEmployee} from '@/utils'
 import React, { useState } from 'react'
-import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { EditEmployeeProps, EmployeeProps } from '@/types'
+import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { EditEmployeeProps } from '@/types'
+import {selectItems} from '../constants/index'
 
 interface ModalProps {
     onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
     
   }
   
-
   const Modal: React.FC<ModalProps> = ({ onClose}) => {
     
-
     const resetModal = () => {
         setEmployeeData({
           profilepicture:'',
@@ -67,13 +66,6 @@ interface ModalProps {
           personality: selectedPersonality,
         }));
       };
-
-      const selectItems = [
-        { value: 'extravertie', label: 'Extravertie' },
-        { value: 'introverti', label: 'Introverti' },
-        { value: 'ambiverti', label: 'Ambiverti' },
-      ];
-
 
   return (
     <DialogContent className="sm:max-w-[425px]">
