@@ -1,10 +1,10 @@
 "use client"
-import { deleteEmployee, fetchEmployee } from "@/utils"
+import { deleteEmployee, editEmployee, fetchEmployee } from "@/utils"
 import EmployeeSection from "./EmployeeSection"
-import { EmployeeProps } from "@/types";
+import { EditEmployeeProps, EmployeeProps } from "@/types";
 import Buttons from "./Buttons";
 import { useEffect, useState } from "react";
-import Modal from "./Modal";
+
   
 export default function Home() {
   const [allEmployees, setAllEmployees] = useState<EmployeeProps[]>([]);
@@ -33,6 +33,15 @@ export default function Home() {
     }
   };
 
+  const handleEditEmployee = async (employeeToEdit: EditEmployeeProps) => {
+    try {
+      editEmployee(employeeToEdit)
+
+    } catch(error) {
+
+    }
+  }
+
   return (
     <main className="h-screen">
       <div className="flex justify-center items-center mt-20 font-bold text-4xl text-[#F1B92A]">
@@ -40,7 +49,7 @@ export default function Home() {
       </div> 
       <Buttons/>
       {allEmployees.map((employee: EmployeeProps) => (
-        <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee}/>
+        <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onEditEmployee={handleEditEmployee}/>
       ))}
       
         

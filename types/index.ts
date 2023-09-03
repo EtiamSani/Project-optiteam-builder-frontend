@@ -12,6 +12,15 @@ export interface AddEmployeeProps {
     lastname: String,
     firstname: String,
     job : String,
-    // personality: String
+    personality: String
     
+}
+
+export interface EditEmployeeProps {
+    lastname: String,
+    firstname: String,
+    job : String,
+    personality: String
+    teamId: number
+    profilepicture: String
 }

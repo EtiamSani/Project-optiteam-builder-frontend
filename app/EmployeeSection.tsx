@@ -2,19 +2,37 @@
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card } from '@/components/ui/card'
-import React from 'react'
+import React, { useState } from 'react'
 import {IoIosAddCircleOutline} from 'react-icons/io'
 import {FiBriefcase} from 'react-icons/fi'
 import {RiDeleteBin7Line} from 'react-icons/ri'
-import { EmployeeProps } from "@/types"
+import {BsPencil} from 'react-icons/bs'
+import { EditEmployeeProps, EmployeeProps } from "@/types"
+import { DialogTrigger } from "@radix-ui/react-dialog"
+import { Dialog } from "@/components/ui/dialog"
+import Modal from "./Modal"
+import ModalEditEmployee from "./ModalEditEmployee"
 
 
 interface EmployeeCardProps {
   employee: EmployeeProps;
   onDeleteEmployee: (employee: EmployeeProps) => void;
+  onEditEmployee: (employee: EditEmployeeProps) => void;
 }
-const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
+const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: EmployeeCardProps) => {
+
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
   
+  function closeModal(): void {
+    throw new Error("Function not implemented.")
+  }
+
+  const handleEditEmployeeClick = (employeeId: number) => {
+    console.log(employeeId)
+    localStorage.setItem('selectedEmployeeId', employeeId.toString());
+    setSelectedEmployeeId(employeeId);
+  };
+
   return (
     <div className='ml-5'>
      
@@ -34,9 +52,18 @@ const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
                     {employee.job}
                   </div>
                 </div>
-                <div className="my-7 flex ml-5">
+                <div className="my-7 flex ml-20">
                   <IoIosAddCircleOutline className='text-2xl ml-2' />
                   <FiBriefcase className='text-2xl ml-2' />
+                  <button onClick={() => handleEditEmployeeClick(employee.id)}>
+                    <Dialog>
+                      <DialogTrigger>
+                  <BsPencil className='text-2xl ml-2' />
+                  {/* onClick={() => onEditEmployee(employee)} */}
+                    </DialogTrigger>
+                    <ModalEditEmployee onClose={closeModal}  />
+                  </Dialog>
+                  </button>
                   <button>
                     <RiDeleteBin7Line className='text-2xl ml-2' onClick={() => onDeleteEmployee(employee)} />
                   </button>

@@ -1,5 +1,9 @@
-import { AddEmployeeProps, EmployeeProps } from "@/types";
-
+import { AddEmployeeProps, EditEmployeeProps, EmployeeProps } from "@/types";
+let storedEmployeeId: string | null = null;
+if (typeof window !== "undefined") {
+  storedEmployeeId = localStorage.getItem('selectedEmployeeId');
+  
+}
 
 export async function fetchEmployee() {
     try {
@@ -60,6 +64,29 @@ export async function deleteEmployee(id: number) {
         console.error("Erreur lors de la soumission du formulaire :", error);
       }
     }
+
+    export async function editEmployee (employeeData : EditEmployeeProps) {
+      
+        try {
+          console.log("get local",storedEmployeeId)
+          
+          const response = await fetch(`http://localhost:3001/employees/${storedEmployeeId}`, {
+            method: "PATCH",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(employeeData),
+          });
+    
+          if (response.ok) {
+            // La requête a réussi, vous pouvez gérer la réponse ici
+          } else {
+            // La requête a échoué, gérer les erreurs ici
+          }
+        } catch (error) {
+          console.error("Erreur lors de la soumission du formulaire :", error);
+        }
+      }
   
     
 
