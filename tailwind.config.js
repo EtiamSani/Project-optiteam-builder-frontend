@@ -71,7 +71,7 @@ module.exports = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       backgroundColor: {
-        "yellow-custom": "#FDF5D8",
+        "yellow-custom": "#fefbef",
       },
     },
   },
