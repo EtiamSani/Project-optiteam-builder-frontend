@@ -34,7 +34,7 @@ interface ModalProps {
           // Une fois l'employé ajouté avec succès, fermez le modal en mettant isModalOpen à false
           await editEmployee(employeeData); // Appelez handleSubmit directement
           onClose();
-          // Réinitialisez les données du formulaire, si nécessaire.
+          // Réinitialisez les données du formulaire, si nécessaire
           resetModal();
         } catch (error) {
           console.error('Error adding employee:', error);
