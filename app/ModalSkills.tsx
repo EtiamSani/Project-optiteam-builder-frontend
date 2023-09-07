@@ -80,9 +80,9 @@ interface ModalProps {
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
+            {/* <Label htmlFor="name" className="text-right">
               Compétence
-            </Label>
+            </Label> */}
             <Input id="name" value={skillsData.name} onChange={handleInputChange} className="col-span-3" />
           </div>
         </div>
@@ -90,7 +90,7 @@ interface ModalProps {
         <Button type="submit" variant="yellow" onClick={async () => {handleSaveSkills(skillsData)}}>Ajouter</Button>
         </DialogFooter>
         <DialogDescription>
-            <h4 className='text-lg mb-5 font-bold text-black'>Les compétences disponibles {''}</h4>
+            <h4 className='text-lg mb-5 font-bold text-black'>Les compétences ajoutées {''}</h4>
             <div>
     {Array.isArray(filteredSkills) ? (
       filteredSkills.map((skill) => (
