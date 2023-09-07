@@ -89,14 +89,17 @@ export async function deleteEmployee(id: number) {
       }
 
       export async function saveSkills (skillsData : SaveSkillsProps) {
-      
+      console.log(skillsData , 'dans index')
         try {   
-          const response = await fetch(`http://localhost:3001/skills/`, {
+          const response = await fetch(`http://localhost:3001/skills`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify(skillsData),
+            body: JSON.stringify({
+              name: skillsData.name, // Utilisez la propriété name de skillsData
+              // Ajoutez d'autres propriétés si nécessaire
+            }),
           });
     
           if (response.ok) {
@@ -106,6 +109,43 @@ export async function deleteEmployee(id: number) {
           }
         } catch (error) {
           console.error("Erreur lors de la soumission du des compétences :", error);
+        }
+      }
+
+      export async function fetchSkills() {
+        try {
+          const response = await fetch('http://localhost:3001/skills', {
+            cache: 'no-cache'
+          });
+      
+          if (!response.ok) {
+            throw new Error('Échec de la requête.');
+          }
+      
+          const result = await response.json();
+          return result;
+        } catch (error) {
+          console.error('Erreur lors de la récupération des compétences :', error);
+          throw error; // Vous pouvez choisir de gérer l'erreur ici ou de la remonter à l'appelant
+        }
+      }
+
+      export async function deleteSkill(skillId: any) {
+        try {
+          const response = await fetch(`http://localhost:3001/skills/${skillId}`, {
+            method: 'DELETE',
+          });
+          
+      
+          if (response.status === 204) {
+            console.log('Employee deleted successfully.');
+            await fetchEmployee();
+            
+          } else {
+            console.error('Failed to delete employee.');
+          }
+        } catch (error) {
+          console.error('Error deleting employee:', error);
         }
       }
 
