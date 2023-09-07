@@ -33,7 +33,9 @@ const Buttons = () => {
               Ajouter des compétences <IoIosAddCircleOutline className="text-2xl ml-2" />
             </Button>
           </DialogTrigger>
-        {isModalSkillsOpen && <ModalSkills  />}
+        {isModalSkillsOpen && <ModalSkills onClose={function (): void {
+          throw new Error('Function not implemented.')
+        } }/>}
         </Dialog>
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Employers</h3>
