@@ -3,13 +3,16 @@ import { Dialog,DialogTrigger } from '@/components/ui/dialog'
 import React, { useState } from 'react'
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import Modal from './Modal'
+import ModalSkills from './ModalSkills'
 
 const Buttons = () => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalSkillsOpen, setIsModalSkillsOpen] = useState(false);
 
   const closeModal = () => {
     setIsModalOpen(false);
+    setIsModalSkillsOpen(false);
   };
   
   return (
@@ -21,9 +24,14 @@ const Buttons = () => {
       </DialogTrigger>
       </div>
       <div>
+      <DialogTrigger asChild>
+        <div>
       <Button size="lg" variant="yellow">Ajouter des compétences <IoIosAddCircleOutline className='text-2xl ml-2'/></Button>
+        </div>
+      </DialogTrigger>
       </div>
       {!isModalOpen && <Modal onClose={closeModal} />}
+      {!isModalSkillsOpen && <ModalSkills onClose={closeModal} />}
       </Dialog>
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Employers</h3>

@@ -24,3 +24,7 @@ export interface EditEmployeeProps {
     teamId: number
     profilepicture: String
 }
+
+export interface SaveSkillsProps {
+    name: String
+}

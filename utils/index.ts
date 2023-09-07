@@ -1,4 +1,4 @@
-import { AddEmployeeProps, EditEmployeeProps, EmployeeProps } from "@/types";
+import { AddEmployeeProps, EditEmployeeProps, EmployeeProps, SaveSkillsProps } from "@/types";
 let storedEmployeeId: string | null = null;
 if (typeof window !== "undefined") {
   storedEmployeeId = localStorage.getItem('selectedEmployeeId');
@@ -87,6 +87,29 @@ export async function deleteEmployee(id: number) {
           console.error("Erreur lors de la soumission du formulaire :", error);
         }
       }
+
+      export async function saveSkills (skillsData : SaveSkillsProps) {
+      
+        try {   
+          const response = await fetch(`http://localhost:3001/skills/`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(skillsData),
+          });
+    
+          if (response.ok) {
+            // La requête a réussi, vous pouvez gérer la réponse ici
+          } else {
+            // La requête a échoué, gérer les erreurs ici
+          }
+        } catch (error) {
+          console.error("Erreur lors de la soumission du des compétences :", error);
+        }
+      }
+
+
   
     
 
