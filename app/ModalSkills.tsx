@@ -12,7 +12,7 @@ interface ModalProps {
     
   }
   
-  const Modal: React.FC<ModalProps> = ({ onClose}) => {
+  const ModalSkills: React.FC<ModalProps> = () => {
     
     const resetModal = () => {
       setSkillsData({
@@ -25,7 +25,7 @@ interface ModalProps {
         try {
             console.log("save console", skillsData)
           await saveSkills(skillsData); 
-          onClose();
+          
           resetModal();
         } catch (error) {
           console.error('Error adding employee:', error);
@@ -81,7 +81,7 @@ interface ModalProps {
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="name" className="text-right">
-              Nom
+              Compétence
             </Label>
             <Input id="name" value={skillsData.name} onChange={handleInputChange} className="col-span-3" />
           </div>
@@ -90,7 +90,7 @@ interface ModalProps {
         <Button type="submit" variant="yellow" onClick={async () => {handleSaveSkills(skillsData)}}>Ajouter</Button>
         </DialogFooter>
         <DialogDescription>
-            <h4 className='text-xl mb-5'>Les compétences disponibles {''}</h4>
+            <h4 className='text-lg mb-5 font-bold text-black'>Les compétences disponibles {''}</h4>
             <div>
     {Array.isArray(filteredSkills) ? (
       filteredSkills.map((skill) => (
@@ -108,4 +108,4 @@ interface ModalProps {
   )
 }
 
-export default Modal
+export default ModalSkills

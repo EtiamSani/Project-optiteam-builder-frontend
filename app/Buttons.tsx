@@ -16,28 +16,30 @@ const Buttons = () => {
   };
   
   return (
-    <div className='ml-5'>
+    <div className="ml-5">
       <Dialog>
-    <div className='mb-3'>
-    <DialogTrigger asChild>
-      <Button size="lg" variant="yellow">Ajouter employé <IoIosAddCircleOutline className='text-2xl ml-2'/></Button>
-      </DialogTrigger>
-      </div>
-      <div>
-      <DialogTrigger asChild>
-        <div>
-      <Button size="lg" variant="yellow">Ajouter des compétences <IoIosAddCircleOutline className='text-2xl ml-2'/></Button>
+        <div className="mb-3">
+          <DialogTrigger asChild>
+            <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
+              Ajouter employé <IoIosAddCircleOutline className="text-2xl ml-2" />
+            </Button>
+          </DialogTrigger>
+        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
         </div>
-      </DialogTrigger>
-      </div>
-      {!isModalOpen && <Modal onClose={closeModal} />}
-      {!isModalSkillsOpen && <ModalSkills onClose={closeModal} />}
       </Dialog>
+      <Dialog>
+          <DialogTrigger asChild>
+            <Button size="lg" variant="yellow" onClick={() => setIsModalSkillsOpen(true)}>
+              Ajouter des compétences <IoIosAddCircleOutline className="text-2xl ml-2" />
+            </Button>
+          </DialogTrigger>
+        {isModalSkillsOpen && <ModalSkills  />}
+        </Dialog>
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Employers</h3>
-        </div>
-        </div>
-  )
-}
+      </div>
+    </div>
+  );
+};
 
 export default Buttons
