@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { editEmployee} from '@/utils'
+import { editEmployee, editEmployeePicture} from '@/utils'
 import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { EditEmployeeProps } from '@/types'
@@ -29,7 +29,6 @@ interface ModalProps {
 
     const handleEditEmployee = async (employeeData: EditEmployeeProps) => {
         try {
-            console.log("Edit console", employeeData)
           // Effectuez ici l'ajout de l'employé (par exemple, en utilisant une API)
           // Une fois l'employé ajouté avec succès, fermez le modal en mettant isModalOpen à false
           await editEmployee(employeeData); // Appelez handleSubmit directement
@@ -71,9 +70,6 @@ interface ModalProps {
     <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Modifier un employé</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
           <div className="grid w-full max-w-sm items-center gap-1.5">
       <Label htmlFor="picture">Photo</Label>
       <Input id="picture" type="file" />

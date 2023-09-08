@@ -11,6 +11,7 @@ import { EditEmployeeProps, EmployeeProps } from "@/types"
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import { Dialog } from "@/components/ui/dialog"
 import ModalEditEmployee from "./ModalEditEmployee"
+import ModalPicture from "./ModalPicture"
 
 
 interface EmployeeCardProps {
@@ -36,10 +37,15 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
     <div className='ml-5'>
         <Card className='w-[345px] h-[80px] mb-2 hover:bg-[#F1B92A]' key={employee.id}>
           <div className="flex items-center">
+          <Dialog>
+              <DialogTrigger>
             <Avatar className="my-5 ml-4">
               <AvatarImage src={`http://localhost:3001/${employee.profilepicture}`} />
               <AvatarFallback>{employee.firstname}</AvatarFallback>
             </Avatar>
+              </DialogTrigger>
+            <ModalPicture/>
+            </Dialog>
             <div>
               <div className="flex">
                 <div className="my-4">

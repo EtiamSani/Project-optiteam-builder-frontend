@@ -27,7 +27,6 @@ interface ModalProps {
 
     const handleAddEmployee = async (e:any) => {
         try {
-            console.log("coucou")
           // Effectuez ici l'ajout de l'employé (par exemple, en utilisant une API)
           // Une fois l'employé ajouté avec succès, fermez le modal en mettant isModalOpen à false
           await handleSubmit(employeeData,e); // Appelez handleSubmit directement
@@ -71,9 +70,6 @@ interface ModalProps {
     <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Ajouter un employé</DialogTitle>
-          <DialogDescription>
-            Make changes to your profile here. Click save when you're done.
-          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -100,7 +96,7 @@ interface ModalProps {
             </Label>
             <Select onValueChange={handlePersonalityChange}>
                 <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="La personnalité" />
+                <SelectValue placeholder="Choisissez" />
                 </SelectTrigger>
                 <SelectContent>
                 <SelectGroup>

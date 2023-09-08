@@ -88,6 +88,30 @@ export async function deleteEmployee(id: number) {
         }
       }
 
+      export async function editEmployeePicture (file: File) {
+      
+        try {
+          console.log("get local",storedEmployeeId)
+
+          const formData = new FormData(); // Utilisez FormData pour envoyer un fichier
+          formData.append("file", file);
+
+          
+          const response = await fetch(`http://localhost:3001/employees/${storedEmployeeId}/profile-picture`, {
+            method: "POST",
+            body: formData,
+          });
+    
+          if (response.ok) {
+            // La requête a réussi, vous pouvez gérer la réponse ici
+          } else {
+            // La requête a échoué, gérer les erreurs ici
+          }
+        } catch (error) {
+          console.error("Erreur lors de la soumission du formulaire :", error);
+        }
+      }
+
       export async function saveSkills (skillsData : SaveSkillsProps) {
       console.log(skillsData , 'dans index')
         try {   
