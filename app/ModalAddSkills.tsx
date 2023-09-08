@@ -29,6 +29,13 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture }: ModalAddSkillsP
     
         fetchData();
       }, [getSkills]); 
+
+      const handleAddSkillToEmployee = (skillId: any) => {
+        
+        console.log(`ID ${skillId}`);
+        
+      };
+
   return (
     <DialogContent className="sm:max-w-[425px]">
     <DialogHeader>
@@ -45,7 +52,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture }: ModalAddSkillsP
               <AccordionContent>
                 {Array.isArray(getSkills) ? (
                             getSkills.map((skill) => (
-                            <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' >
+                            <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleAddSkillToEmployee(skill.id)} >
                                 {skill.name}
                             </Badge>
                             ))
