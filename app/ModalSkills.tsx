@@ -6,6 +6,7 @@ import { deleteSkill, editEmployee, fetchSkills, saveSkills} from '@/utils'
 import React, { useEffect, useState } from 'react'
 import { SaveSkillsProps } from '@/types'
 import { Badge } from '@/components/ui/badge'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 interface ModalProps {
     onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
@@ -72,35 +73,38 @@ interface ModalProps {
     <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Ajouter des compétences</DialogTitle>
-          <DialogDescription>
-            Rajouter des nouvel compétences
-          </DialogDescription>
           <div className="grid w-full max-w-sm items-center gap-1.5">
     </div>
         </DialogHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            {/* <Label htmlFor="name" className="text-right">
-              Compétence
-            </Label> */}
+            <Label htmlFor="name">
+              Nom
+            </Label>
             <Input id="name" value={skillsData.name} onChange={handleInputChange} className="col-span-3" />
-          </div>
         </div>
         <DialogFooter>
         <Button type="submit" variant="yellow" onClick={async () => {handleSaveSkills(skillsData)}}>Ajouter</Button>
         </DialogFooter>
         <DialogDescription>
-            <h4 className='text-lg mb-5 font-bold text-black'>Les compétences ajoutées {''}</h4>
+
+        <Accordion type="single" collapsible>
+          <AccordionItem value="item-1">
+            <AccordionTrigger className='text-md text-black'>Les compétences disponibles</AccordionTrigger>
+              <AccordionContent>
+              {Array.isArray(filteredSkills) ? (
+                filteredSkills.map((skill) => (
+                  <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleDeleteSkill(skill.id)}>
+                    {skill.name}
+                  </Badge>
+                ))
+              ) : (
+                ''
+              )}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
             <div>
-    {Array.isArray(filteredSkills) ? (
-      filteredSkills.map((skill) => (
-        <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleDeleteSkill(skill.id)}>
-          {skill.name}
-        </Badge>
-      ))
-    ) : (
-      ''
-    )}
+    
   </div>
             
           </DialogDescription>
