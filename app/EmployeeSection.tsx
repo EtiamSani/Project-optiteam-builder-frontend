@@ -12,6 +12,7 @@ import { DialogTrigger } from "@radix-ui/react-dialog"
 import { Dialog } from "@/components/ui/dialog"
 import ModalEditEmployee from "./ModalEditEmployee"
 import ModalPicture from "./ModalPicture"
+import ModalAddSkills from "./ModalAddSkills"
 
 
 interface EmployeeCardProps {
@@ -58,7 +59,12 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
                 </div>
                 <div className="my-7 flex ml-8">
                   <IoIosAddCircleOutline className='text-2xl ml-2' />
+                  <Dialog>
+                      <DialogTrigger>
                   <FiBriefcase className='text-2xl ml-2' />
+                  </DialogTrigger>
+                    <ModalAddSkills firstname={employee.firstname} lastname={employee.lastname} profilepicture={employee.profilepicture}/>
+                  </Dialog>
                   <button onClick={() => handleEditEmployeeClick(employee.id)}>
                     <Dialog>
                       <DialogTrigger>

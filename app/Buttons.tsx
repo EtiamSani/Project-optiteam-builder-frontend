@@ -38,7 +38,7 @@ const Buttons = () => {
         } }/>}
         </Dialog>
       <div>
-        <h3 className="text-md font-bold ml-4 my-5">Employers</h3>
+        <h3 className="text-md font-bold ml-4 my-5">Liste des employés</h3>
       </div>
     </div>
   );

@@ -70,51 +70,47 @@ interface ModalProps {
     <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Modifier un employé</DialogTitle>
-          <div className="grid w-full max-w-sm items-center gap-1.5">
-      <Label htmlFor="picture">Photo</Label>
-      <Input id="picture" type="file" />
-    </div>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Nom
-            </Label>
-            <Input id="lastname" value={employeeData.lastname} onChange={handleInputChange} className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Prénom
-            </Label>      
-            <Input id="firstname" value={employeeData.firstname} onChange={handleInputChange} className="col-span-3" />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-          <Label htmlFor="job" className="text-right">
-              Métier
-            </Label>
-            <Input id="job" value={employeeData.job} onChange={handleInputChange} className="col-span-3" />
+          <div className="grid gap-4 py-4">
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
+                Nom
+              </Label>
+              <Input id="lastname" value={employeeData.lastname} onChange={handleInputChange} className="col-span-3" />
+            </div>
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="username" className="text-right">
+                Prénom
+              </Label>      
+              <Input id="firstname" value={employeeData.firstname} onChange={handleInputChange} className="col-span-3" />
             </div>
             <div className="grid grid-cols-4 items-center gap-4">
             <Label htmlFor="job" className="text-right">
-              Personalité
-            </Label>
-            <Select onValueChange={handlePersonalityChange}>
-                <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="La personnalité" />
-                </SelectTrigger>
-                <SelectContent>
-                <SelectGroup>
-           
-                {selectItems.map((item) => (
-          <SelectItem key={item.value} value={item.value}>
-                    {item.label}
-                </SelectItem>
-                ))}
-                </SelectGroup>
-                </SelectContent>
-            </Select>
-            </div>
-        </div>
+                Métier
+              </Label>
+              <Input id="job" value={employeeData.job} onChange={handleInputChange} className="col-span-3" />
+              </div>
+              <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="job" className="text-right">
+                Personalité
+              </Label>
+              <Select onValueChange={handlePersonalityChange}>
+                  <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="La personnalité" />
+                  </SelectTrigger>
+                  <SelectContent>
+                  <SelectGroup>
+            
+                  {selectItems.map((item) => (
+            <SelectItem key={item.value} value={item.value}>
+                      {item.label}
+                  </SelectItem>
+                  ))}
+                  </SelectGroup>
+                  </SelectContent>
+              </Select>
+              </div>
+          </div>
         <DialogFooter>
         <Button type="submit" variant="yellow" onClick={async () => {handleEditEmployee(employeeData)}}>Modifier</Button>
         </DialogFooter>
