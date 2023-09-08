@@ -2,18 +2,20 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { fetchSkills } from '@/utils';
+import { addSkillsToEmployee, fetchSkills, fetchSkillsOfEmployee } from '@/utils';
 import React, { useEffect, useState } from 'react'
 
 interface ModalAddSkillsProps {
     firstname: string;
     lastname: string;
     profilepicture: string
+    id: number
   }
 
-const ModalAddSkills = ({ firstname, lastname, profilepicture }: ModalAddSkillsProps) => {
+const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSkillsProps) => {
 
     const [getSkills, setGetSkills] = useState([])
+    const [getEmployeeSkills, setGetEmployeeSkills] = useState([])
 
     useEffect(() => {
         // Utilisez useEffect pour récupérer la liste des employés au chargement initial
@@ -21,6 +23,10 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture }: ModalAddSkillsP
           try {
             const skills = await fetchSkills();
             setGetSkills(skills);
+
+            const skillsOfEmployee = await fetchSkillsOfEmployee(id);
+            console.log(skillsOfEmployee.skills)
+            setGetEmployeeSkills(skillsOfEmployee.skills);
             
           } catch (error) {
             console.error('Error fetching skills:', error);
@@ -28,11 +34,12 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture }: ModalAddSkillsP
         };
     
         fetchData();
-      }, [getSkills]); 
+      }, []); 
 
-      const handleAddSkillToEmployee = (skillId: any) => {
-        
-        console.log(`ID ${skillId}`);
+      const handleAddSkillToEmployee = (employeeId: number ,skillId: number) => {
+
+          console.log(`ID ${skillId} employee id ${skillId}`);
+        addSkillsToEmployee(employeeId, skillId)
         
       };
 
@@ -52,13 +59,28 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture }: ModalAddSkillsP
               <AccordionContent>
                 {Array.isArray(getSkills) ? (
                             getSkills.map((skill) => (
-                            <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleAddSkillToEmployee(skill.id)} >
+                            <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleAddSkillToEmployee(skill.id, id)} >
                                 {skill.name}
                             </Badge>
                             ))
                         ) : (
                             ''
                         )}
+              </AccordionContent>
+            </AccordionItem>
+
+            <AccordionItem value="item-2">
+            <AccordionTrigger className='text-md text-black'>Les compétences de {firstname} {lastname} </AccordionTrigger>
+              <AccordionContent>
+                                {Array.isArray(getEmployeeSkills) ? (
+                    getEmployeeSkills.map((employeeSkill) => (
+                        <Badge key={employeeSkill.id} variant="outline" className='ml-2 mb-2 cursor-pointer'  >
+                        {employeeSkill.skill.name}
+                        </Badge>
+                    ))
+                    ) : (
+                    ''
+                    )}
               </AccordionContent>
             </AccordionItem>
           </Accordion>

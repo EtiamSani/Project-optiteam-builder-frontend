@@ -63,7 +63,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
                       <DialogTrigger>
                   <FiBriefcase className='text-2xl ml-2' />
                   </DialogTrigger>
-                    <ModalAddSkills firstname={employee.firstname} lastname={employee.lastname} profilepicture={employee.profilepicture}/>
+                    <ModalAddSkills firstname={employee.firstname} lastname={employee.lastname} profilepicture={employee.profilepicture} id={employee.id}/>
                   </Dialog>
                   <button onClick={() => handleEditEmployeeClick(employee.id)}>
                     <Dialog>
