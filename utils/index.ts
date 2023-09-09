@@ -211,7 +211,15 @@ export async function deleteEmployee(id: number) {
         }
       }
 
-  
+      export async function deleteSkillFromEmployee(skillId: any) {
+        try {
+          const response = await fetch(`http://localhost:3001/employees/skill/${skillId}`, {
+            method: 'DELETE',
+          });
+        } catch (error) {
+          console.error('Error deleting employee:', error);
+        }
+      }
     
 
 

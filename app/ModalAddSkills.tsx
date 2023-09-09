@@ -2,7 +2,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { addSkillsToEmployee, fetchSkills, fetchSkillsOfEmployee } from '@/utils';
+import { addSkillsToEmployee, deleteSkill, deleteSkillFromEmployee, fetchSkills, fetchSkillsOfEmployee } from '@/utils';
 import React, { useEffect, useState } from 'react'
 
 interface ModalAddSkillsProps {
@@ -43,8 +43,15 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
 
         // Mettez à jour getEmployeeSkills avec les nouvelles compétences
         const skillsOfEmployee = await fetchSkillsOfEmployee(id);
+        console.log(skillsOfEmployee.skills.id)
         setGetEmployeeSkills(skillsOfEmployee.skills);
 
+        setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+      };
+
+      const handleDeleteSkill = (skillId: any) => {
+        deleteSkillFromEmployee(skillId)
+        console.log(`Suppression de la compétence avec l'ID ${skillId}`);
         setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
       };
 
@@ -79,7 +86,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
               <AccordionContent>
                                 {Array.isArray(filteredSkills) ? (
                     filteredSkills.map((employeeSkill) => (
-                        <Badge key={employeeSkill.id} variant="outline" className='ml-2 mb-2 cursor-pointer'  >
+                        <Badge key={employeeSkill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleDeleteSkill(employeeSkill.id)}  >
                         {employeeSkill.skill.name}
                         </Badge>
                     ))
