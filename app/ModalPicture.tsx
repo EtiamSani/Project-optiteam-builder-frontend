@@ -1,7 +1,6 @@
 import { Button } from '@/components/ui/button'
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { editEmployeePicture } from '@/utils'
 import React from 'react'
 
@@ -10,12 +9,8 @@ import React from 'react'
 const ModalPicture = ({ }) => {
     const handlePictureChange = () => {
         const fileInput = document.getElementById('picture') as HTMLInputElement;
-        // Récupérez le fichier sélectionné par l'utilisateur
         const file = fileInput.files?.[0];
         if (file) {
-            console.log(file)
-          // Vous n'avez pas besoin de stocker la photo de profil dans l'état
-          // Passez simplement le fichier à la fonction handleEditEmployee lors de la soumission
           editEmployeePicture(file);
         }
       };
