@@ -16,6 +16,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
 
     const [getSkills, setGetSkills] = useState([])
     const [getEmployeeSkills, setGetEmployeeSkills] = useState([])
+    const [filteredSkills, setFilteredSkills] = useState([]);
 
     useEffect(() => {
         // Utilisez useEffect pour récupérer la liste des employés au chargement initial
@@ -25,8 +26,9 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
             setGetSkills(skills);
 
             const skillsOfEmployee = await fetchSkillsOfEmployee(id);
-            console.log(skillsOfEmployee.skills)
+            
             setGetEmployeeSkills(skillsOfEmployee.skills);
+            setFilteredSkills(skillsOfEmployee.skills);
             
           } catch (error) {
             console.error('Error fetching skills:', error);
@@ -34,13 +36,16 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
         };
     
         fetchData();
-      }, []); 
+      }, [id,getSkills,getEmployeeSkills ]); 
 
-      const handleAddSkillToEmployee = (employeeId: number ,skillId: number) => {
+      const handleAddSkillToEmployee = async (employeeId: number ,skillId: number) => {
+        await addSkillsToEmployee(employeeId, skillId)
 
-          console.log(`ID ${skillId} employee id ${skillId}`);
-        addSkillsToEmployee(employeeId, skillId)
-        
+        // Mettez à jour getEmployeeSkills avec les nouvelles compétences
+        const skillsOfEmployee = await fetchSkillsOfEmployee(id);
+        setGetEmployeeSkills(skillsOfEmployee.skills);
+
+        setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
       };
 
   return (
@@ -72,8 +77,8 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
             <AccordionItem value="item-2">
             <AccordionTrigger className='text-md text-black'>Les compétences de {firstname} {lastname} </AccordionTrigger>
               <AccordionContent>
-                                {Array.isArray(getEmployeeSkills) ? (
-                    getEmployeeSkills.map((employeeSkill) => (
+                                {Array.isArray(filteredSkills) ? (
+                    filteredSkills.map((employeeSkill) => (
                         <Badge key={employeeSkill.id} variant="outline" className='ml-2 mb-2 cursor-pointer'  >
                         {employeeSkill.skill.name}
                         </Badge>
