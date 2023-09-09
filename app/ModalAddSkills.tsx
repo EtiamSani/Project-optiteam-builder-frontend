@@ -1,8 +1,8 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Avatar, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog'
-import { addSkillsToEmployee, deleteSkill, deleteSkillFromEmployee, fetchSkills, fetchSkillsOfEmployee } from '@/utils';
+import { addSkillsToEmployee, deleteSkillFromEmployee, fetchSkills, fetchSkillsOfEmployee } from '@/utils';
 import React, { useEffect, useState } from 'react'
 
 interface ModalAddSkillsProps {
@@ -10,13 +10,14 @@ interface ModalAddSkillsProps {
     lastname: string;
     profilepicture: string
     id: number
+    name:string
   }
 
-const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSkillsProps) => {
+const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkillsProps) => {
 
-    const [getSkills, setGetSkills] = useState([])
-    const [getEmployeeSkills, setGetEmployeeSkills] = useState([])
-    const [filteredSkills, setFilteredSkills] = useState([]);
+    const [getSkills, setGetSkills] = useState<ModalAddSkillsProps[]>([])
+    const [getEmployeeSkills, setGetEmployeeSkills] = useState<ModalAddSkillsProps[]>([])
+    const [filteredSkills, setFilteredSkills] = useState<ModalAddSkillsProps[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {

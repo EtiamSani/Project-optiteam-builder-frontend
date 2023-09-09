@@ -18,9 +18,8 @@ import ModalAddSkills from "./ModalAddSkills"
 interface EmployeeCardProps {
   employee: EmployeeProps;
   onDeleteEmployee: (employee: EmployeeProps) => void;
-  onEditEmployee: (employee: EditEmployeeProps) => void;
 }
-const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: EmployeeCardProps) => {
+const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
   
@@ -36,7 +35,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
 
   return (
     <div className='ml-5'>
-        <Card className='w-[345px] h-[80px] mb-2 hover:bg-[#F1B92A]' key={employee.id}>
+        <Card className='w-[350px] h-[80px] mb-2 hover:bg-[#F1B92A]' key={employee.id}>
           <div className="flex items-center">
           <Dialog>
               <DialogTrigger>
@@ -47,9 +46,8 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
               </DialogTrigger>
             <ModalPicture employeeId={employee.id}/>
             </Dialog>
-            <div>
               <div className="flex">
-                <div className="my-4">
+                <div className="m-auto">
                   <div className="ml-5 font-bold w-[100px]">
                     {employee.firstname} {employee.lastname}
                   </div>
@@ -57,13 +55,13 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
                     {employee.job}
                   </div>
                 </div>
-                <div className="my-7 flex ml-8">
+                <div className="m-auto flex ml-8">
                   <IoIosAddCircleOutline className='text-2xl ml-2' />
                   <Dialog>
                       <DialogTrigger>
                   <FiBriefcase className='text-2xl ml-2' />
                   </DialogTrigger>
-                    <ModalAddSkills firstname={employee.firstname} lastname={employee.lastname} profilepicture={employee.profilepicture} id={employee.id}/>
+                    <ModalAddSkills firstname={employee.firstname.toString()} lastname={employee.lastname.toString()} profilepicture={employee.profilepicture.toString()} id={employee.id} name={""}/>
                   </Dialog>
                   <button onClick={() => handleEditEmployeeClick(employee.id)}>
                     <Dialog>
@@ -78,7 +76,6 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
                   </button>
                 </div>
               </div>
-            </div>
           </div>
         </Card>
     </div>
