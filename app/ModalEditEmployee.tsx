@@ -10,10 +10,11 @@ import {selectItems} from '../constants/index'
 
 interface ModalProps {
     onClose: () => void; // type de onClose comme une fonction qui ne renvoie rien (void)
-    
+    employeeId : number
   }
   
-  const Modal: React.FC<ModalProps> = ({ onClose}) => {
+  const Modal: React.FC<ModalProps> = ({ onClose, employeeId}) => {
+    
     
     const resetModal = () => {
         setEmployeeData({
@@ -27,9 +28,10 @@ interface ModalProps {
       };
       
 
-    const handleEditEmployee = async (employeeData: EditEmployeeProps) => {
+    const handleEditEmployee = async (employeeData: EditEmployeeProps, employeeId: number) => {
+      console.log('employeeee id', employeeId)
         try {
-          await editEmployee(employeeData); 
+          await editEmployee(employeeData, employeeId); 
           onClose();
           resetModal();
         } catch (error) {
@@ -109,7 +111,7 @@ interface ModalProps {
               </div>
           </div>
         <DialogFooter>
-        <Button type="submit" variant="yellow" onClick={async () => {handleEditEmployee(employeeData)}}>Modifier</Button>
+        <Button type="submit" variant="yellow" onClick={async () => {handleEditEmployee(employeeData, employeeId)}}>Modifier</Button>
         </DialogFooter>
       </DialogContent>
   )

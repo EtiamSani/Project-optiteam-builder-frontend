@@ -56,11 +56,11 @@ export async function deleteEmployee(id: number) {
       }
     }
 
-    export async function editEmployee (employeeData : EditEmployeeProps) {
+    export async function editEmployee (employeeData : EditEmployeeProps, employeeId: number) {
       
         try {
            
-          const response = await fetch(`http://localhost:3001/employees/${storedEmployeeId}`, {
+          const response = await fetch(`http://localhost:3001/employees/${employeeId}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -73,7 +73,7 @@ export async function deleteEmployee(id: number) {
         }
       }
 
-      export async function editEmployeePicture (file: File) {
+      export async function editEmployeePicture (file: File, employeeId: number) {
       
         try {
          
@@ -81,7 +81,7 @@ export async function deleteEmployee(id: number) {
           formData.append("file", file);
 
           
-          const response = await fetch(`http://localhost:3001/employees/${storedEmployeeId}/profile-picture`, {
+          const response = await fetch(`http://localhost:3001/employees/${employeeId}/profile-picture`, {
             method: "POST",
             body: formData,
           });

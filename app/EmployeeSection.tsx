@@ -45,7 +45,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
               <AvatarFallback>{employee.firstname}</AvatarFallback>
             </Avatar>
               </DialogTrigger>
-            <ModalPicture/>
+            <ModalPicture employeeId={employee.id}/>
             </Dialog>
             <div>
               <div className="flex">
@@ -70,7 +70,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onEditEmployee }: Employe
                       <DialogTrigger>
                   <BsPencil className='text-2xl ml-2' />
                     </DialogTrigger>
-                    <ModalEditEmployee onClose={closeModal}  />
+                    <ModalEditEmployee onClose={closeModal}  employeeId={employee.id}/>
                   </Dialog>
                   </button>
                   <button>

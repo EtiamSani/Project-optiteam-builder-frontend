@@ -4,14 +4,16 @@ import { Input } from '@/components/ui/input'
 import { editEmployeePicture } from '@/utils'
 import React from 'react'
 
+interface ModalPictureProps {
+  employeeId: number;
+}
 
-
-const ModalPicture = ({ }) => {
+const ModalPicture = ({employeeId}: ModalPictureProps) => {
     const handlePictureChange = () => {
         const fileInput = document.getElementById('picture') as HTMLInputElement;
         const file = fileInput.files?.[0];
         if (file) {
-          editEmployeePicture(file);
+          editEmployeePicture(file, employeeId);
         }
       };
   return (
