@@ -9,7 +9,7 @@ import { EditEmployeeProps } from '@/types'
 import {selectItems} from '../constants/index'
 
 interface ModalProps {
-    onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
+    onClose: () => void; // type de onClose comme une fonction qui ne renvoie rien (void)
     
   }
   
@@ -29,11 +29,8 @@ interface ModalProps {
 
     const handleEditEmployee = async (employeeData: EditEmployeeProps) => {
         try {
-          // Effectuez ici l'ajout de l'employé (par exemple, en utilisant une API)
-          // Une fois l'employé ajouté avec succès, fermez le modal en mettant isModalOpen à false
-          await editEmployee(employeeData); // Appelez handleSubmit directement
+          await editEmployee(employeeData); 
           onClose();
-          // Réinitialisez les données du formulaire, si nécessaire
           resetModal();
         } catch (error) {
           console.error('Error adding employee:', error);

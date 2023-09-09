@@ -19,7 +19,6 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
     const [filteredSkills, setFilteredSkills] = useState([]);
 
     useEffect(() => {
-        // Utilisez useEffect pour récupérer la liste des employés au chargement initial
         const fetchData = async () => {
           try {
             const skills = await fetchSkills();
@@ -40,12 +39,9 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id }: ModalAddSki
 
       const handleAddSkillToEmployee = async (employeeId: number ,skillId: number) => {
         await addSkillsToEmployee(employeeId, skillId)
-
-        // Mettez à jour getEmployeeSkills avec les nouvelles compétences
         const skillsOfEmployee = await fetchSkillsOfEmployee(id);
         console.log(skillsOfEmployee.skills.id)
         setGetEmployeeSkills(skillsOfEmployee.skills);
-
         setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
       };
 
