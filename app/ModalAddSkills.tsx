@@ -19,6 +19,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
     const [getEmployeeSkills, setGetEmployeeSkills] = useState<ModalAddSkillsProps[]>([])
     const [filteredSkills, setFilteredSkills] = useState<ModalAddSkillsProps[]>([]);
     const [deleteMessage, setDeleteMessage] = useState(false);
+    const [addMessage, setAddMessage] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,6 +46,10 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
         console.log(skillsOfEmployee.skills.id)
         setGetEmployeeSkills(skillsOfEmployee.skills);
         setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+        setAddMessage(true);
+        setTimeout(() => {
+          setAddMessage(false);
+        }, 1000);
       };
 
       const handleDeleteSkill = (skillId: any) => {
@@ -63,6 +68,8 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
       <DialogTitle >Ajouter des compétences à <span className='text-[#F1B92A]'>{firstname} {lastname}</span></DialogTitle>
       {deleteMessage && 
       <div className='text-red-600 m-auto font-bold bg-red-300 p-2 rounded-md'> La compétence a bien été effacé !</div>}
+      {addMessage && 
+      <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> La compétence a bien été ajouté !</div>}
     </DialogHeader>
     <div className='flex flex-col m-auto '>
     <Avatar className="w-20 h-20">
