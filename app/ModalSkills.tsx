@@ -14,6 +14,9 @@ interface ModalProps {
   }
   
   const ModalSkills: React.FC<ModalProps> = () => {
+
+    const [deleteMessage, setDeleteMessage] = useState(false);
+    const [addMessage, setAddMessage] = useState(false);
     
     const resetModal = () => {
       setSkillsData({
@@ -26,7 +29,10 @@ interface ModalProps {
         try {
             console.log("save console", skillsData)
           await saveSkills(skillsData); 
-          
+          setAddMessage(true);
+        setTimeout(() => {
+          setAddMessage(false);
+        }, 1000);
           resetModal();
         } catch (error) {
           console.error('Error adding employee:', error);
@@ -52,6 +58,10 @@ interface ModalProps {
         deleteSkill(skillId)
         console.log(`Suppression de la compétence avec l'ID ${skillId}`);
         setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+        setDeleteMessage(true);
+        setTimeout(() => {
+          setDeleteMessage(false);
+        }, 1000);
       };
 
       useEffect(() => {
@@ -73,6 +83,10 @@ interface ModalProps {
     <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Ajouter des compétences</DialogTitle>
+          {deleteMessage && 
+          <div className='text-red-600 m-auto font-bold bg-red-300 p-2 rounded-md'> La compétence a bien été effacé !</div>}
+          {addMessage && 
+          <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> La compétence a bien été ajouté !</div>}
           <div className="grid w-full max-w-sm items-center gap-1.5">
     </div>
         </DialogHeader>

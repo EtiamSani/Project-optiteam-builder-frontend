@@ -21,7 +21,6 @@ export interface EditEmployeeProps {
     firstname: String,
     job : String,
     personality: String
-    teamId: number
     profilepicture: String
 }
 

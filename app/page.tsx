@@ -24,7 +24,7 @@ export default function Home() {
 
   const handleDeleteEmployee = async (employeeToDelete: EmployeeProps) => {
     try {
-      deleteEmployee(employeeToDelete.id)
+      await deleteEmployee(employeeToDelete.id)
       const updatedEmployees = allEmployees.filter((e) => e.id !== employeeToDelete.id);
       setAllEmployees(updatedEmployees);
     } catch (error) {

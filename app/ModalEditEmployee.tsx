@@ -13,8 +13,9 @@ interface ModalProps {
     employeeId : number
   }
   
-  const Modal: React.FC<ModalProps> = ({ onClose, employeeId}) => {
+  const Modal: React.FC<ModalProps> = ({  employeeId}) => {
     
+    const [editMessage, setEditMessage] = useState(false);
     
     const resetModal = () => {
         setEmployeeData({
@@ -23,7 +24,7 @@ interface ModalProps {
           firstname: "",
           job: "",
           personality: "",
-          teamId: 1
+          
         });
       };
       
@@ -32,7 +33,10 @@ interface ModalProps {
       console.log('employeeee id', employeeId)
         try {
           await editEmployee(employeeData, employeeId); 
-          onClose();
+          setEditMessage(true);
+          setTimeout(() => {
+            setEditMessage(false);
+          }, 1000);
           resetModal();
         } catch (error) {
           console.error('Error adding employee:', error);
@@ -46,7 +50,7 @@ interface ModalProps {
         job: "",
         profilepicture:"",
         personality:"",
-        teamId: 1
+        
       });
 
       const handleInputChange = (e: { target: { id: any; value: any } }) => {
@@ -69,6 +73,8 @@ interface ModalProps {
     <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Modifier un employé</DialogTitle>
+          {editMessage && 
+      <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> L'employer a bien été mis a jour</div>}
         </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-4 items-center gap-4">

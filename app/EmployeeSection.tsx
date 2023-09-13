@@ -68,7 +68,9 @@ const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
                       <DialogTrigger>
                   <BsPencil className='text-2xl ml-2' />
                     </DialogTrigger>
-                    <ModalEditEmployee onClose={closeModal}  employeeId={employee.id}/>
+                    <ModalEditEmployee  employeeId={employee.id} onClose={function (): void {
+                    throw new Error("Function not implemented.")
+                  } }/>
                   </Dialog>
                   </button>
                   <button>
