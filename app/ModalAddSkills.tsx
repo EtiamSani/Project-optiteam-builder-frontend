@@ -18,6 +18,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
     const [getSkills, setGetSkills] = useState<ModalAddSkillsProps[]>([])
     const [getEmployeeSkills, setGetEmployeeSkills] = useState<ModalAddSkillsProps[]>([])
     const [filteredSkills, setFilteredSkills] = useState<ModalAddSkillsProps[]>([]);
+    const [deleteMessage, setDeleteMessage] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -50,12 +51,18 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
         deleteSkillFromEmployee(skillId)
         console.log(`Suppression de la compétence avec l'ID ${skillId}`);
         setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+        setDeleteMessage(true);
+        setTimeout(() => {
+          setDeleteMessage(false);
+        }, 1000);
       };
 
   return (
     <DialogContent className="sm:max-w-[425px]">
     <DialogHeader>
       <DialogTitle >Ajouter des compétences à <span className='text-[#F1B92A]'>{firstname} {lastname}</span></DialogTitle>
+      {deleteMessage && 
+      <div className='text-red-600 m-auto font-bold bg-red-300 p-2 rounded-md'> La compétence a bien été effacé !</div>}
     </DialogHeader>
     <div className='flex flex-col m-auto '>
     <Avatar className="w-20 h-20">
