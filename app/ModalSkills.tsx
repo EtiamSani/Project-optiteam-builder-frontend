@@ -45,6 +45,7 @@ interface ModalProps {
       });
       const [getSkills, setGetSkills] = useState([])
       const [filteredSkills, setFilteredSkills] = useState([]);
+      const [isLoading, setIsLoading] = useState(false);
 
       const handleInputChange = (e: { target: { id: any; value: any } }) => {
         const { id, value } = e.target;
@@ -54,16 +55,28 @@ interface ModalProps {
         }));
       };
 
-      const handleDeleteSkill = (skillId: any) => {
-        deleteSkill(skillId)
-        console.log(`Suppression de la compétence avec l'ID ${skillId}`);
-        setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+      const handleDeleteSkill = async (skillId: any) => {
+        setIsLoading(true);
+        try {
+          await deleteSkill(skillId)
+          setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+
+        } catch(error) {
+          console.error('Erreur lors de la suppression de la compétence:', error);
+        } finally {
+          // Désactivez isLoading après l'opération (succès ou échec)
+        setIsLoading(false);
+
+        // Affichez le message après avoir désactivé isLoading
         setDeleteMessage(true);
+
+        // Effacez le message après un certain délai
         setTimeout(() => {
           setDeleteMessage(false);
         }, 1000);
-      };
-
+  };
+      }
+        
       useEffect(() => {
         // Utilisez useEffect pour récupérer la liste des employés au chargement initial
         const fetchData = async () => {
@@ -105,6 +118,7 @@ interface ModalProps {
           <AccordionItem value="item-1">
             <AccordionTrigger className='text-md text-black'>Les compétences disponibles</AccordionTrigger>
               <AccordionContent>
+              <div className="max-h-[120px] overflow-y-auto">
               {Array.isArray(filteredSkills) ? (
                 filteredSkills.map((skill) => (
                   <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleDeleteSkill(skill.id)}>
@@ -114,13 +128,19 @@ interface ModalProps {
               ) : (
                 ''
               )}
+              {isLoading && 
+                   <div className=" bg-white">
+                   <div className="flex justify-center items-center h-full">
+                     <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+                   </div>
+                   </div>               
+                  }
+                  </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
             <div>
-    
-  </div>
-            
+        </div>  
           </DialogDescription>
       </DialogContent>
   )

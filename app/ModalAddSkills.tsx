@@ -20,6 +20,8 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
     const [filteredSkills, setFilteredSkills] = useState<ModalAddSkillsProps[]>([]);
     const [deleteMessage, setDeleteMessage] = useState(false);
     const [addMessage, setAddMessage] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
+
 
     useEffect(() => {
         const fetchData = async () => {
@@ -38,12 +40,11 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
         };
     
         fetchData();
-      }, [id,getSkills,getEmployeeSkills ]); 
+      }, [id,getSkills]); 
 
       const handleAddSkillToEmployee = async (employeeId: number ,skillId: number) => {
         await addSkillsToEmployee(employeeId, skillId)
         const skillsOfEmployee = await fetchSkillsOfEmployee(id);
-        console.log(skillsOfEmployee.skills.id)
         setGetEmployeeSkills(skillsOfEmployee.skills);
         setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
         setAddMessage(true);
@@ -52,15 +53,22 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
         }, 1000);
       };
 
-      const handleDeleteSkill = (skillId: any) => {
-        deleteSkillFromEmployee(skillId)
-        console.log(`Suppression de la compétence avec l'ID ${skillId}`);
-        setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
-        setDeleteMessage(true);
-        setTimeout(() => {
-          setDeleteMessage(false);
-        }, 1000);
+      const handleDeleteSkill = async (skillId: any) => {
+        setIsLoading(true); 
+        try {
+          await deleteSkillFromEmployee(skillId);
+          setFilteredSkills((prevSkills) => prevSkills.filter((skill) => skill.id !== skillId));
+        } catch (error) {
+          console.error('Erreur lors de la suppression de la compétence:', error);
+        } finally {
+          setIsLoading(false);
+          setDeleteMessage(true);
+          setTimeout(() => {
+            setDeleteMessage(false);
+          }, 1000);
+        }
       };
+      
 
   return (
     <DialogContent className="sm:max-w-[425px]">
@@ -80,6 +88,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
           <AccordionItem value="item-1">
             <AccordionTrigger className='text-md text-black'>Les compétences disponibles</AccordionTrigger>
               <AccordionContent>
+              <div className="max-h-[120px] overflow-y-auto">
                 {Array.isArray(getSkills) ? (
                             getSkills.map((skill) => (
                             <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleAddSkillToEmployee(skill.id, id)} >
@@ -89,12 +98,14 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
                         ) : (
                             ''
                         )}
+                        </div>
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-2">
             <AccordionTrigger className='text-md text-black'>Les compétences de {firstname} {lastname} </AccordionTrigger>
               <AccordionContent>
+              <div className="max-h-[120px] overflow-y-auto">
                                 {Array.isArray(filteredSkills) ? (
                     filteredSkills.map((employeeSkill) => (
                         <Badge key={employeeSkill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleDeleteSkill(employeeSkill.id)}  >
@@ -104,6 +115,15 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
                     ) : (
                     ''
                     )}
+                    {isLoading && 
+                   <div className=" bg-white">
+                   <div className="flex justify-center items-center h-full">
+                     <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+                   </div>
+                   </div>
+                    
+                  }
+                  </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>
