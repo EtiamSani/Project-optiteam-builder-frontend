@@ -1,7 +1,8 @@
 import { Button } from '@/components/ui/button'
 import { Dialog,DialogTrigger } from '@/components/ui/dialog'
 import React, { useState } from 'react'
-import { IoIosAddCircleOutline } from 'react-icons/io'
+import { AiOutlineTool } from 'react-icons/ai'
+import { GrGroup, GrUser } from 'react-icons/gr'
 import Modal from './Modal'
 import ModalSkills from './ModalSkills'
 import ModalCreateTeam from './ModalCreateTeam'
@@ -23,7 +24,7 @@ const Buttons = ({onAddEmployee}) => {
       <div className="mb-3">
       <DialogTrigger asChild>
       <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
-              Créer une équipe <IoIosAddCircleOutline className="text-2xl ml-2" />
+              Créer une équipe <GrGroup className="text-2xl ml-2" />
             </Button>
             </DialogTrigger>
             {isModalOpen && <ModalCreateTeam onClose={() => setIsModalOpen(false)} />}
@@ -34,7 +35,7 @@ const Buttons = ({onAddEmployee}) => {
         <div className="mb-3">
           <DialogTrigger asChild>
             <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
-              Ajouter employé <IoIosAddCircleOutline className="text-2xl ml-2" />
+              Ajouter employé <GrUser className="text-2xl ml-2" />
             </Button>
           </DialogTrigger>
         {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} onAddEmployee={onAddEmployee} />}
@@ -43,7 +44,7 @@ const Buttons = ({onAddEmployee}) => {
       <Dialog>
           <DialogTrigger asChild>
             <Button size="lg" variant="yellow" onClick={() => setIsModalSkillsOpen(true)}>
-              Ajouter des compétences <IoIosAddCircleOutline className="text-2xl ml-2" />
+              Ajouter des compétences <AiOutlineTool className="text-3xl ml-2" />
             </Button>
           </DialogTrigger>
         {isModalSkillsOpen && <ModalSkills onClose={function (): void {

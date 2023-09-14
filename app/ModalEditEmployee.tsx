@@ -13,7 +13,7 @@ interface ModalProps {
     employeeId : number
   }
   
-  const Modal: React.FC<ModalProps> = ({  employeeId}) => {
+  const Modal: React.FC<ModalProps> = ({ employeeId , onUpdateEmployee}) => {
     
     const [editMessage, setEditMessage] = useState(false);
     
@@ -33,6 +33,7 @@ interface ModalProps {
       console.log('employeeee id', employeeId)
         try {
           await editEmployee(employeeData, employeeId); 
+          onUpdateEmployee(employeeData, employeeId);
           setEditMessage(true);
           setTimeout(() => {
             setEditMessage(false);

@@ -28,13 +28,9 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
           try {
             const skills = await fetchSkills();
             setGetSkills(skills);
-
             const skillsOfEmployee = await fetchSkillsOfEmployee(id);
-            
-            
             setGetEmployeeSkills(skillsOfEmployee.skills);
             setFilteredSkills(skillsOfEmployee.skills);
-            
           } catch (error) {
             console.error('Error fetching skills:', error);
           }
@@ -43,7 +39,8 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
         fetchData();
       }, [id,getSkills,getEmployeeSkills]); 
 
-      const handleAddSkillToEmployee = async (employeeId: number ,skillId: number) => {
+        const handleAddSkillToEmployee = async (employeeId: number ,skillId: number) => {
+          
         await addSkillsToEmployee(employeeId, skillId)
         const skillsOfEmployee = await fetchSkillsOfEmployee(id);
         setGetEmployeeSkills(skillsOfEmployee.skills);

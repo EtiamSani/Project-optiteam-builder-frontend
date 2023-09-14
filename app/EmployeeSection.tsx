@@ -19,9 +19,10 @@ import { fetchEmployee } from "@/utils"
 interface EmployeeCardProps {
   employee: EmployeeProps;
   onDeleteEmployee: (employee: EmployeeProps) => void;
+  onUpdateEmployee: (updatedEmployee: EmployeeProps,employeeId:number ) => void;
   
 }
-const EmployeeSection = ({ employee, onDeleteEmployee  }: EmployeeCardProps) => {
+const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee  }: EmployeeCardProps) => {
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
  
@@ -31,28 +32,18 @@ const EmployeeSection = ({ employee, onDeleteEmployee  }: EmployeeCardProps) => 
   }
 
   const handleEditEmployeeClick = (employeeId: number) => {
-    console.log(employeeId)
     localStorage.setItem('selectedEmployeeId', employeeId.toString());
     setSelectedEmployeeId(employeeId);
   };
 
-  // const handleAddEmployeeClick = async () => {
-  //   try {
-  //    const newEmployee = await fetchEmployee()
-  //    setNewEmployeeData(newEmployee);
-  //    onAddEmployee(newEmployee);
-      
-      
+  const handleUpdateEmployee = (updatedEmployee: EmployeeProps, employeeId : number) => {
+    onUpdateEmployee(updatedEmployee, employeeId); // Appelez la fonction onUpdateEmployee avec les données mises à jour
+  };
 
-  //   } catch (error) {
-  //     console.error('Error adding employee:', error);
-  //   }
-  // };
-  console.log('Employee profile picture:', employee.profilepicture);
-
+ 
   return (
     <div className='ml-5'>
-        <Card className='w-[350px] h-[80px] mb-2 hover:bg-[#F1B92A]' key={employee.id}>
+        <Card className='w-[390px] h-[80px] mb-2 hover:bg-[#ffebb7]' key={employee.id}>
           <div className="flex items-center">
           <Dialog>
               <DialogTrigger>
@@ -65,7 +56,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee  }: EmployeeCardProps) => 
             </Dialog>
               <div className="flex">
                 <div className="m-auto">
-                  <div className="ml-5 font-bold w-[100px]">
+                  <div className="ml-5 font-bold w-[140px]">
                     {employee.firstname} {employee.lastname}
                   </div>
                   <div className="ml-5 text-sm">
@@ -85,9 +76,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee  }: EmployeeCardProps) => 
                       <DialogTrigger>
                   <BsPencil className='text-2xl ml-2' />
                     </DialogTrigger>
-                    <ModalEditEmployee  employeeId={employee.id} onClose={function (): void {
-                    throw new Error("Function not implemented.")
-                  } }/>
+                    <ModalEditEmployee  employeeId={employee.id} onUpdateEmployee={handleUpdateEmployee}/>
                   </Dialog>
                   </button>
                   <button>

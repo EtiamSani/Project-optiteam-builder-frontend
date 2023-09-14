@@ -1,11 +1,10 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
-import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { EmployeeProps } from '@/types';
 import React from 'react'
-import { IoIosAddCircleOutline } from 'react-icons/io'
+
 
 interface EmployeeCardProps {
     employee: EmployeeProps;
@@ -16,10 +15,10 @@ interface EmployeeCardProps {
 
 const TeamSection = ({ employee }: EmployeeCardProps) => {
   const { firstname, lastname, job, profilepicture, skills , personality} = employee.employee;
-
+ //#f1b92a7c
   return (
     <div>
-        <Card className='w-[350px] h-[280px] mb-2 hover:bg-[#f1b92a7c] ml-5' >
+        <Card className='w-[350px] h-[280px] mb-2 ml-5' >
           <div className='flex'>
         <Avatar className="my-5 ml-4 h-20 w-20">
             <AvatarImage src={`http://localhost:3001/${profilepicture}`} />
