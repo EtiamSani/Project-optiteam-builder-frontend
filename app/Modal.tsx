@@ -6,46 +6,57 @@ import { handleSubmit } from '@/utils'
 import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
 import {selectItems} from '../constants/index'
+import { EmployeeProps } from '@/types'
 
 interface ModalProps {
     onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
+    onAddEmployee: (newEmployee: Employee) => void;
+  }
+  interface Employee {
+    lastname: string;
+    firstname: string;
+    job: string;
+    personality: string;
+  
   }
 
-  const Modal: React.FC<ModalProps> = ({ onClose }) => {
+  const Modal: React.FC<ModalProps> = ({ onClose, onAddEmployee  }) => {
     
-
+    const [allEmployees, setAllEmployees] = useState<Employee[]>([]);
     const resetModal = () => {
         setEmployeeData({
           lastname: "",
           firstname: "",
           job: "",
           personality: "",
-          teamId: 1
         });
       };
       
 
     const handleAddEmployee = async (e:any) => {
         try {
-          // Effectuez ici l'ajout de l'employé (par exemple, en utilisant une API)
-          // Une fois l'employé ajouté avec succès, fermez le modal en mettant isModalOpen à false
           await handleSubmit(employeeData,e); // Appelez handleSubmit directement
+          console.log("Employee added:", employeeData)
+          setAllEmployees((prevEmployees) => [...prevEmployees, employeeData]);
           onClose();
-          // Réinitialisez les données du formulaire, si nécessaire.
           resetModal();
+          // cest ca qui pose soucis
+          // onAddEmployee(employeeData); 
         } catch (error) {
           console.error('Error adding employee:', error);
         }
       };
+
+      const handleAddEmployeeFilter = async () => {
+        onAddEmployee(employeeData); 
+      }
       
       
     const [employeeData, setEmployeeData] = useState({
         lastname: "",
         firstname: "",
         job: "",
-        personality:"",
-        teamId: 1
-        
+        personality:"", 
       });
 
       const handleInputChange = (e: { target: { id: any; value: any } }) => {
@@ -112,7 +123,7 @@ interface ModalProps {
             </div>
         </div>
         <DialogFooter>
-        <Button type="submit" variant="yellow" onClick={handleAddEmployee}>Ajouter</Button>
+        <Button type="submit" variant="yellow" onClick={(e) => { handleAddEmployee(e); handleAddEmployeeFilter(); }}>Ajouter</Button>
         </DialogFooter>
       </DialogContent>
   )

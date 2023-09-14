@@ -4,8 +4,9 @@ import React, { useState } from 'react'
 import { IoIosAddCircleOutline } from 'react-icons/io'
 import Modal from './Modal'
 import ModalSkills from './ModalSkills'
+import ModalCreateTeam from './ModalCreateTeam'
 
-const Buttons = () => {
+const Buttons = ({onAddEmployee}) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalSkillsOpen, setIsModalSkillsOpen] = useState(false);
@@ -17,6 +18,18 @@ const Buttons = () => {
   
   return (
     <div className="ml-5">
+
+      <Dialog>
+      <div className="mb-3">
+      <DialogTrigger asChild>
+      <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
+              Créer une équipe <IoIosAddCircleOutline className="text-2xl ml-2" />
+            </Button>
+            </DialogTrigger>
+            {isModalOpen && <ModalCreateTeam onClose={() => setIsModalOpen(false)} />}
+            </div>
+      </Dialog>
+
       <Dialog>
         <div className="mb-3">
           <DialogTrigger asChild>
@@ -24,7 +37,7 @@ const Buttons = () => {
               Ajouter employé <IoIosAddCircleOutline className="text-2xl ml-2" />
             </Button>
           </DialogTrigger>
-        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} />}
+        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} onAddEmployee={onAddEmployee} />}
         </div>
       </Dialog>
       <Dialog>
@@ -37,6 +50,7 @@ const Buttons = () => {
           throw new Error('Function not implemented.')
         } }/>}
         </Dialog>
+        
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Liste des employés</h3>
       </div>

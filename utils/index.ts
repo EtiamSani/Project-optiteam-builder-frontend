@@ -76,11 +76,8 @@ export async function deleteEmployee(id: number) {
       export async function editEmployeePicture (file: File, employeeId: number) {
       
         try {
-         
           const formData = new FormData(); 
           formData.append("file", file);
-
-          
           const response = await fetch(`http://localhost:3001/employees/${employeeId}/profile-picture`, {
             method: "POST",
             body: formData,
@@ -91,7 +88,6 @@ export async function deleteEmployee(id: number) {
       }
 
       export async function saveSkills (skillsData : SaveSkillsProps) {
-      console.log(skillsData , 'dans index')
         try {   
           const response = await fetch(`http://localhost:3001/skills`, {
             method: "POST",
@@ -151,7 +147,7 @@ export async function deleteEmployee(id: number) {
           const response = await fetch(`http://localhost:3001/employees/${employeeId}/skill/${skillId}`, {
             method: 'POST',
           });
-          console.log(response)
+          
       
           if (response.status === 201) {
             console.log('Employee deleted successfully.');
@@ -166,8 +162,54 @@ export async function deleteEmployee(id: number) {
       }
 
       export async function fetchSkillsOfEmployee(employeeId : number) {
+        // console.log(employeeId)
         try {
           const response = await fetch(`http://localhost:3001/employees/${employeeId}`, {
+            cache: 'no-cache'
+          });
+      
+          if (!response.ok) {
+            throw new Error('Échec de la requête.');
+          }
+      
+          const result = await response.json();
+          return result;
+        } catch (error) {
+          console.error('Erreur lors de la récupération des compétences des employees :', error);
+          throw error; // Vous pouvez choisir de gérer l'erreur ici ou de la remonter à l'appelant
+        }
+      }
+
+      export async function deleteSkillFromEmployee(skillId: any) {
+        try {
+          const response = await fetch(`http://localhost:3001/employees/skill/${skillId}`, {
+            method: 'DELETE',
+          });
+        } catch (error) {
+          console.error('Error deleting employee:', error);
+        }
+      }
+
+      export async function createTeam (team : any) {
+      
+        try {   
+          const response = await fetch(`http://localhost:3001/team`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: team.name, 
+            }),
+          });
+        } catch (error) {
+          console.error("Erreur lors de la soumission de l'équipe :", error);
+        }
+      }
+
+      export async function fetchTeamWithEmployees(teamId : number) {
+        try {
+          const response = await fetch(`http://localhost:3001/team/${teamId}`, {
             cache: 'no-cache'
           });
       
@@ -183,15 +225,7 @@ export async function deleteEmployee(id: number) {
         }
       }
 
-      export async function deleteSkillFromEmployee(skillId: any) {
-        try {
-          const response = await fetch(`http://localhost:3001/employees/skill/${skillId}`, {
-            method: 'DELETE',
-          });
-        } catch (error) {
-          console.error('Error deleting employee:', error);
-        }
-      }
+      
     
 
 

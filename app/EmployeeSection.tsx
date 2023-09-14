@@ -13,15 +13,18 @@ import { Dialog } from "@/components/ui/dialog"
 import ModalEditEmployee from "./ModalEditEmployee"
 import ModalPicture from "./ModalPicture"
 import ModalAddSkills from "./ModalAddSkills"
+import { fetchEmployee } from "@/utils"
 
 
 interface EmployeeCardProps {
   employee: EmployeeProps;
   onDeleteEmployee: (employee: EmployeeProps) => void;
+  
 }
-const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
+const EmployeeSection = ({ employee, onDeleteEmployee  }: EmployeeCardProps) => {
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
+ 
   
   function closeModal(): void {
     throw new Error("Function not implemented.")
@@ -32,6 +35,20 @@ const EmployeeSection = ({ employee, onDeleteEmployee }: EmployeeCardProps) => {
     localStorage.setItem('selectedEmployeeId', employeeId.toString());
     setSelectedEmployeeId(employeeId);
   };
+
+  // const handleAddEmployeeClick = async () => {
+  //   try {
+  //    const newEmployee = await fetchEmployee()
+  //    setNewEmployeeData(newEmployee);
+  //    onAddEmployee(newEmployee);
+      
+      
+
+  //   } catch (error) {
+  //     console.error('Error adding employee:', error);
+  //   }
+  // };
+  console.log('Employee profile picture:', employee.profilepicture);
 
   return (
     <div className='ml-5'>
