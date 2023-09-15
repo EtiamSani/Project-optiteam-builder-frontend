@@ -22,7 +22,7 @@ interface EmployeeCardProps {
   onUpdateEmployee: (updatedEmployee: EmployeeProps,employeeId:number ) => void;
   
 }
-const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee  }: EmployeeCardProps) => {
+const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture  }: EmployeeCardProps) => {
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
  
@@ -52,7 +52,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee  }: Empl
               <AvatarFallback>{employee.firstname}</AvatarFallback>
             </Avatar>
               </DialogTrigger>
-            <ModalPicture employeeId={employee.id}/>
+            <ModalPicture employeeId={employee.id} onUpdateProfilePicture={updateProfilePicture}/>
             </Dialog>
               <div className="flex">
                 <div className="m-auto">

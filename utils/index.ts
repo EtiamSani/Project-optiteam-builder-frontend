@@ -82,6 +82,13 @@ export async function deleteEmployee(id: number) {
             method: "POST",
             body: formData,
           });
+          const data = await response.json();
+          console.log(data.profilepicture)
+          if (data.profilepicture) {
+            // Si l'URL de la nouvelle photo de profil est disponible, renvoyez-la
+            return data.profilepicture;
+          }
+
         } catch (error) {
           console.error("Erreur lors de la soumission du formulaire :", error);
         }

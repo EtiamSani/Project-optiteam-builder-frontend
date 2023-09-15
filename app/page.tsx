@@ -59,6 +59,19 @@ export default function Home() {
     
   };
 
+  const updateProfilePicture = (employeeId, newProfilePictureUrl) => {
+    setAllEmployees((prevEmployees) =>
+      prevEmployees.map((employee) =>
+        employee.id === employeeId
+          ? { ...employee, profilepicture: newProfilePictureUrl }
+          : employee
+      )
+    );
+  };
+
+
+
+
   return (
     <main className="h-screen">
       <div className="flex justify-center items-center mt-20 font-bold text-4xl text-[#F1B92A]">
@@ -69,7 +82,7 @@ export default function Home() {
       <div className="flex flex-col">
         
       {allEmployees.map((employee: EmployeeProps) => (
-        <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee} 
+        <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee} updateProfilePicture={updateProfilePicture}
         />
       ))}
       </div>

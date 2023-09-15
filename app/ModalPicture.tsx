@@ -8,12 +8,17 @@ interface ModalPictureProps {
   employeeId: number;
 }
 
-const ModalPicture = ({employeeId}: ModalPictureProps) => {
+const ModalPicture = ({employeeId, onUpdateProfilePicture}: ModalPictureProps) => {
     const handlePictureChange = () => {
         const fileInput = document.getElementById('picture') as HTMLInputElement;
         const file = fileInput.files?.[0];
         if (file) {
-          editEmployeePicture(file, employeeId);
+          
+          // editEmployeePicture(file, employeeId);
+          editEmployeePicture(file, employeeId).then((newProfilePictureUrl) => {
+            console.log(newProfilePictureUrl)
+            onUpdateProfilePicture(employeeId, newProfilePictureUrl);
+          });
         }
       };
   return (
