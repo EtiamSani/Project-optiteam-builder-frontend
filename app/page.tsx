@@ -10,13 +10,13 @@ import TeamSection from "./TeamSection";
 export default function Home() {
   const [allEmployees, setAllEmployees] = useState<EmployeeProps[]>([]);
   const [teamWithEmployees, setTeamWithEmployees] = useState<EmployeeProps[]>([]);
+ 
 
   const teamId = 1
   useEffect(() => {
     const fetchData = async (teamId : number) => {
       try {
         const employees = await fetchEmployee();
-        console.log(employees)
         setAllEmployees(employees);
         const teamWithEmployees = await fetchTeamWithEmployees(teamId)
         setTeamWithEmployees(teamWithEmployees.employees)
@@ -47,12 +47,16 @@ export default function Home() {
 
   const handleUpdateEmployee = (updatedEmployee: EmployeeProps, employeeId : number) => {
     updatedEmployee.id = employeeId
-    console.log(employeeId)
-    console.log(updatedEmployee)
-    // Mettez à jour la liste des employés en remplaçant l'employé mis à jour
-    setAllEmployees((prevEmployees) =>
-      prevEmployees.map((employee) => (employee.id === updatedEmployee.id ? updatedEmployee : employee))
-    );
+    // maj de la liste des employés en remplaçant l'employé mis à jour
+    setAllEmployees((prevEmployees) => {
+    // le profilepicture actuel de l'employé dans l'état
+    const currentEmployee = prevEmployees.find((employee) => employee.id === employeeId);
+    if (currentEmployee) {
+      updatedEmployee.profilepicture = currentEmployee.profilepicture;
+    }
+    return prevEmployees.map((employee) => (employee.id === updatedEmployee.id ? updatedEmployee : employee));
+  });
+    
   };
 
   return (
@@ -65,7 +69,7 @@ export default function Home() {
       <div className="flex flex-col">
         
       {allEmployees.map((employee: EmployeeProps) => (
-        <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee}
+        <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee} 
         />
       ))}
       </div>
@@ -75,13 +79,7 @@ export default function Home() {
         />
       ))}
       </div>
-      </div>
-      
-
-      
-      
-      
-        
+      </div>  
     </main>
   )
 }

@@ -4,7 +4,6 @@ export interface EmployeeProps {
     firstname: String,
     job : String,
     personality: String
-    teamId: number
     profilepicture: String
 }
 
@@ -17,11 +16,12 @@ export interface AddEmployeeProps {
 }
 
 export interface EditEmployeeProps {
+    id: number
     lastname: String,
     firstname: String,
     job : String,
     personality: String
-    profilepicture: String
+    
 }
 
 export interface SaveSkillsProps {

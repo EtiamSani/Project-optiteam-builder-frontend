@@ -36,7 +36,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee  }: Empl
     setSelectedEmployeeId(employeeId);
   };
 
-  const handleUpdateEmployee = (updatedEmployee: EmployeeProps, employeeId : number) => {
+  const handleUpdateEmployee = (updatedEmployee: EditEmployeeProps, employeeId : number) => {
     onUpdateEmployee(updatedEmployee, employeeId); // Appelez la fonction onUpdateEmployee avec les données mises à jour
   };
 
@@ -69,7 +69,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee  }: Empl
                       <DialogTrigger>
                   <FiBriefcase className='text-2xl ml-2' />
                   </DialogTrigger>
-                    <ModalAddSkills firstname={employee.firstname.toString()} lastname={employee.lastname.toString()} profilepicture={employee.profilepicture.toString()} id={employee.id} name={""}/>
+                    <ModalAddSkills firstname={employee.firstname.toString()} lastname={employee.lastname.toString()}  id={employee.id} name={""}/>
                   </Dialog>
                   <button onClick={() => handleEditEmployeeClick(employee.id)}>
                     <Dialog>

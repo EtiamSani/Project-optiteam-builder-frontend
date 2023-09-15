@@ -19,7 +19,7 @@ interface ModalProps {
     
     const resetModal = () => {
         setEmployeeData({
-          profilepicture:'',
+          
           lastname: "",
           firstname: "",
           job: "",
@@ -30,7 +30,7 @@ interface ModalProps {
       
 
     const handleEditEmployee = async (employeeData: EditEmployeeProps, employeeId: number) => {
-      console.log('employeeee id', employeeId)
+      
         try {
           await editEmployee(employeeData, employeeId); 
           onUpdateEmployee(employeeData, employeeId);
@@ -49,7 +49,6 @@ interface ModalProps {
         lastname: "",
         firstname: "",
         job: "",
-        profilepicture:"",
         personality:"",
         
       });
