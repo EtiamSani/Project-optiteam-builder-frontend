@@ -3,7 +3,6 @@
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Card } from '@/components/ui/card'
 import React, { useState } from 'react'
-import {IoIosAddCircleOutline} from 'react-icons/io'
 import {FiBriefcase} from 'react-icons/fi'
 import {RiDeleteBin7Line} from 'react-icons/ri'
 import {BsPencil} from 'react-icons/bs'
@@ -70,7 +69,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
                   </div>
                 </div>
                 <div className="m-auto flex ml-8">
-                  <IoIosAddCircleOutline className='text-2xl ml-2' />
+                  
                   <Dialog>
                       <DialogTrigger>
                   <FiBriefcase className='text-2xl ml-2' />
