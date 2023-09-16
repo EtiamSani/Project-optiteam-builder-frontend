@@ -13,7 +13,7 @@ import { Dialog } from "@/components/ui/dialog"
 import ModalEditEmployee from "./ModalEditEmployee"
 import ModalPicture from "./ModalPicture"
 import ModalAddSkills from "./ModalAddSkills"
-import { fetchEmployee } from "@/utils"
+import { AddEmployeeToTeam, fetchEmployee } from "@/utils"
 
 
 interface EmployeeCardProps {
@@ -40,10 +40,15 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
     onUpdateEmployee(updatedEmployee, employeeId); // Appelez la fonction onUpdateEmployee avec les données mises à jour
   };
 
+  const handleAddEmployeeToTeam = (employeeId : number) => {
+    console.log(employeeId)
+    AddEmployeeToTeam(1,employeeId)
+  }
+
  
   return (
     <div className='ml-5'>
-        <Card className='w-[390px] h-[80px] mb-2 hover:bg-[#ffebb7]' key={employee.id}>
+        <Card className='w-[390px] h-[80px] mb-2 hover:bg-[#ffebb7]' key={employee.id} onDoubleClick={() => handleAddEmployeeToTeam(employee.id)}>
           <div className="flex items-center">
           <Dialog>
               <DialogTrigger>

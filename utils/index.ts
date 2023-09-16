@@ -232,6 +232,25 @@ export async function deleteEmployee(id: number) {
         }
       }
 
+      export async function AddEmployeeToTeam(teamId: number,employeeId: number) {
+        try {
+          const response = await fetch(`http://localhost:3001/team/${teamId}/employee/${employeeId}`, {
+            method: 'POST',
+          });
+          
+      
+          if (response.status === 201) {
+            console.log('Employee deleted successfully.');
+            await fetchEmployee();
+            
+          } else {
+            console.error('Failed to add skill.');
+          }
+        } catch (error) {
+          console.error('Error deleting employee:', error);
+        }
+      }
+
       
     
 
