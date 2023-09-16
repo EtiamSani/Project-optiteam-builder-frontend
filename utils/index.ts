@@ -251,6 +251,16 @@ export async function deleteEmployee(id: number) {
         }
       }
 
+      export async function deleteEmployeeFromTeam(id: number) {
+        try {
+          const response = await fetch(`http://localhost:3001/team/employee/${id}`, {
+            method: 'DELETE',
+          });
+        } catch (error) {
+          console.error('Error deleting employee:', error);
+        }
+      }
+
       
     
 

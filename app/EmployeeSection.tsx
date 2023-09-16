@@ -20,9 +20,9 @@ interface EmployeeCardProps {
   employee: EmployeeProps;
   onDeleteEmployee: (employee: EmployeeProps) => void;
   onUpdateEmployee: (updatedEmployee: EmployeeProps,employeeId:number ) => void;
-  
 }
-const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture  }: EmployeeCardProps) => {
+
+const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture, handleUpdateAddEmployeeToTeam  }: EmployeeCardProps) => {
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
  
@@ -43,6 +43,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
   const handleAddEmployeeToTeam = (employeeId : number) => {
     console.log(employeeId)
     AddEmployeeToTeam(1,employeeId)
+    handleUpdateAddEmployeeToTeam(employee)
   }
 
  

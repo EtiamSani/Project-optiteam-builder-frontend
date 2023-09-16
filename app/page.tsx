@@ -56,10 +56,32 @@ export default function Home() {
     }
     return prevEmployees.map((employee) => (employee.id === updatedEmployee.id ? updatedEmployee : employee));
   });
-    
-  };
 
-  const updateProfilePicture = (employeeId, newProfilePictureUrl) => {
+};
+
+const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
+  
+  const updatedEmployee = {
+    ...newEmployee, 
+    employee: {     
+      id: newEmployee.id,
+      lastname: newEmployee.lastname,
+      firstname: newEmployee.firstname,
+      profilepicture: newEmployee.profilepicture,
+      job: newEmployee.job,
+      personality: newEmployee.personality,
+      skills: newEmployee.skills || [],
+    },
+  };
+  // setTeamWithEmployees((prevTeamWithEmployees) => {
+  //   console.log("Previous Team:", prevTeamWithEmployees);
+  //   console.log("New Employee:", updatedEmployee );
+  //   return [...prevTeamWithEmployees, updatedEmployee ];
+  // });
+  setTeamWithEmployees((prevTeamWithEmployees) => [...prevTeamWithEmployees, updatedEmployee]);
+}
+
+  const updateProfilePicture = (employeeId: number, newProfilePictureUrl: any) => {
     setAllEmployees((prevEmployees) =>
       prevEmployees.map((employee) =>
         employee.id === employeeId
@@ -68,9 +90,6 @@ export default function Home() {
       )
     );
   };
-
-
-
 
   return (
     <main className="h-screen">
@@ -83,10 +102,11 @@ export default function Home() {
         
       {allEmployees.map((employee: EmployeeProps) => (
         <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee} updateProfilePicture={updateProfilePicture}
+        handleUpdateAddEmployeeToTeam={handleUpdateAddEmployeeToTeam}
         />
       ))}
       </div>
-      <div className="ml-[100px] flex">
+      <div className="ml-[100px] flex flex-wrap">
       {teamWithEmployees.map((employeeTeam: EmployeeProps) => (
         <TeamSection key={employeeTeam.id} employee={employeeTeam} 
         />
