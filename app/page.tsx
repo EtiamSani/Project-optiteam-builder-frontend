@@ -108,7 +108,7 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
       </div>
       <div className="ml-[100px] flex flex-wrap">
       {teamWithEmployees.map((employeeTeam: EmployeeProps) => (
-        <TeamSection key={employeeTeam.id} employee={employeeTeam} handleDeleteEmployeeFromTeamUpdater={handleDeleteEmployeeFromTeamUpdater}
+        <TeamSection key={employeeTeam.id} employee={employeeTeam} handleDeleteEmployeeFromTeamUpdater={handleDeleteEmployeeFromTeamUpdater} 
         />
       ))}
       </div>
