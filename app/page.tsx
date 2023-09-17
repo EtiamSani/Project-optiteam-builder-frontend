@@ -73,13 +73,13 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
       skills: newEmployee.skills || [],
     },
   };
-  // setTeamWithEmployees((prevTeamWithEmployees) => {
-  //   console.log("Previous Team:", prevTeamWithEmployees);
-  //   console.log("New Employee:", updatedEmployee );
-  //   return [...prevTeamWithEmployees, updatedEmployee ];
-  // });
   setTeamWithEmployees((prevTeamWithEmployees) => [...prevTeamWithEmployees, updatedEmployee]);
 }
+
+  const handleDeleteEmployeeFromTeamUpdater = (employeeToDeleteFromTeam : any) => {
+    const updatedTeamWithEmployees = teamWithEmployees.filter((e) => e.id !== employeeToDeleteFromTeam.id);
+    setTeamWithEmployees(updatedTeamWithEmployees);
+  }
 
   const updateProfilePicture = (employeeId: number, newProfilePictureUrl: any) => {
     setAllEmployees((prevEmployees) =>
@@ -108,7 +108,7 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
       </div>
       <div className="ml-[100px] flex flex-wrap">
       {teamWithEmployees.map((employeeTeam: EmployeeProps) => (
-        <TeamSection key={employeeTeam.id} employee={employeeTeam} 
+        <TeamSection key={employeeTeam.id} employee={employeeTeam} handleDeleteEmployeeFromTeamUpdater={handleDeleteEmployeeFromTeamUpdater}
         />
       ))}
       </div>

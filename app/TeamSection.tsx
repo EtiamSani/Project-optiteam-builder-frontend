@@ -15,7 +15,7 @@ interface EmployeeCardProps {
   
   
 
-const TeamSection = ({ employee }: EmployeeCardProps) => {
+const TeamSection = ({ employee, handleDeleteEmployeeFromTeamUpdater }: EmployeeCardProps) => {
   const [deleteMessage, setDeleteMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,7 +31,7 @@ const TeamSection = ({ employee }: EmployeeCardProps) => {
       setIsLoading(false);
   
       setDeleteMessage(true);
-
+      handleDeleteEmployeeFromTeamUpdater(employee)
       setTimeout(() => {
       setDeleteMessage(false);
       }, 1000);
@@ -45,9 +45,9 @@ const TeamSection = ({ employee }: EmployeeCardProps) => {
     <div>
       <div>
       {isLoading && 
-               <div className=" bg-white">
+               <div className=" bg-[#F9FAFB]">
                <div className="flex justify-center items-center h-full">
-                 <img className="h-16 w-16" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
+                 <img className="h-16 w-16 bg-[#F9FAFB]" src="https://icons8.com/preloaders/preloaders/1488/Iphone-spinner-2.gif" alt=""/>
                </div>
                </div>               
               }
