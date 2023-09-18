@@ -73,7 +73,7 @@ const TeamSection = ({ employee, handleDeleteEmployeeFromTeamUpdater }: Employee
               <div className="max-h-[50px] overflow-y-auto">
               {Array.isArray(skills) ? (
                 skills.map((item) => (
-                  <Badge key={item.skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer'>
+                  <Badge key={item.skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer bg-[#F1B92A] text-white border-[#F1B92A]'>
                     {item.skill.name}
                   </Badge>
                 ))

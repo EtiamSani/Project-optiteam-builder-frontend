@@ -71,16 +71,13 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
   return (
     <DialogContent className="sm:max-w-[425px]">
     <DialogHeader>
-      <DialogTitle >Ajouter des compétences à <span className='text-[#F1B92A]'>{firstname} {lastname}</span></DialogTitle>
+      <DialogTitle className='text-2xl'>Ajouter des compétences à <span className='text-[#F1B92A] '>{firstname} {lastname}</span></DialogTitle>
       {deleteMessage && 
       <div className='text-red-600 m-auto font-bold bg-red-300 p-2 rounded-md'> La compétence a bien été effacé !</div>}
       {addMessage && 
       <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> La compétence a bien été ajouté !</div>}
     </DialogHeader>
     <div className='flex flex-col m-auto '>
-    <Avatar className="w-20 h-20">
-              <AvatarImage src={`http://localhost:3001/${profilepicture}`} />
-            </Avatar>
             </div>
     <Accordion type="single" collapsible>
           <AccordionItem value="item-1">
@@ -89,7 +86,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
               <div className="max-h-[120px] overflow-y-auto">
                 {Array.isArray(getSkills) ? (
                             getSkills.map((skill) => (
-                            <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleAddSkillToEmployee(skill.id, id)} >
+                            <Badge key={skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer bg-[#F1B92A] text-white border-[#F1B92A]' onDoubleClick={() => handleAddSkillToEmployee(skill.id, id)} >
                                 {skill.name}
                             </Badge>
                             ))
@@ -106,7 +103,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
               <div className="max-h-[120px] overflow-y-auto">
                                 {Array.isArray(filteredSkills) ? (
                     filteredSkills.map((employeeSkill) => (
-                        <Badge key={employeeSkill.id} variant="outline" className='ml-2 mb-2 cursor-pointer' onDoubleClick={() => handleDeleteSkill(employeeSkill.id)}  >
+                        <Badge key={employeeSkill.id} variant="outline" className='ml-2 mb-2 cursor-pointer bg-[#F1B92A] text-white border-[#F1B92A]' onDoubleClick={() => handleDeleteSkill(employeeSkill.id)}  >
                         {employeeSkill.skill.name}
                         </Badge>
                     ))

@@ -44,7 +44,7 @@ const Buttons = ({onAddEmployee}) => {
       <Dialog>
           <DialogTrigger asChild>
             <Button size="lg" variant="yellow" onClick={() => setIsModalSkillsOpen(true)}>
-              Ajouter des compétences <AiOutlineTool className="text-3xl ml-2" />
+              Ajouter des compétences <AiOutlineTool className="text-3xl ml-2 text-black" />
             </Button>
           </DialogTrigger>
         {isModalSkillsOpen && <ModalSkills onClose={function (): void {
