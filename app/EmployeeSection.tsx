@@ -12,6 +12,7 @@ import { Dialog } from "@/components/ui/dialog"
 import ModalEditEmployee from "./ModalEditEmployee"
 import ModalPicture from "./ModalPicture"
 import ModalAddSkills from "./ModalAddSkills"
+import {AiOutlineUsergroupAdd} from 'react-icons/ai'
 import { AddEmployeeToTeam, fetchEmployee } from "@/utils"
 
 
@@ -44,11 +45,10 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
     AddEmployeeToTeam(1,employeeId)
     handleUpdateAddEmployeeToTeam(employee)
   }
-
- 
+  
   return (
     <div className='ml-5'>
-        <Card className='w-[390px] h-[80px] mb-2 hover:bg-[#ffebb7]' key={employee.id} onDoubleClick={() => handleAddEmployeeToTeam(employee.id)}>
+        <Card className='w-[390px] h-[80px] mb-2 hover:bg-[#ffebb7]' key={employee.id}>
           <div className="flex items-center">
           <Dialog>
               <DialogTrigger>
@@ -69,7 +69,9 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
                   </div>
                 </div>
                 <div className="m-auto flex ml-8">
-                  
+                  <button onClick={() => handleAddEmployeeToTeam(employee.id)}>
+                  <AiOutlineUsergroupAdd className='text-2xl ml-2'/>
+                  </button>
                   <Dialog>
                       <DialogTrigger>
                   <FiBriefcase className='text-2xl ml-2' />
