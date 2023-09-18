@@ -28,7 +28,14 @@ interface ModalProps {
     const handleSaveTeam = async (teamData: SaveSkillsProps) => {
         try {
         
-          await createTeam(teamData); 
+          const response = await createTeam(teamData); 
+          if (response && response.id) {
+            const teamId = response.id;
+            console.log("teamID c" , teamId)
+      
+            // Stocker l'ID dans le localStorage
+            localStorage.setItem('teamId', teamId);  }
+      
           setAddMessage(true);
         setTimeout(() => {
           setAddMessage(false);

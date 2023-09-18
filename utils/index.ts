@@ -209,6 +209,8 @@ export async function deleteEmployee(id: number) {
               name: team.name, 
             }),
           });
+          const result = await response.json();
+          return result;
         } catch (error) {
           console.error("Erreur lors de la soumission de l'équipe :", error);
         }

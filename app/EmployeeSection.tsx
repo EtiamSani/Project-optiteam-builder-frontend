@@ -25,7 +25,8 @@ interface EmployeeCardProps {
 const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture, handleUpdateAddEmployeeToTeam  }: EmployeeCardProps) => {
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
- 
+  const storedTeamId = localStorage.getItem('teamId');
+  const teamId = parseInt(storedTeamId, 10);
   
   function closeModal(): void {
     throw new Error("Function not implemented.")
@@ -40,9 +41,9 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
     onUpdateEmployee(updatedEmployee, employeeId); // Appelez la fonction onUpdateEmployee avec les données mises à jour
   };
 
-  const handleAddEmployeeToTeam = (employeeId : number) => {
+  const handleAddEmployeeToTeam = (employeeId : number, teamId: number) => {
     console.log(employeeId)
-    AddEmployeeToTeam(1,employeeId)
+    AddEmployeeToTeam(teamId,employeeId)
     handleUpdateAddEmployeeToTeam(employee)
   }
   
@@ -69,7 +70,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
                   </div>
                 </div>
                 <div className="m-auto flex ml-8">
-                  <button onClick={() => handleAddEmployeeToTeam(employee.id)}>
+                  <button onClick={() => handleAddEmployeeToTeam(employee.id,teamId)}>
                   <AiOutlineUsergroupAdd className='text-2xl ml-2'/>
                   </button>
                   <Dialog>

@@ -14,6 +14,9 @@ export default function Home() {
 
   const teamId = 1
   useEffect(() => {
+    const storedTeamId = localStorage.getItem('teamId');
+    const teamId = parseInt(storedTeamId, 10);
+    console.log(teamId)
     const fetchData = async (teamId : number) => {
       try {
         const employees = await fetchEmployee();
