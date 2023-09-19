@@ -1,10 +1,10 @@
 "use client"
 import { deleteEmployee,fetchEmployee, fetchTeamWithEmployees } from "@/utils"
-import EmployeeSection from "./EmployeeSection"
+import EmployeeSection from "../../../components/sections/EmployeeSection"
 import { EmployeeProps } from "@/types";
-import Buttons from "./Buttons";
+import Buttons from "../../../components/Buttons";
 import { useEffect, useState } from "react";
-import TeamSection from "./TeamSection";
+import TeamSection from "../../../components/sections/TeamSection";
 
   
 export default function Home() {

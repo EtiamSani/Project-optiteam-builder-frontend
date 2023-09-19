@@ -9,9 +9,9 @@ import {BsPencil} from 'react-icons/bs'
 import { EditEmployeeProps, EmployeeProps } from "@/types"
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import { Dialog } from "@/components/ui/dialog"
-import ModalEditEmployee from "./ModalEditEmployee"
-import ModalPicture from "./ModalPicture"
-import ModalAddSkills from "./ModalAddSkills"
+import ModalEditEmployee from "../modals/ModalEditEmployee"
+import ModalPicture from "../modals/ModalPicture"
+import ModalAddSkills from "../modals/ModalAddSkills"
 import {AiOutlineUsergroupAdd} from 'react-icons/ai'
 import { AddEmployeeToTeam, fetchEmployee } from "@/utils"
 

@@ -6,7 +6,7 @@ import { editEmployee, editEmployeePicture} from '@/utils'
 import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { EditEmployeeProps } from '@/types'
-import {selectItems} from '../constants/index'
+import {selectItems} from '../../constants/index'
 
 interface ModalProps {
     onClose: () => void; // type de onClose comme une fonction qui ne renvoie rien (void)

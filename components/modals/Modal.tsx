@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label'
 import { handleSubmit } from '@/utils'
 import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select'
-import {selectItems} from '../constants/index'
+import {selectItems} from '../../constants/index'
 import { EmployeeProps } from '@/types'
 
 interface ModalProps {

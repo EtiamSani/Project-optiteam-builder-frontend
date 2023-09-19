@@ -3,9 +3,9 @@ import { Dialog,DialogTrigger } from '@/components/ui/dialog'
 import React, { useState } from 'react'
 import { AiOutlineTool } from 'react-icons/ai'
 import { GrGroup, GrUser } from 'react-icons/gr'
-import Modal from './Modal'
-import ModalSkills from './ModalSkills'
-import ModalCreateTeam from './ModalCreateTeam'
+import Modal from './modals/Modal'
+import ModalSkills from './modals/ModalSkills'
+import ModalCreateTeam from './modals/ModalCreateTeam'
 
 const Buttons = ({onAddEmployee}) => {
 
