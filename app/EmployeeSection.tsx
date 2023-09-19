@@ -22,7 +22,7 @@ interface EmployeeCardProps {
   onUpdateEmployee: (updatedEmployee: EmployeeProps,employeeId:number ) => void;
 }
 
-const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture, handleUpdateAddEmployeeToTeam  }: EmployeeCardProps) => {
+const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture, handleUpdateAddEmployeeToTeam, updateEmployeeInTeam  }: EmployeeCardProps) => {
 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
   const storedTeamId = localStorage.getItem('teamId');
@@ -39,6 +39,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
 
   const handleUpdateEmployee = (updatedEmployee: EditEmployeeProps, employeeId : number) => {
     onUpdateEmployee(updatedEmployee, employeeId); // Appelez la fonction onUpdateEmployee avec les données mises à jour
+    updateEmployeeInTeam(updatedEmployee);
   };
 
   const handleAddEmployeeToTeam = (employeeId : number, teamId: number) => {

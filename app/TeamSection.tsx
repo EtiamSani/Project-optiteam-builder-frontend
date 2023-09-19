@@ -9,33 +9,26 @@ import React, { useState } from 'react'
 
 interface EmployeeCardProps {
     employee: EmployeeProps;
-    
   }
-
-  
-  
 
 const TeamSection = ({ employee, handleDeleteEmployeeFromTeamUpdater }: EmployeeCardProps) => {
   const [deleteMessage, setDeleteMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  console.log(employee)
 
   const handleDeleteEmployeeFromTeam = async (employee: any) => {
     setIsLoading(true);
     try{
-      await deleteEmployeeFromTeam(employee.id)
-      
+      await deleteEmployeeFromTeam(employee.id) 
     } catch(error) {
       console.error('Erreur lors de la suppression de la compétence:', error);
     } finally {
-
       setIsLoading(false);
-  
       setDeleteMessage(true);
       handleDeleteEmployeeFromTeamUpdater(employee)
       setTimeout(() => {
       setDeleteMessage(false);
       }, 1000);
-      console.log(employee.id)
     }
   }
   
@@ -73,7 +66,7 @@ const TeamSection = ({ employee, handleDeleteEmployeeFromTeamUpdater }: Employee
               <div className="max-h-[50px] overflow-y-auto">
               {Array.isArray(skills) ? (
                 skills.map((item) => (
-                  <Badge key={item.skill.id} variant="outline" className='ml-2 mb-2 cursor-pointer bg-[#F1B92A] text-white border-[#F1B92A]'>
+                  <Badge key={item.skill.id} variant="outline" className='ml-2 mb-2 bg-[#F1B92A] text-white border-[#F1B92A]'>
                     {item.skill.name}
                   </Badge>
                 ))

@@ -12,16 +12,17 @@ export default function Home() {
   const [teamWithEmployees, setTeamWithEmployees] = useState<EmployeeProps[]>([]);
  
 
-  const teamId = 1
+  let teamId
   useEffect(() => {
     const storedTeamId = localStorage.getItem('teamId');
-    const teamId = parseInt(storedTeamId, 10);
+    teamId = parseInt(storedTeamId, 10);
     console.log(teamId)
     const fetchData = async (teamId : number) => {
       try {
         const employees = await fetchEmployee();
         setAllEmployees(employees);
         const teamWithEmployees = await fetchTeamWithEmployees(teamId)
+        console.log(teamWithEmployees)
         setTeamWithEmployees(teamWithEmployees.employees)
         
         
@@ -94,6 +95,31 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
     );
   };
 
+  const updateEmployeeInTeam = (updatedEmployee: any) => {
+    console.log("updatedEmployee:", updatedEmployee);
+  
+    // Assurez-vous que l'ID est correctement transmis dans la structure de données.
+    console.log("updatedEmployee.id:", updatedEmployee.id);
+  
+    setTeamWithEmployees((prevTeamWithEmployees) =>
+      prevTeamWithEmployees.map((teamWithEmployee) => {
+        console.log("teamWithEmployee.id:", teamWithEmployee.employee.id);
+  
+        // Assurez-vous que les conditions dans map sont satisfaites correctement.
+        if (teamWithEmployee.employee.id === updatedEmployee.id) {
+          console.log("Updating employee:", teamWithEmployee);
+  
+          // Mettez à jour directement l'employé dans le format souhaité.
+          teamWithEmployee.employee = updatedEmployee;
+        }
+        return teamWithEmployee;
+      })
+    );
+  };
+  
+  
+  
+
   return (
     <main className="h-screen">
       <div className="flex justify-center items-center mt-20 font-bold text-4xl text-[#F1B92A]">
@@ -105,7 +131,7 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
         
       {allEmployees.map((employee: EmployeeProps) => (
         <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee} updateProfilePicture={updateProfilePicture}
-        handleUpdateAddEmployeeToTeam={handleUpdateAddEmployeeToTeam}
+        handleUpdateAddEmployeeToTeam={handleUpdateAddEmployeeToTeam} updateEmployeeInTeam={updateEmployeeInTeam}
         />
       ))}
       </div>
