@@ -17,6 +17,23 @@ const Buttons = ({onAddEmployee}) => {
     setIsModalOpen(false);
     setIsModalSkillsOpen(false);
   };
+
+  const [haveTeam, setHaveTeam] = useState(false);
+
+  const CreateTeamButton = (
+    <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
+      Créer une équipe <GrGroup className="text-2xl ml-2" />
+    </Button>
+  );
+  
+  const DisabledCreateTeamButton = (
+    <Button size="lg" variant="red" onClick={() => setIsModalOpen(true)}  className='cursor-not-allowed' disabled>
+      Créer une équipe <GrGroup className="text-2xl ml-2" />
+    </Button>
+  );
+  
+  const buttonToRender = haveTeam ? DisabledCreateTeamButton : CreateTeamButton;
+  
   
   return (
     <div className="ml-5">
@@ -24,9 +41,10 @@ const Buttons = ({onAddEmployee}) => {
       <Dialog>
       <div className="mb-3">
       <DialogTrigger asChild>
-      <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
+      {/* <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
               Créer une équipe <GrGroup className="text-2xl ml-2" />
-            </Button>
+            </Button> */}
+            {buttonToRender}
             </DialogTrigger>
             {isModalOpen && <ModalCreateTeam onClose={() => setIsModalOpen(false)} />}
             </div>
