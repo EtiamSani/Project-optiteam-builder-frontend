@@ -28,13 +28,6 @@ export async function deleteEmployee(id: number) {
       await fetch(`http://localhost:3001/employees/${id}`, {
         method: 'DELETE',
       });     
-      // if (response.status === 204) {
-      //   console.log('Employee deleted successfully.');
-      //   await fetchEmployee();
-        
-      // } else {
-      //   console.error('Failed to delete employee.');
-      // }
     } catch (error) {
       console.error('Error deleting employee:', error);
     }

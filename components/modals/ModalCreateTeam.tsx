@@ -7,6 +7,7 @@ import React, { useEffect, useState } from 'react'
 import { SaveSkillsProps } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import Buttons from '../Buttons'
 
 interface ModalProps {
     onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
@@ -18,6 +19,9 @@ interface ModalProps {
     const [deleteMessage, setDeleteMessage] = useState(false);
     const [addMessage, setAddMessage] = useState(false);
     
+  
+
+    
     const resetModal = () => {
         setTeamData({
           name: "",
@@ -27,14 +31,15 @@ interface ModalProps {
 
     const handleSaveTeam = async (teamData: SaveSkillsProps) => {
         try {
-        
           const response = await createTeam(teamData); 
           if (response && response.id) {
             const teamId = response.id;
             console.log("teamID c" , teamId)
       
             // Stocker l'ID dans le localStorage
-            localStorage.setItem('teamId', teamId);  }
+            localStorage.setItem('teamId', teamId);  
+            setTeamExists(true);
+          }
       
           setAddMessage(true);
         setTimeout(() => {
@@ -59,6 +64,7 @@ interface ModalProps {
           [id]: value,
         }));
       };
+      
 
   return (
     <DialogContent className="sm:max-w-[425px]">
@@ -81,10 +87,6 @@ interface ModalProps {
         <Button type="submit" variant="yellow" onClick={async () => {handleSaveTeam(teamData)}}>Ajouter</Button>
         </DialogFooter>
         <DialogDescription>
-
-        
-            <div>
-        </div>  
           </DialogDescription>
       </DialogContent>
   )

@@ -18,16 +18,12 @@ export default function Home() {
   useEffect(() => {
     const storedTeamId = localStorage.getItem('teamId');
     teamId = parseInt(storedTeamId, 10);
-    console.log(teamId)
     const fetchData = async (teamId : number) => {
       try {
         const employees = await fetchEmployee();
         setAllEmployees(employees);
         const teamWithEmployees = await fetchTeamWithEmployees(teamId)
-        console.log(teamWithEmployees)
-        setTeamWithEmployees(teamWithEmployees.employees)
-        
-        
+        setTeamWithEmployees(teamWithEmployees.employees) 
       } catch (error) {
         console.error('Error fetching employees:', error);
       }
