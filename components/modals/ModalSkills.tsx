@@ -128,6 +128,7 @@ interface ModalProps {
               ) : (
                 ''
               )}
+                  </div>
               {isLoading && 
                    <div className=" bg-white">
                    <div className="flex justify-center items-center h-full">
@@ -135,7 +136,6 @@ interface ModalProps {
                    </div>
                    </div>               
                   }
-                  </div>
               </AccordionContent>
             </AccordionItem>
           </Accordion>

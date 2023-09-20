@@ -5,6 +5,8 @@ import { EmployeeProps } from "@/types";
 import Buttons from "../../../components/Buttons";
 import { useEffect, useState } from "react";
 import TeamSection from "../../../components/sections/TeamSection";
+import MessageWithIcon from "@/components/WarningMessage";
+
 
   
 export default function Home() {
@@ -116,15 +118,48 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
       })
     );
   };
-  
-  
+
+  const [message, setMessage] = useState ('')
+ // Définir le nombre total d'employés
+const totalEmployees = teamWithEmployees.length;
+
+// Compter le nombre d'extravertis et d'introvertis
+let extravertsCount = 0;
+let introvertsCount = 0;
+
+teamWithEmployees.forEach((emp) => {
+  console.log(emp.employee.personality);
+  if (emp.employee.personality === 'extravertie') {
+    extravertsCount++;
+  } else if (emp.employee.personality === 'introvertie') {
+    introvertsCount++;
+  }
+  console.log(extravertsCount)
+});
+
+ // Utilisez useEffect pour mettre à jour le message en fonction des résultats
+ useEffect(() => {
+  // Vérifier si l'une des catégories dépasse la moitié
+  if (extravertsCount > totalEmployees / 2) {
+    setMessage('Trop d\'extravertis dans l\'équipe');
+  } else if (introvertsCount > totalEmployees / 2) {
+    setMessage('Trop d\'introvertis dans l\'équipe');
+  } else if (totalEmployees == 0) {
+    setMessage('Vous n\'avez pas d\'employées dans votre équipe');
+  } else {
+    setMessage('Équilibre entre extravertis et introvertis dans l\'équipe');
+  }
+}, [extravertsCount, introvertsCount, totalEmployees]);
+
+
   
 
   return (
     <main className="h-screen">
       <div className="flex justify-center items-center mt-20 font-bold text-4xl text-[#F1B92A]">
-        <h1>Mon équipe</h1>
+        <h1>Mon équipe</h1> 
       </div> 
+      <MessageWithIcon message={message} />
       <Buttons onAddEmployee={handleAddEmployee}/>
       <div className="flex flex-row">
       <div className="flex flex-col">
@@ -135,6 +170,7 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
         />
       ))}
       </div>
+      
       <div className="ml-[100px] flex flex-wrap">
       {teamWithEmployees.map((employeeTeam: EmployeeProps) => (
         <TeamSection key={employeeTeam.id} employee={employeeTeam} handleDeleteEmployeeFromTeamUpdater={handleDeleteEmployeeFromTeamUpdater} 
