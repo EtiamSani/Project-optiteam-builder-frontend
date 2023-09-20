@@ -116,10 +116,10 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
   };
 
   const [message, setMessage] = useState ('')
- // Définir le nombre total d'employés
+
 const totalEmployees = teamWithEmployees.length;
 
-// Compter le nombre d'extravertis et d'introvertis
+
 let extravertsCount = 0;
 let introvertsCount = 0;
 
@@ -130,12 +130,10 @@ teamWithEmployees.forEach((emp) => {
   } else if (emp.employee.personality === 'introvertie') {
     introvertsCount++;
   }
-  console.log(extravertsCount)
 });
 
- // Utilisez useEffect pour mettre à jour le message en fonction des résultats
+
  useEffect(() => {
-  // Vérifier si l'une des catégories dépasse la moitié
   if (extravertsCount > totalEmployees / 2) {
     setMessage('Trop d\'extravertis dans l\'équipe');
   } else if (introvertsCount > totalEmployees / 2) {
