@@ -20,7 +20,7 @@ interface ModalProps {
   
   }
 
-  const Modal: React.FC<ModalProps> = ({ onClose, onAddEmployee  }) => {
+  const Modal: React.FC<ModalProps> = ({ onClose, onAddEmployee, setEmployeeCount}) => {
     
     const [allEmployees, setAllEmployees] = useState<Employee[]>([]);
     const resetModal = () => {
@@ -40,8 +40,7 @@ interface ModalProps {
           setAllEmployees((prevEmployees) => [...prevEmployees, employeeData]);
           onClose();
           resetModal();
-          // cest ca qui pose soucis
-          // onAddEmployee(employeeData); 
+          setEmployeeCount((prevCount: number) => prevCount + 1);
         } catch (error) {
           console.error('Error adding employee:', error);
         }

@@ -8,7 +8,7 @@ import ModalSkills from './modals/ModalSkills'
 import ModalCreateTeam from './modals/ModalCreateTeam'
 import { fetchTeam } from '@/utils'
 
-const Buttons =  ({onAddEmployee, team}) => {
+const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -42,7 +42,13 @@ const Buttons =  ({onAddEmployee, team}) => {
       <DialogTrigger asChild>
             {buttonToRender}
             </DialogTrigger>
-            {isModalOpen && <ModalCreateTeam onClose={() => setIsModalOpen(false)} />}
+            {/* {isModalOpen && <ModalCreateTeam onClose={() => setIsModalOpen(false)}/>} */}
+            {isModalOpen && (
+  <ModalCreateTeam
+    onClose={() => setIsModalOpen(false)}
+    onUpdateTeamId={onUpdateTeamId} // Passez la fonction
+  />
+)}
             </div>
       </Dialog>
 
@@ -53,7 +59,7 @@ const Buttons =  ({onAddEmployee, team}) => {
               Ajouter employé <GrUser className="text-2xl ml-2" />
             </Button>
           </DialogTrigger>
-        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} onAddEmployee={onAddEmployee} />}
+        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} onAddEmployee={onAddEmployee} setEmployeeCount={setEmployeeCount}/>}
         </div>
       </Dialog>
       <Dialog>

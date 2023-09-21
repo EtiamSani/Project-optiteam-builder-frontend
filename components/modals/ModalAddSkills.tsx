@@ -8,12 +8,11 @@ import React, { useEffect, useState } from 'react'
 interface ModalAddSkillsProps {
     firstname: string;
     lastname: string;
-    profilepicture: string
     id: number
     name:string
   }
 
-const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkillsProps) => {
+const ModalAddSkills = ({ firstname, lastname, id}: ModalAddSkillsProps) => {
 
     const [getSkills, setGetSkills] = useState<ModalAddSkillsProps[]>([])
     const [getEmployeeSkills, setGetEmployeeSkills] = useState<ModalAddSkillsProps[]>([])
@@ -22,7 +21,7 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
     const [addMessage, setAddMessage] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
 
-
+  
     useEffect(() => {
         const fetchData = async () => {
           try {
@@ -40,7 +39,6 @@ const ModalAddSkills = ({ firstname, lastname, profilepicture, id}: ModalAddSkil
       }, [id,getSkills,getEmployeeSkills]); 
 
         const handleAddSkillToEmployee = async (employeeId: number ,skillId: number) => {
-          
         await addSkillsToEmployee(employeeId, skillId)
         const skillsOfEmployee = await fetchSkillsOfEmployee(id);
         setGetEmployeeSkills(skillsOfEmployee.skills);

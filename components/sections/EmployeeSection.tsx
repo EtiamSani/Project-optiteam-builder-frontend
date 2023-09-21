@@ -23,7 +23,7 @@ interface EmployeeCardProps {
 }
 
 const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture, handleUpdateAddEmployeeToTeam, updateEmployeeInTeam  }: EmployeeCardProps) => {
-
+ 
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
   const storedTeamId = localStorage.getItem('teamId');
   const teamId = parseInt(storedTeamId, 10);
@@ -47,6 +47,8 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
     AddEmployeeToTeam(teamId,employeeId)
     handleUpdateAddEmployeeToTeam(employee)
   }
+
+  console.log(employee.id)
   
   return (
     <div className='ml-5'>

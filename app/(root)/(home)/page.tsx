@@ -13,12 +13,22 @@ export default function Home() {
   const [allEmployees, setAllEmployees] = useState<EmployeeProps[]>([]);
   const [teamWithEmployees, setTeamWithEmployees] = useState<EmployeeProps[]>([]);
   const [team, setTeam] = useState(false)
- 
+  const [teamId, setTeamId] = useState<number | null>(null);
+  const [employeeCount, setEmployeeCount] = useState(0);
 
-  let teamId
+
+  const updateTeamId = (newTeamId: number) => {
+    setTeamId(newTeamId);
+  };
+
+
+
+  
   useEffect(() => {
     const storedTeamId = localStorage.getItem('teamId');
-    teamId = parseInt(storedTeamId, 10);
+    const teamId = parseInt(storedTeamId, 10);
+    console.log(teamId)
+    setTeamId(teamId);
     const fetchData = async (teamId : number) => {
       try {
         const employees = await fetchEmployee();
@@ -36,7 +46,7 @@ export default function Home() {
     };
 
     fetchData(teamId);
-  }, [teamId]); 
+  }, [teamId,employeeCount]); 
 
   const handleDeleteEmployee = async (employeeToDelete: EmployeeProps) => {
     try {
@@ -160,13 +170,13 @@ teamWithEmployees.forEach((emp) => {
         <h1>Mon équipe</h1> 
       </div> 
       <MessageWithIcon message={message} />
-      <Buttons onAddEmployee={handleAddEmployee} team={team}/>
+      <Buttons onAddEmployee={handleAddEmployee} team={team} onUpdateTeamId={updateTeamId} setEmployeeCount={setEmployeeCount}/>
       <div className="flex flex-row">
       <div className="flex flex-col">
         
       {allEmployees.map((employee: EmployeeProps) => (
         <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee} updateProfilePicture={updateProfilePicture}
-        handleUpdateAddEmployeeToTeam={handleUpdateAddEmployeeToTeam} updateEmployeeInTeam={updateEmployeeInTeam}
+        handleUpdateAddEmployeeToTeam={handleUpdateAddEmployeeToTeam} updateEmployeeInTeam={updateEmployeeInTeam} 
         />
       ))}
       </div>

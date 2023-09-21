@@ -14,7 +14,7 @@ interface ModalProps {
     
   }
   
-  const ModalSkills: React.FC<ModalProps> = () => {
+  const ModalSkills: React.FC<ModalProps> = ({onUpdateTeamId}) => {
 
     
     const [addMessage, setAddMessage] = useState(false);
@@ -37,7 +37,8 @@ interface ModalProps {
             console.log("teamID c" , teamId)
       
             // Stocker l'ID dans le localStorage
-            localStorage.setItem('teamId', teamId);  
+            localStorage.setItem('teamId', teamId); 
+            onUpdateTeamId(teamId)
             
           }
       
@@ -72,7 +73,7 @@ interface ModalProps {
           <DialogTitle>Créer une équipe</DialogTitle>
           
           {addMessage && 
-          <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> La compétence a bien été ajouté !</div>}
+          <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> Votre équipe a bien été créée !</div>}
           <div className="grid w-full max-w-sm items-center gap-1.5">
     </div>
         </DialogHeader>
