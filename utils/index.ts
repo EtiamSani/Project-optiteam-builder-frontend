@@ -256,6 +256,23 @@ export async function deleteEmployee(id: number) {
         }
       }
 
+      export async function fetchTeam() {
+        try {
+          const response = await fetch('http://localhost:3001/team', {
+            cache: 'no-cache'
+          });
+      
+          if (!response.ok) {
+            throw new Error('Échec de la requête.');
+          }
+          const result = await response.json();
+          return result;
+        } catch (error) {
+          console.error('Erreur lors de la récupération des équipes :', error);
+          throw error; 
+        }
+      }
+
       
     
 

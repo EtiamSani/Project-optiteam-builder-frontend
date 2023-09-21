@@ -16,7 +16,7 @@ interface ModalProps {
   
   const ModalSkills: React.FC<ModalProps> = () => {
 
-    const [deleteMessage, setDeleteMessage] = useState(false);
+    
     const [addMessage, setAddMessage] = useState(false);
     
   
@@ -38,7 +38,7 @@ interface ModalProps {
       
             // Stocker l'ID dans le localStorage
             localStorage.setItem('teamId', teamId);  
-            setTeamExists(true);
+            
           }
       
           setAddMessage(true);
@@ -70,8 +70,7 @@ interface ModalProps {
     <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Créer une équipe</DialogTitle>
-          {deleteMessage && 
-          <div className='text-red-600 m-auto font-bold bg-red-300 p-2 rounded-md'> La compétence a bien été effacé !</div>}
+          
           {addMessage && 
           <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> La compétence a bien été ajouté !</div>}
           <div className="grid w-full max-w-sm items-center gap-1.5">

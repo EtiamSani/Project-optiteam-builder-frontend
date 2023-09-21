@@ -1,13 +1,14 @@
 import { Button } from '@/components/ui/button'
 import { Dialog,DialogTrigger } from '@/components/ui/dialog'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineTool } from 'react-icons/ai'
 import { GrGroup, GrUser } from 'react-icons/gr'
 import Modal from './modals/Modal'
 import ModalSkills from './modals/ModalSkills'
 import ModalCreateTeam from './modals/ModalCreateTeam'
+import { fetchTeam } from '@/utils'
 
-const Buttons = ({onAddEmployee}) => {
+const Buttons =  ({onAddEmployee, team}) => {
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,8 +18,6 @@ const Buttons = ({onAddEmployee}) => {
     setIsModalOpen(false);
     setIsModalSkillsOpen(false);
   };
-
-  const [haveTeam, setHaveTeam] = useState(false);
 
   const CreateTeamButton = (
     <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
@@ -32,7 +31,7 @@ const Buttons = ({onAddEmployee}) => {
     </Button>
   );
   
-  const buttonToRender = haveTeam ? DisabledCreateTeamButton : CreateTeamButton;
+  const buttonToRender = team ? DisabledCreateTeamButton : CreateTeamButton;
   
   
   return (
@@ -41,9 +40,6 @@ const Buttons = ({onAddEmployee}) => {
       <Dialog>
       <div className="mb-3">
       <DialogTrigger asChild>
-      {/* <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
-              Créer une équipe <GrGroup className="text-2xl ml-2" />
-            </Button> */}
             {buttonToRender}
             </DialogTrigger>
             {isModalOpen && <ModalCreateTeam onClose={() => setIsModalOpen(false)} />}

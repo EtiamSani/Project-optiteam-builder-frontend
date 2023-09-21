@@ -1,5 +1,5 @@
 "use client"
-import { deleteEmployee,fetchEmployee, fetchTeamWithEmployees } from "@/utils"
+import { deleteEmployee,fetchEmployee, fetchTeam, fetchTeamWithEmployees } from "@/utils"
 import EmployeeSection from "../../../components/sections/EmployeeSection"
 import { EmployeeProps } from "@/types";
 import Buttons from "../../../components/Buttons";
@@ -12,6 +12,7 @@ import MessageWithIcon from "@/components/WarningMessage";
 export default function Home() {
   const [allEmployees, setAllEmployees] = useState<EmployeeProps[]>([]);
   const [teamWithEmployees, setTeamWithEmployees] = useState<EmployeeProps[]>([]);
+  const [team, setTeam] = useState(false)
  
 
   let teamId
@@ -23,7 +24,12 @@ export default function Home() {
         const employees = await fetchEmployee();
         setAllEmployees(employees);
         const teamWithEmployees = await fetchTeamWithEmployees(teamId)
-        setTeamWithEmployees(teamWithEmployees.employees) 
+        setTeamWithEmployees(teamWithEmployees.employees)
+        const team = await fetchTeam()  
+        if (team) {
+
+          setTeam(true)
+        }
       } catch (error) {
         console.error('Error fetching employees:', error);
       }
@@ -154,7 +160,7 @@ teamWithEmployees.forEach((emp) => {
         <h1>Mon équipe</h1> 
       </div> 
       <MessageWithIcon message={message} />
-      <Buttons onAddEmployee={handleAddEmployee}/>
+      <Buttons onAddEmployee={handleAddEmployee} team={team}/>
       <div className="flex flex-row">
       <div className="flex flex-col">
         
