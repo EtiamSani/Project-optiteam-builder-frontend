@@ -2,26 +2,18 @@ import { Button } from '@/components/ui/button'
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { createTeam, deleteSkill, editEmployee, fetchSkills, saveSkills} from '@/utils'
-import React, { useEffect, useState } from 'react'
+import { createTeam} from '@/utils'
+import React, { useState } from 'react'
 import { SaveSkillsProps } from '@/types'
-import { Badge } from '@/components/ui/badge'
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
-import Buttons from '../Buttons'
+
+
 
 interface ModalProps {
     onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
-    
   }
   
-  const ModalSkills: React.FC<ModalProps> = ({onUpdateTeamId}) => {
-
-    
+  const ModalSkills: React.FC<ModalProps> = ({onUpdateTeamId}) => { 
     const [addMessage, setAddMessage] = useState(false);
-    
-  
-
-    
     const resetModal = () => {
         setTeamData({
           name: "",
@@ -35,13 +27,10 @@ interface ModalProps {
           if (response && response.id) {
             const teamId = response.id;
             console.log("teamID c" , teamId)
-      
-            // Stocker l'ID dans le localStorage
             localStorage.setItem('teamId', teamId); 
             onUpdateTeamId(teamId)
             
           }
-      
           setAddMessage(true);
         setTimeout(() => {
           setAddMessage(false);
