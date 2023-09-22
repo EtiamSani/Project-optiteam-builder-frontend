@@ -155,7 +155,7 @@ teamWithEmployees.forEach((emp) => {
   } else if (introvertsCount > totalEmployees / 2) {
     setMessage('Trop d\'introvertis dans l\'équipe');
   } else if (totalEmployees == 0) {
-    setMessage('Vous n\'avez pas d\'employées dans votre équipe');
+    setMessage('Vous n\'avez pas d\'employés dans votre équipe');
   } else {
     setMessage('Équilibre entre extravertis et introvertis dans l\'équipe');
   }

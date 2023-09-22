@@ -2,17 +2,15 @@ import { Button } from '@/components/ui/button'
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { deleteSkill, editEmployee, fetchSkills, saveSkills} from '@/utils'
+import { deleteSkill, fetchSkills, saveSkills} from '@/utils'
 import React, { useEffect, useState } from 'react'
 import { SaveSkillsProps } from '@/types'
 import { Badge } from '@/components/ui/badge'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
 interface ModalProps {
-    onClose: () => void; // Définissez le type de onClose comme une fonction qui ne renvoie rien (void)
-    
+    onClose: () => void; 
   }
-  
   const ModalSkills: React.FC<ModalProps> = () => {
 
     const [deleteMessage, setDeleteMessage] = useState(false);
@@ -64,13 +62,8 @@ interface ModalProps {
         } catch(error) {
           console.error('Erreur lors de la suppression de la compétence:', error);
         } finally {
-          // Désactivez isLoading après l'opération (succès ou échec)
         setIsLoading(false);
-
-        // Affichez le message après avoir désactivé isLoading
         setDeleteMessage(true);
-
-        // Effacez le message après un certain délai
         setTimeout(() => {
           setDeleteMessage(false);
         }, 1000);
@@ -78,7 +71,6 @@ interface ModalProps {
       }
         
       useEffect(() => {
-        // Utilisez useEffect pour récupérer la liste des employés au chargement initial
         const fetchData = async () => {
           try {
             const skills = await fetchSkills();

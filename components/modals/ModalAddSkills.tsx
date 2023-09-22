@@ -71,9 +71,9 @@ const ModalAddSkills = ({ firstname, lastname, id}: ModalAddSkillsProps) => {
     <DialogHeader>
       <DialogTitle className='text-2xl'>Ajouter des compétences à <span className='text-[#F1B92A] '>{firstname} {lastname}</span></DialogTitle>
       {deleteMessage && 
-      <div className='text-red-600 m-auto font-bold bg-red-300 p-2 rounded-md'> La compétence a bien été effacé !</div>}
+      <div className='text-red-600 m-auto font-bold bg-red-300 p-2 rounded-md'> La compétence a bien été effacée !</div>}
       {addMessage && 
-      <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> La compétence a bien été ajouté !</div>}
+      <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> La compétence a bien été ajoutée !</div>}
     </DialogHeader>
     <div className='flex flex-col m-auto '>
             </div>

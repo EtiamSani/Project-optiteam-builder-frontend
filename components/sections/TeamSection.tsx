@@ -77,7 +77,7 @@ const TeamSection = ({ employee, handleDeleteEmployeeFromTeamUpdater }: Employee
               </AccordionContent>
             </AccordionItem>
           </Accordion>
-         <div className='text-md text-black font-bold ml-2'>Personalité : <span className='font-normal'>{personality}</span></div>
+         <div className='text-md text-black font-bold ml-2'>Personnalité : <span className='font-normal'>{personality}</span></div>
         </Card>
            
     </div>
