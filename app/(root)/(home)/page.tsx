@@ -6,6 +6,7 @@ import Buttons from "../../../components/Buttons";
 import { useEffect, useState } from "react";
 import TeamSection from "../../../components/sections/TeamSection";
 import MessageWithIcon from "@/components/WarningMessage";
+import { calculatePersonalityCounts, getMessage } from "@/utils/teamUtils";
 
 
   
@@ -15,6 +16,7 @@ export default function Home() {
   const [team, setTeam] = useState(false)
   const [teamId, setTeamId] = useState<number | null>(null);
   const [employeeCount, setEmployeeCount] = useState(0);
+  const [message, setMessage] = useState ('')
 
 
   const updateTeamId = (newTeamId: number) => {
@@ -120,37 +122,14 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
     );
   };
 
-  const [message, setMessage] = useState ('')
-
-const totalEmployees = teamWithEmployees.length;
 
 
-let extravertsCount = 0;
-let introvertsCount = 0;
-
-teamWithEmployees.forEach((emp) => {
-  console.log(emp.employee.personality);
-  if (emp.employee.personality === 'extravertie') {
-    extravertsCount++;
-  } else if (emp.employee.personality === 'introvertie') {
-    introvertsCount++;
-  }
-});
-
-
- useEffect(() => {
-  if (extravertsCount > totalEmployees / 2) {
-    setMessage('Trop d\'extravertis dans l\'équipe');
-  } else if (introvertsCount > totalEmployees / 2) {
-    setMessage('Trop d\'introvertis dans l\'équipe');
-  } else if (totalEmployees == 0) {
-    setMessage('Vous n\'avez pas d\'employés dans votre équipe');
-  } else {
-    setMessage('Équilibre entre extravertis et introvertis dans l\'équipe');
-  }
-}, [extravertsCount, introvertsCount, totalEmployees]);
-
-
+useEffect(() => {
+  const { extravertsCount, introvertsCount } = calculatePersonalityCounts(teamWithEmployees);
+  const totalEmployees = teamWithEmployees.length;
+  const newMessage = getMessage(extravertsCount, introvertsCount, totalEmployees);
+  setMessage(newMessage);
+}, [teamWithEmployees]);
   
 
   return (
