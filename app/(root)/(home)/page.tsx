@@ -110,20 +110,9 @@ const handleUpdateAddEmployeeToTeam = (newEmployee: EmployeeProps) => {
   };
 
   const updateEmployeeInTeam = (updatedEmployee: any) => {
-    console.log("updatedEmployee:", updatedEmployee);
-  
-    // Assurez-vous que l'ID est correctement transmis dans la structure de données.
-    console.log("updatedEmployee.id:", updatedEmployee.id);
-  
     setTeamWithEmployees((prevTeamWithEmployees) =>
       prevTeamWithEmployees.map((teamWithEmployee) => {
-        console.log("teamWithEmployee.id:", teamWithEmployee.employee.id);
-  
-        // Assurez-vous que les conditions dans map sont satisfaites correctement.
         if (teamWithEmployee.employee.id === updatedEmployee.id) {
-          console.log("Updating employee:", teamWithEmployee);
-  
-          // Mettez à jour directement l'employé dans le format souhaité.
           teamWithEmployee.employee = updatedEmployee;
         }
         return teamWithEmployee;

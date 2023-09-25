@@ -1,12 +1,12 @@
 import { Button } from '@/components/ui/button'
 import { Dialog,DialogTrigger } from '@/components/ui/dialog'
-import React, { useEffect, useState } from 'react'
+import React, {useState } from 'react'
 import { AiOutlineTool } from 'react-icons/ai'
 import { GrGroup, GrUser } from 'react-icons/gr'
 import Modal from './modals/ModalCreateEmployee'
 import ModalSkills from './modals/ModalSkills'
 import ModalCreateTeam from './modals/ModalCreateTeam'
-import { fetchTeam } from '@/utils'
+
 
 const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
 
@@ -72,7 +72,6 @@ const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
           throw new Error('Function not implemented.')
         } }/>}
         </Dialog>
-        
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Liste des employés</h3>
       </div>
