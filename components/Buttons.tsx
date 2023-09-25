@@ -42,11 +42,10 @@ const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
       <DialogTrigger asChild>
             {buttonToRender}
             </DialogTrigger>
-            {/* {isModalOpen && <ModalCreateTeam onClose={() => setIsModalOpen(false)}/>} */}
             {isModalOpen && (
   <ModalCreateTeam
     onClose={() => setIsModalOpen(false)}
-    onUpdateTeamId={onUpdateTeamId} // Passez la fonction
+    onUpdateTeamId={onUpdateTeamId} 
   />
 )}
             </div>
