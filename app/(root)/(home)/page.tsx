@@ -23,9 +23,6 @@ export default function Home() {
     setTeamId(newTeamId);
   };
 
-
-
-  
   useEffect(() => {
     const storedTeamId = localStorage.getItem('teamId');
     const teamId = parseInt(storedTeamId, 10);
