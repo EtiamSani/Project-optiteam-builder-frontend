@@ -33,7 +33,6 @@ const TeamSection = ({ employee, handleDeleteEmployeeFromTeamUpdater }: Employee
   }
   
   const { firstname, lastname, job, profilepicture, skills , personality} = employee.employee;
- //#f1b92a7c
   return (
     <div>
       <div>
