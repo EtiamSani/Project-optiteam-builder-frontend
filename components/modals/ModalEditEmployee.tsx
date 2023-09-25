@@ -1,8 +1,8 @@
 import { Button } from '@/components/ui/button'
-import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { editEmployee, editEmployeePicture} from '@/utils'
+import { editEmployee} from '@/utils'
 import React, { useState } from 'react'
 import {Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { EditEmployeeProps } from '@/types'
@@ -11,6 +11,7 @@ import {selectItems} from '../../constants/index'
 interface ModalProps {
     onClose: () => void; // type de onClose comme une fonction qui ne renvoie rien (void)
     employeeId : number
+    onUpdateEmployee: (employeeData: EditEmployeeProps, employeeId: number) => void;
   }
   
   const Modal: React.FC<ModalProps> = ({ employeeId , onUpdateEmployee}) => {
@@ -77,24 +78,14 @@ interface ModalProps {
       <div className='text-green-600 m-auto font-bold bg-green-300 p-2 rounded-md'> L'employer a bien été mis a jour</div>}
         </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="name" className="text-right">
-                Nom
-              </Label>
-              <Input id="lastname" value={employeeData.lastname} onChange={handleInputChange} className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-              <Label htmlFor="username" className="text-right">
-                Prénom
-              </Label>      
-              <Input id="firstname" value={employeeData.firstname} onChange={handleInputChange} className="col-span-3" />
-            </div>
-            <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="job" className="text-right">
-                Métier
-              </Label>
-              <Input id="job" value={employeeData.job} onChange={handleInputChange} className="col-span-3" />
-              </div>
+          {['lastname', 'firstname', 'job'].map((field) => (
+          <div key={field} className="grid grid-cols-4 items-center gap-4">
+            <Label htmlFor={field} className="text-right">
+              {field === 'lastname' ? 'Nom' : field === 'firstname' ? 'Prénom' : 'Métier'}
+            </Label>
+            <Input id={field} value={employeeData[field]} onChange={handleInputChange} className="col-span-3" />
+          </div>
+        ))}
               <div className="grid grid-cols-4 items-center gap-4">
               <Label htmlFor="job" className="text-right">
                 Personalité
