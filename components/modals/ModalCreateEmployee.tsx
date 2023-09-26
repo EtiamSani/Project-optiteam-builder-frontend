@@ -11,7 +11,7 @@ import {selectItems} from '../../constants/index'
 interface ModalProps {
     onClose: () => void; 
     onAddEmployee: (newEmployee: Employee) => void;
-    setEmployeeCount: (newEmployee: Employee) => void;
+    setEmployeeCount: (prevCount: number) => void;
   }
   interface Employee {
     lastname: string;

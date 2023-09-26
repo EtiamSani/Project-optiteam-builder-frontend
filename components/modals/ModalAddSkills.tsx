@@ -13,6 +13,7 @@ interface ModalAddSkillsProps {
   }
 
 const ModalAddSkills = ({ firstname, lastname, id}: ModalAddSkillsProps) => {
+  
 
     const [getSkills, setGetSkills] = useState<ModalAddSkillsProps[]>([])
     const [getEmployeeSkills, setGetEmployeeSkills] = useState<ModalAddSkillsProps[]>([])

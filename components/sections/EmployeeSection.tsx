@@ -14,6 +14,7 @@ import ModalPicture from "../modals/ModalPicture"
 import ModalAddSkills from "../modals/ModalAddSkills"
 import {AiOutlineUsergroupAdd} from 'react-icons/ai'
 import { AddEmployeeToTeam, fetchEmployee } from "@/utils"
+import ModalFactory from "../modalFactory/ModalFactory"
 
 
 interface EmployeeCardProps {
@@ -27,6 +28,8 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
   const storedTeamId = localStorage.getItem('teamId');
   const teamId = parseInt(storedTeamId, 10);
+
+  const modalFactory = new ModalFactory();
   
   function closeModal(): void {
     throw new Error("Function not implemented.")
@@ -47,21 +50,23 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
     AddEmployeeToTeam(teamId,employeeId)
     handleUpdateAddEmployeeToTeam(employee)
   }
-
-  console.log(employee.id)
   
   return (
     <div className='ml-5'>
         <Card className='w-[390px] h-[80px] mb-2 hover:bg-[#ffebb7]' key={employee.id}>
           <div className="flex items-center">
           <Dialog>
-              <DialogTrigger>
+          <DialogTrigger>
             <Avatar className="my-5 ml-4">
               <AvatarImage src={`http://localhost:3001/${employee.profilepicture}`} />
               <AvatarFallback>{employee.firstname}</AvatarFallback>
             </Avatar>
               </DialogTrigger>
-            <ModalPicture employeeId={employee.id} onUpdateProfilePicture={updateProfilePicture}/>
+            {/* <ModalPicture employeeId={employee.id} onUpdateProfilePicture={updateProfilePicture}/> */}
+            {modalFactory.createEmployeeProfilePicture(
+            employee.id,
+            updateProfilePicture
+          ).render()}
             </Dialog>
               <div className="flex">
                 <div className="m-auto">

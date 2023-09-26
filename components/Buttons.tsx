@@ -6,9 +6,12 @@ import { GrGroup, GrUser } from 'react-icons/gr'
 import Modal from './modals/ModalCreateEmployee'
 import ModalSkills from './modals/ModalSkills'
 import ModalCreateTeam from './modals/ModalCreateTeam'
+import ModalFactory from './modalFactory/ModalFactory'
 
 
 const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
+
+
 
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -18,6 +21,8 @@ const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
     setIsModalOpen(false);
     setIsModalSkillsOpen(false);
   };
+
+  const modalFactory = new ModalFactory(closeModal);
 
   const CreateTeamButton = (
     <Button size="lg" variant="yellow" onClick={() => setIsModalOpen(true)}>
@@ -42,12 +47,7 @@ const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
       <DialogTrigger asChild>
             {buttonToRender}
             </DialogTrigger>
-            {isModalOpen && (
-  <ModalCreateTeam
-    onClose={() => setIsModalOpen(false)}
-    onUpdateTeamId={onUpdateTeamId} 
-  />
-)}
+            {isModalOpen &&  modalFactory.createCreateTeamModal(onUpdateTeamId).render()} 
             </div>
       </Dialog>
 
@@ -58,19 +58,20 @@ const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
               Ajouter employé <GrUser className="text-2xl ml-2" />
             </Button>
           </DialogTrigger>
-        {isModalOpen && <Modal onClose={() => setIsModalOpen(false)} onAddEmployee={onAddEmployee} setEmployeeCount={setEmployeeCount}/>}
+        {isModalOpen && modalFactory.createAddEmployeeModal(onAddEmployee, (prevCount: number) => prevCount + 1).render()}
         </div>
       </Dialog>
+
+
       <Dialog>
           <DialogTrigger asChild>
             <Button size="lg" variant="yellow" onClick={() => setIsModalSkillsOpen(true)}>
               Ajouter des compétences <AiOutlineTool className="text-3xl ml-2 text-black" />
             </Button>
           </DialogTrigger>
-        {isModalSkillsOpen && <ModalSkills onClose={function (): void {
-          throw new Error('Function not implemented.')
-        } }/>}
+        {isModalSkillsOpen && modalFactory.createAddSkillsModal().render()}
         </Dialog>
+
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Liste des employés</h3>
       </div>

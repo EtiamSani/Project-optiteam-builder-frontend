@@ -15,13 +15,14 @@ export default function Home() {
   const [teamWithEmployees, setTeamWithEmployees] = useState<EmployeeProps[]>([]);
   const [team, setTeam] = useState(false)
   const [teamId, setTeamId] = useState<number | null>(null);
-  const [employeeCount, setEmployeeCount] = useState(0);
+  const [employeeCount, setEmployeeCount] = useState<number>(0);
   const [message, setMessage] = useState ('')
 
 
   const updateTeamId = (newTeamId: number) => {
     setTeamId(newTeamId);
   };
+  
 
   useEffect(() => {
     const storedTeamId = localStorage.getItem('teamId');
@@ -32,6 +33,8 @@ export default function Home() {
       try {
         const employees = await fetchEmployee();
         setAllEmployees(employees);
+        // setEmployeeCount(employees.length)
+        // console.log(employeeCount)
         const teamWithEmployees = await fetchTeamWithEmployees(teamId)
         setTeamWithEmployees(teamWithEmployees.employees)
         const team = await fetchTeam()  
@@ -126,6 +129,8 @@ useEffect(() => {
   const totalEmployees = teamWithEmployees.length;
   const newMessage = getMessage(extravertsCount, introvertsCount, totalEmployees);
   setMessage(newMessage);
+  setEmployeeCount(teamWithEmployees.length);
+  
 }, [teamWithEmployees]);
   
 
