@@ -5,12 +5,19 @@ import { AiOutlineTool } from "react-icons/ai";
 import { GrGroup, GrUser } from "react-icons/gr";
 import ModalFactory from "./modalFactory/ModalFactory";
 
+interface ButtonGroupProps {
+  onAddEmployee: () => void;
+  team: boolean; 
+  onUpdateTeamId: () => void; 
+  updateEmployeeCount: () => void; 
+}
+
 const ButtonGroup = ({
   onAddEmployee,
   team,
   onUpdateTeamId,
   updateEmployeeCount,
-}) => {
+}: ButtonGroupProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isModalSkillsOpen, setIsModalSkillsOpen] = useState(false);
 

@@ -24,7 +24,6 @@ export default function Home() {
   };
 
   const updateEmployeeCount = (count : any) => {
-    console.log('CA A COUNT')
     setEmployeeCount(count);
   };
   
@@ -44,7 +43,6 @@ export default function Home() {
         }
         const team = await fetchTeam()  
         if (team) {
-
           setTeam(true)
         }
       } catch (error) {
