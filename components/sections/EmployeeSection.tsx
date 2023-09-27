@@ -20,7 +20,10 @@ import ModalFactory from "../modalFactory/ModalFactory"
 interface EmployeeCardProps {
   employee: EmployeeProps;
   onDeleteEmployee: (employee: EmployeeProps) => void;
-  onUpdateEmployee: (updatedEmployee: EmployeeProps,employeeId:number ) => void;
+  onUpdateEmployee: (updatedEmployee: any,employeeId:number ) => void;
+  updateProfilePicture: any
+  handleUpdateAddEmployeeToTeam: any
+  updateEmployeeInTeam: any
 }
 
 const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateProfilePicture, handleUpdateAddEmployeeToTeam, updateEmployeeInTeam  }: EmployeeCardProps) => {
@@ -41,7 +44,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
   };
 
   const handleUpdateEmployee = (updatedEmployee: EditEmployeeProps, employeeId : number) => {
-    onUpdateEmployee(updatedEmployee, employeeId); // Appelez la fonction onUpdateEmployee avec les données mises à jour
+    onUpdateEmployee(updatedEmployee, employeeId); 
     updateEmployeeInTeam(updatedEmployee);
   };
 
@@ -92,7 +95,9 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
                       <DialogTrigger>
                   <BsPencil className='text-2xl ml-2' />
                     </DialogTrigger>
-                    <ModalEditEmployee  employeeId={employee.id} onUpdateEmployee={handleUpdateEmployee}/>
+                    <ModalEditEmployee  employeeId={employee.id} onUpdateEmployee={handleUpdateEmployee} onClose={function (): void {
+                    throw new Error("Function not implemented.")
+                  } }/>
                   </Dialog>
                   </button>
                   <button>

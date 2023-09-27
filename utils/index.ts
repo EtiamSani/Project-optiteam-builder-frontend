@@ -1,4 +1,4 @@
-import { AddEmployeeProps, EditEmployeeProps, EmployeeProps, SaveSkillsProps } from "@/types";
+import { AddEmployeeProps, EditEmployeeProps, SaveSkillsProps } from "@/types";
 let storedEmployeeId: string | null = null;
 if (typeof window !== "undefined") {
   storedEmployeeId = localStorage.getItem('selectedEmployeeId');
@@ -7,7 +7,7 @@ if (typeof window !== "undefined") {
 
 export async function fetchEmployee() {
     try {
-      const response = await fetch('http://localhost:3001/employees', {
+      const response = await fetch(`${process.env.API_URL}/employees`, {
         cache: 'no-cache'
       });
   
@@ -25,7 +25,7 @@ export async function fetchEmployee() {
 
 export async function deleteEmployee(id: number) {
     try {
-      await fetch(`http://localhost:3001/employees/${id}`, {
+      await fetch(`${process.env.API_URL}/employees/${id}`, {
         method: 'DELETE',
       });     
     } catch (error) {
@@ -36,7 +36,7 @@ export async function deleteEmployee(id: number) {
   export async function handleSubmit (employeeData : AddEmployeeProps, e:any) {
     e.preventDefault();
       try {
-        const response = await fetch("http://localhost:3001/employees", {
+        const response = await fetch(`${process.env.API_URL}/employees`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +53,7 @@ export async function deleteEmployee(id: number) {
       
         try {
            
-          const response = await fetch(`http://localhost:3001/employees/${employeeId}`, {
+          const response = await fetch(`${process.env.API_URL}/employees/${employeeId}`, {
             method: "PATCH",
             headers: {
               "Content-Type": "application/json",
@@ -71,14 +71,13 @@ export async function deleteEmployee(id: number) {
         try {
           const formData = new FormData(); 
           formData.append("file", file);
-          const response = await fetch(`http://localhost:3001/employees/${employeeId}/profile-picture`, {
+          const response = await fetch(`${process.env.API_URL}/employees/${employeeId}/profile-picture`, {
             method: "POST",
             body: formData,
           });
           const data = await response.json();
           console.log(data.profilepicture)
           if (data.profilepicture) {
-            // Si l'URL de la nouvelle photo de profil est disponible, renvoyez-la
             return data.profilepicture;
           }
 
@@ -89,7 +88,7 @@ export async function deleteEmployee(id: number) {
 
       export async function saveSkills (skillsData : SaveSkillsProps) {
         try {   
-          const response = await fetch(`http://localhost:3001/skills`, {
+          const response = await fetch(`${process.env.API_URL}/skills`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -106,7 +105,7 @@ export async function deleteEmployee(id: number) {
 
       export async function fetchSkills() {
         try {
-          const response = await fetch('http://localhost:3001/skills', {
+          const response = await fetch(`${process.env.API_URL}/skills`, {
             cache: 'no-cache'
           });
       
@@ -118,13 +117,13 @@ export async function deleteEmployee(id: number) {
           return result;
         } catch (error) {
           console.error('Erreur lors de la récupération des compétences :', error);
-          throw error; // Vous pouvez choisir de gérer l'erreur ici ou de la remonter à l'appelant
+          throw error; 
         }
       }
 
       export async function deleteSkill(skillId: any) {
         try {
-          const response = await fetch(`http://localhost:3001/skills/${skillId}`, {
+          const response = await fetch(`${process.env.API_URL}/skills/${skillId}`, {
             method: 'DELETE',
           });
           
@@ -144,7 +143,7 @@ export async function deleteEmployee(id: number) {
       export async function addSkillsToEmployee(skillId: number,employeeId: number) {
         console.log(skillId,employeeId)
         try {
-          const response = await fetch(`http://localhost:3001/employees/${employeeId}/skill/${skillId}`, {
+          const response = await fetch(`${process.env.API_URL}/employees/${employeeId}/skill/${skillId}`, {
             method: 'POST',
           });
           
@@ -164,7 +163,7 @@ export async function deleteEmployee(id: number) {
       export async function fetchSkillsOfEmployee(employeeId : number) {
         // console.log(employeeId)
         try {
-          const response = await fetch(`http://localhost:3001/employees/${employeeId}`, {
+          const response = await fetch(`${process.env.API_URL}/employees/${employeeId}`, {
             cache: 'no-cache'
           });
       
@@ -176,13 +175,13 @@ export async function deleteEmployee(id: number) {
           return result;
         } catch (error) {
           console.error('Erreur lors de la récupération des compétences des employees :', error);
-          throw error; // Vous pouvez choisir de gérer l'erreur ici ou de la remonter à l'appelant
+          throw error; 
         }
       }
 
       export async function deleteSkillFromEmployee(skillId: any) {
         try {
-          const response = await fetch(`http://localhost:3001/employees/skill/${skillId}`, {
+          const response = await fetch(`${process.env.API_URL}/employees/skill/${skillId}`, {
             method: 'DELETE',
           });
         } catch (error) {
@@ -193,7 +192,7 @@ export async function deleteEmployee(id: number) {
       export async function createTeam (team : any) {
       
         try {   
-          const response = await fetch(`http://localhost:3001/team`, {
+          const response = await fetch(`${process.env.API_URL}/team`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -211,7 +210,7 @@ export async function deleteEmployee(id: number) {
 
       export async function fetchTeamWithEmployees(teamId : number) {
         try {
-          const response = await fetch(`http://localhost:3001/team/${teamId}`, {
+          const response = await fetch(`${process.env.API_URL}/team/${teamId}`, {
             cache: 'no-cache'
           });
       
@@ -223,13 +222,13 @@ export async function deleteEmployee(id: number) {
           return result;
         } catch (error) {
           console.error('Erreur lors de la récupération des employés :', error);
-          throw error; // Vous pouvez choisir de gérer l'erreur ici ou de la remonter à l'appelant
+          throw error; 
         }
       }
 
       export async function AddEmployeeToTeam(teamId: number,employeeId: number) {
         try {
-          const response = await fetch(`http://localhost:3001/team/${teamId}/employee/${employeeId}`, {
+          const response = await fetch(`${process.env.API_URL}/team/${teamId}/employee/${employeeId}`, {
             method: 'POST',
           });
           
@@ -248,7 +247,7 @@ export async function deleteEmployee(id: number) {
 
       export async function deleteEmployeeFromTeam(id: number) {
         try {
-          const response = await fetch(`http://localhost:3001/team/employee/${id}`, {
+          const response = await fetch(`${process.env.API_URL}/team/employee/${id}`, {
             method: 'DELETE',
           });
         } catch (error) {
@@ -258,7 +257,7 @@ export async function deleteEmployee(id: number) {
 
       export async function fetchTeam() {
         try {
-          const response = await fetch('http://localhost:3001/team', {
+          const response = await fetch(`${process.env.API_URL}/team`, {
             cache: 'no-cache'
           });
       
