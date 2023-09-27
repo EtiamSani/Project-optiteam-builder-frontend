@@ -22,21 +22,28 @@ export default function Home() {
   const updateTeamId = (newTeamId: number) => {
     setTeamId(newTeamId);
   };
+
+  const updateEmployeeCount = (count : any) => {
+    console.log('CA A COUNT')
+    setEmployeeCount(count);
+  };
+  
   
 
   useEffect(() => {
     const storedTeamId = localStorage.getItem('teamId');
     const teamId = parseInt(storedTeamId, 10);
-    console.log(teamId)
     setTeamId(teamId);
     const fetchData = async (teamId : number) => {
       try {
         const employees = await fetchEmployee();
         setAllEmployees(employees);
         // setEmployeeCount(employees.length)
-        // console.log(employeeCount)
+        console.log(employeeCount)
+        if(teamId){
         const teamWithEmployees = await fetchTeamWithEmployees(teamId)
         setTeamWithEmployees(teamWithEmployees.employees)
+        }
         const team = await fetchTeam()  
         if (team) {
 
@@ -140,7 +147,7 @@ useEffect(() => {
         <h1>Mon équipe</h1> 
       </div> 
       <MessageWithIcon message={message} />
-      <Buttons onAddEmployee={handleAddEmployee} team={team} onUpdateTeamId={updateTeamId} setEmployeeCount={setEmployeeCount}/>
+      <Buttons onAddEmployee={handleAddEmployee} team={team} onUpdateTeamId={updateTeamId} updateEmployeeCount={updateEmployeeCount}/>
       <div className="flex flex-row">
       <div className="flex flex-col">
         

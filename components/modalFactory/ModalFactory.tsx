@@ -53,16 +53,16 @@ class Modal {
 
   class AddEmployeeModal extends Modal {
     onAddEmployee: any;
-    setEmployeeCount: any;
-    constructor(onClose: () => void, onAddEmployee: any, setEmployeeCount: any) {
+    updateEmployeeCount: any;
+    constructor(onClose: () => void, onAddEmployee: any, updateEmployeeCount: any) {
       super(onClose);
       this.onAddEmployee = onAddEmployee;
-      this.setEmployeeCount = setEmployeeCount;
+      this.updateEmployeeCount = updateEmployeeCount;
     }
   
     render(): JSX.Element {
       return (
-        <ModalCreateEmployee onClose={this.onClose} onAddEmployee={this.onAddEmployee} setEmployeeCount={this.setEmployeeCount}/>
+        <ModalCreateEmployee onClose={this.onClose} onAddEmployee={this.onAddEmployee} updateEmployeeCount={this.updateEmployeeCount}/>
       );
     }
   }

@@ -37,7 +37,8 @@ const ModalAddSkills = ({ firstname, lastname, id}: ModalAddSkillsProps) => {
         };
     
         fetchData();
-      }, [id,getSkills,getEmployeeSkills]); 
+      }, [id]); 
+      //,getSkills,getEmployeeSkills
 
         const handleAddSkillToEmployee = async (employeeId: number ,skillId: number) => {
         await addSkillsToEmployee(employeeId, skillId)

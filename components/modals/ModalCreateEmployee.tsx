@@ -20,9 +20,10 @@ interface ModalProps {
     personality: string;
   }
 
-  const Modal: React.FC<ModalProps> = ({ onClose, onAddEmployee, setEmployeeCount}) => {
+  const Modal: React.FC<ModalProps> = ({ onClose, onAddEmployee, updateEmployeeCount, employeeCount}) => {
     
     const [allEmployees, setAllEmployees] = useState<Employee[]>([]);
+    
     const resetModal = () => {
         setEmployeeData({
           lastname: "",
@@ -36,9 +37,10 @@ interface ModalProps {
         try {
           await handleSubmit(employeeData,e); 
           setAllEmployees((prevEmployees) => [...prevEmployees, employeeData]);
-          onClose();
+          // onClose();
           resetModal();
-          setEmployeeCount((prevCount: number) => prevCount + 1);
+          updateEmployeeCount(1);
+          console.log('handle add employee declenché')
         } catch (error) {
           console.error('Error adding employee:', error);
         }

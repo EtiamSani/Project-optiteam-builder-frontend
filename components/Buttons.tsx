@@ -9,7 +9,7 @@ import ModalCreateTeam from './modals/ModalCreateTeam'
 import ModalFactory from './modalFactory/ModalFactory'
 
 
-const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
+const Buttons =  ({onAddEmployee, team, onUpdateTeamId, updateEmployeeCount}) => {
 
 
 
@@ -58,7 +58,7 @@ const Buttons =  ({onAddEmployee, team, onUpdateTeamId, setEmployeeCount}) => {
               Ajouter employé <GrUser className="text-2xl ml-2" />
             </Button>
           </DialogTrigger>
-        {isModalOpen && modalFactory.createAddEmployeeModal(onAddEmployee, (prevCount: number) => prevCount + 1).render()}
+        {isModalOpen && modalFactory.createAddEmployeeModal(onAddEmployee, updateEmployeeCount).render()}
         </div>
       </Dialog>
 
