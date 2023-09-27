@@ -2,7 +2,7 @@
 import { deleteEmployee,fetchEmployee, fetchTeam, fetchTeamWithEmployees } from "@/utils"
 import EmployeeSection from "../../../components/sections/EmployeeSection"
 import { EmployeeProps } from "@/types";
-import Buttons from "../../../components/Buttons";
+import ButtonGroup from "../../../components/ButtonGroup";
 import { useEffect, useState } from "react";
 import TeamSection from "../../../components/sections/TeamSection";
 import MessageWithIcon from "@/components/WarningMessage";
@@ -38,8 +38,6 @@ export default function Home() {
       try {
         const employees = await fetchEmployee();
         setAllEmployees(employees);
-        // setEmployeeCount(employees.length)
-        console.log(employeeCount)
         if(teamId){
         const teamWithEmployees = await fetchTeamWithEmployees(teamId)
         setTeamWithEmployees(teamWithEmployees.employees)
@@ -147,7 +145,7 @@ useEffect(() => {
         <h1>Mon équipe</h1> 
       </div> 
       <MessageWithIcon message={message} />
-      <Buttons onAddEmployee={handleAddEmployee} team={team} onUpdateTeamId={updateTeamId} updateEmployeeCount={updateEmployeeCount}/>
+      <ButtonGroup onAddEmployee={handleAddEmployee} team={team} onUpdateTeamId={updateTeamId} updateEmployeeCount={updateEmployeeCount}/>
       <div className="flex flex-row">
       <div className="flex flex-col">
         
