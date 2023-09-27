@@ -61,7 +61,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
           <Dialog>
           <DialogTrigger>
             <Avatar className="my-5 ml-4">
-              <AvatarImage src={`http://localhost:3001/${employee.profilepicture}`} />
+              <AvatarImage src={`${process.env.API_URL}/${employee.profilepicture}`} />
               <AvatarFallback>{employee.firstname}</AvatarFallback>
             </Avatar>
               </DialogTrigger>
@@ -90,7 +90,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
                   </DialogTrigger>
                     <ModalAddSkills firstname={employee.firstname.toString()} lastname={employee.lastname.toString()}  id={employee.id} name={""}/>
                   </Dialog>
-                  <button onClick={() => handleEditEmployeeClick(employee.id)}>
+                  <button onClick={() => handleEditEmployeeClick(employee.id)}></button>
                     <Dialog>
                       <DialogTrigger>
                   <BsPencil className='text-2xl ml-2' />
@@ -99,7 +99,6 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
                     throw new Error("Function not implemented.")
                   } }/>
                   </Dialog>
-                  </button>
                   <button>
                     <RiDeleteBin7Line className='text-2xl ml-2 mb-1' onClick={() => onDeleteEmployee(employee)} />
                   </button>
