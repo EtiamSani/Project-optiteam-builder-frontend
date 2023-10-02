@@ -70,7 +70,7 @@ const page = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button variant="yellow">S'inscrire</Button>
+          <Button variant="yellow">S'inscriree</Button>
         </CardFooter>
       </Card>
     </TabsContent>
