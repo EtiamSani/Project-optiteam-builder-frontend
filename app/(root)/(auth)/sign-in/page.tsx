@@ -29,7 +29,8 @@ const page = () => {
   const [userData, setUserData] = useState({
     username:"",
     password: "",
-    email:""
+    email:"",
+    teamId: ""
   })
 
   const handleTeamSubmit = (teamData : any) => {
@@ -54,6 +55,8 @@ const page = () => {
       if (response && response.id) {
         const teamId = response.id;
         localStorage.setItem('teamId', teamId); 
+        setUserData({ ...userData, teamId })
+
       }
     } catch (error) {
       console.error('Error adding employee:', error);
@@ -62,6 +65,7 @@ const page = () => {
 
   const handleSignUp = async (userData : any ) => {
     try {
+      console.log(userData)
       const response = await signup(userData);
       console.log(userData)
     } catch (error) {

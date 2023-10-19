@@ -283,7 +283,8 @@ export async function deleteEmployee(id: number) {
             body: JSON.stringify({
              username: userData.username, 
              email : userData.email,
-             password: userData.password
+             password: userData.password,
+             teamId: userData.teamId
             }),
           });
           if (response.ok) {
