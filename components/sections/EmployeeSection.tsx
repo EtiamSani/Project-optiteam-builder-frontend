@@ -15,6 +15,7 @@ import ModalAddSkills from "../modals/ModalAddSkills"
 import {AiOutlineUsergroupAdd} from 'react-icons/ai'
 import { AddEmployeeToTeam, fetchEmployee } from "@/utils"
 import ModalFactory from "../modalFactory/ModalFactory"
+import SearchBar from "../SearchBar"
 
 
 interface EmployeeCardProps {
@@ -56,6 +57,7 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
   
   return (
     <div className='ml-5'>
+      
         <Card className='w-[390px] h-[80px] mb-2 hover:bg-[#ffebb7]' key={employee.id}>
           <div className="flex items-center">
           <Dialog>

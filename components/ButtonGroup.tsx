@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { AiOutlineTool } from "react-icons/ai";
 import { GrGroup, GrUser } from "react-icons/gr";
 import ModalFactory from "./modalFactory/ModalFactory";
+import SearchBar from "./SearchBar";
 
 interface ButtonGroupProps {
   onAddEmployee: () => void;
@@ -91,6 +92,7 @@ const ButtonGroup = ({
 
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Liste des employés</h3>
+        <SearchBar/>
       </div>
     </div>
   );
