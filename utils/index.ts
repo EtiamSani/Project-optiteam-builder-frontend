@@ -190,7 +190,7 @@ export async function deleteEmployee(id: number) {
       }
 
       export async function createTeam (team : any) {
-      
+      console.log(team)
         try {   
           const response = await fetch(`${process.env.API_URL}/team`, {
             method: "POST",
@@ -198,7 +198,7 @@ export async function deleteEmployee(id: number) {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({
-              name: team.name, 
+              name: team, 
             }),
           });
           const result = await response.json();
@@ -272,6 +272,61 @@ export async function deleteEmployee(id: number) {
         }
       }
 
+      export async function signup(userData:any) {
+        console.log(userData)
+        try {
+          const response = await fetch(`${process.env.API_URL}/auth/signup`, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+             username: userData.username, 
+             email : userData.email,
+             password: userData.password
+            }),
+          });
+          if (response.ok) {
+            const responseData = await response.json();
+            const token = responseData.acces_token; 
+          } else {
+            console.error('Erreur lors de la création de compte.');
+            throw new Error('Erreur lors de la création de compte.');
+          }
+        } catch (error) {
+          console.error('Erreur lors la création de compte :', error);
+          throw error; 
+        }
+      }
+
+      export async function signin(userData:any) {
+        console.log(userData)
+        try {
+          const response = await fetch(`${process.env.API_URL}/auth/signin`, {
+            method: 'POST',
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+             email : userData.email,
+             password: userData.password
+            }),
+          });
+          if (response.ok) {
+            const responseData = await response.json();
+            const token = responseData.acces_token; 
+            
+            localStorage.setItem('accessToken', token);
+            console.log('token mis dans localstorage !', token)
+          } else {
+            console.error('Erreur lors de la création de compte.');
+            throw new Error('Erreur lors de la création de compte.');
+          }
+        } catch (error) {
+          console.error('Erreur lors la création de compte :', error);
+          throw error; 
+        }
+      }
       
     
 

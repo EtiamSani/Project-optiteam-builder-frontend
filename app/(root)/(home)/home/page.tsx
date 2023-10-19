@@ -1,10 +1,10 @@
 "use client"
 import { deleteEmployee,fetchEmployee, fetchTeam, fetchTeamWithEmployees } from "@/utils"
-import EmployeeSection from "../../../components/sections/EmployeeSection"
+import EmployeeSection from "../../../../components/sections/EmployeeSection"
 import { EmployeeProps } from "@/types";
-import ButtonGroup from "../../../components/ButtonGroup";
+import ButtonGroup from "../../../../components/ButtonGroup";
 import { useEffect, useState } from "react";
-import TeamSection from "../../../components/sections/TeamSection";
+import TeamSection from "../../../../components/sections/TeamSection";
 import MessageWithIcon from "@/components/WarningMessage";
 import { calculatePersonalityCounts, getMessage } from "@/utils/teamUtils";
 

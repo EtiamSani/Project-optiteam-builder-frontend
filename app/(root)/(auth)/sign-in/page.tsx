@@ -1,11 +1,10 @@
 "use client"
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -18,8 +17,79 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import { createTeam, signin, signup } from '@/utils'
+import { useRouter } from 'next/navigation';
 
 const page = () => {
+  const router = useRouter();
+  const [isTeamInputVisible, setTeamInputVisible] = useState(false);
+  const [teamData, setTeamData] = useState({
+    name: "",
+  });
+  const [userData, setUserData] = useState({
+    username:"",
+    password: "",
+    email:""
+  })
+
+  const handleTeamSubmit = (teamData : any) => {
+    setTeamInputVisible(true);
+    console.log(teamData)
+    handleSaveTeam(teamData)
+  }
+
+  const handleTeamInputChange = (e: { target: { value: any } }) => {
+    const { value } = e.target;
+    setTeamData(value)
+  };
+
+  const handleUserInputChange = (e: { target: { value: string; id: string } }) => {
+    const { value, id } = e.target;
+    setUserData((prevUserData) => ({ ...prevUserData, [id]: value })); // Conservez les autres valeurs dans userData
+  };
+
+  const handleSaveTeam = async (teamData: any) => {
+    try {
+      const response = await createTeam(teamData); 
+      if (response && response.id) {
+        const teamId = response.id;
+        localStorage.setItem('teamId', teamId); 
+      }
+    } catch (error) {
+      console.error('Error adding employee:', error);
+    }
+  };
+
+  const handleSignUp = async (userData : any ) => {
+    try {
+      const response = await signup(userData);
+      console.log(userData)
+    } catch (error) {
+      
+    }
+  }
+  
+  const handleLogin = async (userData :any) => {
+    try{
+      const response = await signin(userData)
+      
+      
+    }catch(error) {
+
+    }
+  }
+ 
+  const token = localStorage.getItem('accessToken');
+  useEffect(() => {
+    if (token) {
+      console.log('USEUSEUSE')
+      router.push('/home');
+    }
+  }, [token]);
+
+
+
+
   return (
     <Tabs defaultValue="account" className="w-[400px] mx-auto mt-[150px]">
     <TabsList className="grid w-full grid-cols-2">
@@ -34,15 +104,15 @@ const page = () => {
         <CardContent className="space-y-2">
           <div className="space-y-1">
             <Label htmlFor="email">Email</Label>
-            <Input id="name" defaultValue="Pedro Duarte" />
+            <Input id="email" value={userData.email} onChange={handleUserInputChange} />
           </div>
           <div className="space-y-1">
-            <Label htmlFor="pasword">Mot de passe</Label>
-            <Input id="username" />
+            <Label htmlFor="password" >Mot de passe</Label>
+            <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange} />
           </div>
         </CardContent>
         <CardFooter>
-          <Button variant="yellow">Connecter</Button>
+          <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter</Button>
         </CardFooter>
       </Card>
     </TabsContent>
@@ -51,27 +121,42 @@ const page = () => {
         <CardHeader>
           <CardTitle className='text-2xl'>Inscrivez-vous</CardTitle>
         </CardHeader>
+
+        {!isTeamInputVisible && (
+        <>
+        <CardContent className='space-y-2'>
+              <div className="space-y-1">
+                <Label htmlFor="name">Nom de l'équipe</Label>
+                <Input id="name" value={teamData.name} onChange={handleTeamInputChange}/>
+              </div>
+            </CardContent><CardFooter>
+                <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Valider</Button>
+              </CardFooter>
+              </>
+        )}
+        {isTeamInputVisible && (
+
+        <>
         <CardContent className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="current">Pseudo</Label>
-            <Input id="current" type="password" />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="current">Nom de l'équipe</Label>
-            <Input id="current" type="password" />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="new">Email</Label>
-            <Input id="new" type="password" />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="new">Mot de passe</Label>
-            <Input id="new" type="password" />
-          </div>
-        </CardContent>
-        <CardFooter>
-          <Button variant="yellow">S'inscriree</Button>
-        </CardFooter>
+              <div className="space-y-1">
+                <Label htmlFor="username">Pseudo</Label>
+                <Input id="username" value={userData.username} onChange={handleUserInputChange}/>
+              </div>
+
+              <div className="space-y-1">
+                <Label htmlFor="email">Email</Label>
+                <Input id="email" value={userData.email} onChange={handleUserInputChange} />
+              </div>
+              <div className="space-y-1">
+                <Label htmlFor="password">Mot de passe</Label>
+                <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange}/>
+              </div>
+            </CardContent>
+              <CardFooter>
+                <Button variant="yellow" onClick={() => handleSignUp(userData)}>S'inscriree</Button>
+              </CardFooter>
+              </>
+        )}
       </Card>
     </TabsContent>
   </Tabs>
