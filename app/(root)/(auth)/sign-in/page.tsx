@@ -65,31 +65,23 @@ const page = () => {
       const response = await signup(userData);
       console.log(userData)
     } catch (error) {
-      
+      console.error('Error signup:', error);
     }
   }
   
   const handleLogin = async (userData :any) => {
     try{
-      const response = await signin(userData)
-      
+      const response = await signin(userData)  
+    if (response.acces_token) {
+      console.log('Router useEffect')
+      router.push('/home');
+    }
       
     }catch(error) {
-
+      console.error('Error login:', error);
     }
   }
  
-  const token = localStorage.getItem('accessToken');
-  useEffect(() => {
-    if (token) {
-      console.log('USEUSEUSE')
-      router.push('/home');
-    }
-  }, [token]);
-
-
-
-
   return (
     <Tabs defaultValue="account" className="w-[400px] mx-auto mt-[150px]">
     <TabsList className="grid w-full grid-cols-2">

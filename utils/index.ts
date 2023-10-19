@@ -318,6 +318,7 @@ export async function deleteEmployee(id: number) {
             
             localStorage.setItem('accessToken', token);
             console.log('token mis dans localstorage !', token)
+            return responseData
           } else {
             console.error('Erreur lors de la création de compte.');
             throw new Error('Erreur lors de la création de compte.');
