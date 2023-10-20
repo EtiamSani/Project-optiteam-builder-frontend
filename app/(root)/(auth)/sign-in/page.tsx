@@ -19,6 +19,10 @@ import {
 } from "@/components/ui/tabs"
 import { createTeam, signin, signup } from '@/utils'
 import { useRouter } from 'next/navigation';
+import {FcGoogle} from 'react-icons/fc'
+import { Separator } from '@/components/ui/separator'
+import { AiOutlineMail } from 'react-icons/ai'
+
 
 const page = () => {
   const router = useRouter();
@@ -108,7 +112,9 @@ const page = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter</Button>
+          <div className='m-auto'>
+            <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter</Button>
+          </div>
         </CardFooter>
       </Card>
     </TabsContent>
@@ -125,8 +131,11 @@ const page = () => {
                 <Label htmlFor="name">Nom de l'équipe</Label>
                 <Input id="name" value={teamData.name} onChange={handleTeamInputChange}/>
               </div>
-            </CardContent><CardFooter>
-                <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Valider</Button>
+            </CardContent>
+              <CardFooter>
+                <div className='m-auto'>
+                  <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Valider</Button>
+                </div>
               </CardFooter>
               </>
         )}
@@ -149,7 +158,11 @@ const page = () => {
               </div>
             </CardContent>
               <CardFooter>
-                <Button variant="yellow" onClick={() => handleSignUp(userData)}>S'inscriree</Button>
+                <div className='flex flex-col m-auto'>
+                <Button variant="yellow" onClick={() => handleSignUp(userData)}> <AiOutlineMail className='mr-2 text-lg'/> S'inscrire</Button>
+                <Separator className="my-4" />
+                <Button className='mt-2'> <FcGoogle className='mr-2'/> S'inscrire avec Google </Button>
+                </div>
               </CardFooter>
               </>
         )}
