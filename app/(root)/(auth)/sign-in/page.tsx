@@ -108,24 +108,6 @@ const page = () => {
     }
   }
 
-  const handleOpenNewWindow = () => {
-    
-    const redirectionURL = 'http://localhost:3001/auth/google/';
-    const newWindow = window.open(redirectionURL, '_blank');
-     // Écouter les événements lorsque la page de redirection se charge
-    
-     if (newWindow){
-     newWindow.addEventListener('load', () => {
-      const url = new URL(newWindow.location.href);
-      const authorizationToken = url.searchParams.get('access_token');
-      console.log(authorizationToken);
-      
-      // Vous pouvez maintenant utiliser 'authorizationToken' pour vos besoins d'authentification.
-    });
-  } else {
-    console.error("La fenêtre n'a pas pu être ouverte.");
-  }
-  };
   const clientId: string = process.env.OAUTH_GOOGLE_ID
   return (
     <Tabs defaultValue="account" className="w-[400px] mx-auto mt-[150px]">
@@ -164,6 +146,7 @@ const page = () => {
                     <div>
                         <GoogleLogin
                           useOneTap
+                          shape='pill'
                           onSuccess={handleGoogleLoginAndAuth}
                         />
                     </div>
@@ -189,7 +172,7 @@ const page = () => {
             </CardContent>
               <CardFooter>
                 <div className='m-auto'>
-                  <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Valider</Button>
+                  <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Continuer</Button>
                 </div>
               </CardFooter>
               </>
@@ -221,6 +204,8 @@ const page = () => {
                       <GoogleLogin
                         useOneTap
                         onSuccess={handleGoogleLoginAndAuth}
+                        text='signup_with'
+                        shape='pill'
                       />
                   </div>
                 </GoogleOAuthProvider>
