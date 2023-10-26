@@ -17,11 +17,13 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { createTeam, signin, signup } from '@/utils'
+import { createTeam, googleAuth, signin, signup } from '@/utils'
 import { useRouter } from 'next/navigation';
 import {FcGoogle} from 'react-icons/fc'
 import { Separator } from '@/components/ui/separator'
 import { AiOutlineMail } from 'react-icons/ai'
+
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 
 
 const page = () => {
@@ -36,6 +38,22 @@ const page = () => {
     email:"",
     teamId: ""
   })
+
+  const handleGoogleLoginAndAuth = async (credentialResponse: any) => {
+    try {
+      const googleTokenFromApi = await googleAuth(credentialResponse); // Attend que googleAuth renvoie le token
+
+      console.log('RETURN FROM API', googleTokenFromApi);
+    
+
+      if (googleTokenFromApi) {
+        router.push('/home');
+      }
+    } catch (error) {
+      console.error('Login Failed', error);
+    }
+  }
+  
 
   const handleTeamSubmit = (teamData : any) => {
     setTeamInputVisible(true);
@@ -89,7 +107,26 @@ const page = () => {
       console.error('Error login:', error);
     }
   }
- 
+
+  const handleOpenNewWindow = () => {
+    
+    const redirectionURL = 'http://localhost:3001/auth/google/';
+    const newWindow = window.open(redirectionURL, '_blank');
+     // Écouter les événements lorsque la page de redirection se charge
+    
+     if (newWindow){
+     newWindow.addEventListener('load', () => {
+      const url = new URL(newWindow.location.href);
+      const authorizationToken = url.searchParams.get('access_token');
+      console.log(authorizationToken);
+      
+      // Vous pouvez maintenant utiliser 'authorizationToken' pour vos besoins d'authentification.
+    });
+  } else {
+    console.error("La fenêtre n'a pas pu être ouverte.");
+  }
+  };
+  const clientId: string = process.env.OAUTH_GOOGLE_ID
   return (
     <Tabs defaultValue="account" className="w-[400px] mx-auto mt-[150px]">
     <TabsList className="grid w-full grid-cols-2">
@@ -112,8 +149,26 @@ const page = () => {
           </div>
         </CardContent>
         <CardFooter>
-          <div className='m-auto'>
-            <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter</Button>
+          <div className='flex flex-col m-auto  items-center'>
+            <div className='m-auto'>
+              <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter</Button>
+            </div>
+            <div className='flex w-8 items-center justify-center'>
+      <Separator className="my-4 mx-0" decorative={false} />
+      <span className='m-2'>ou</span>
+      <Separator className="my-4 mx-0" decorative={false} />
+    </div>
+            
+            <div>
+              <GoogleOAuthProvider clientId={clientId}> 
+                    <div>
+                        <GoogleLogin
+                          useOneTap
+                          onSuccess={handleGoogleLoginAndAuth}
+                        />
+                    </div>
+              </GoogleOAuthProvider>
+            </div>
           </div>
         </CardFooter>
       </Card>
@@ -161,7 +216,14 @@ const page = () => {
                 <div className='flex flex-col m-auto'>
                 <Button variant="yellow" onClick={() => handleSignUp(userData)}> <AiOutlineMail className='mr-2 text-lg'/> S'inscrire</Button>
                 <Separator className="my-4" />
-                <Button className='mt-2'> <FcGoogle className='mr-2'/> S'inscrire avec Google </Button>
+                <GoogleOAuthProvider clientId={clientId}> 
+                  <div>
+                      <GoogleLogin
+                        useOneTap
+                        onSuccess={handleGoogleLoginAndAuth}
+                      />
+                  </div>
+                </GoogleOAuthProvider>
                 </div>
               </CardFooter>
               </>

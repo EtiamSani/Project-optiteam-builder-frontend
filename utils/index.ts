@@ -329,7 +329,30 @@ export async function deleteEmployee(id: number) {
           throw error; 
         }
       }
-      
-    
 
+  export async function googleAuth(credentialResponse : any): Promise<any>{
+          const apiUrl = 'http://localhost:3001/auth/login/google'; // Remplacez par l'URL correcte de votre serveur
 
+          try {
+            const response = await fetch(apiUrl, {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({ token: credentialResponse.credential, teamId: localStorage.getItem('teamId') }),
+            });
+        
+            if (!response.ok) {
+              throw new Error('Échec de la requête');
+            }
+        
+            const apiResponse = await response.json();
+            const googleToken = apiResponse.acces_token;
+            localStorage.setItem('accessToken', googleToken);
+            console.log('token mis dans localstorage !', googleToken);
+            return googleToken;
+          } catch (error) {
+            console.error('Erreur lors de la récupération du token :', error);
+            throw error; // Vous devriez propager l'erreur pour qu'elle soit gérée dans le composant appelant
+          }
+      }
