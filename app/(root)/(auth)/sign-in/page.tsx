@@ -68,7 +68,7 @@ const page = () => {
 
   const handleUserInputChange = (e: { target: { value: string; id: string } }) => {
     const { value, id } = e.target;
-    setUserData((prevUserData) => ({ ...prevUserData, [id]: value })); // Conservez les autres valeurs dans userData
+    setUserData((prevUserData) => ({ ...prevUserData, [id]: value })); 
   };
 
   const handleSaveTeam = async (teamData: any) => {
