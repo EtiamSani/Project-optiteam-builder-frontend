@@ -21,10 +21,11 @@ import { createTeam, googleAuth, signin, signup } from '@/utils'
 import { useRouter } from 'next/navigation';
 import {FcGoogle} from 'react-icons/fc'
 import { Separator } from '@/components/ui/separator'
-import { AiOutlineMail } from 'react-icons/ai'
+import { PiSignInBold } from 'react-icons/pi'
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import PasswordValidator from '@/components/PasswordValidator'
+
 
 
 const page = () => {
@@ -142,7 +143,7 @@ const page = () => {
         <CardFooter>
           <div className='flex flex-col m-auto  items-center'>
             <div className='m-auto'>
-              <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter</Button>
+              <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter <PiSignInBold className='text-2xl ml-2'/></Button>
             </div>
             <div className='flex w-8 items-center justify-center'>
       <Separator className="my-4 mx-0" decorative={false} />
