@@ -79,13 +79,15 @@ const PasswordValidator = ({userData, handleUserInputChange, handleSignUp}:any) 
             {rule.label}
           </div>
         ))}
-      </main>
+      <div className='flex flex-col m-auto'>
       <Button
         variant={overallValidation ? "yellow" : "red"}
         onClick={() => handleSignUp(userData)}
       >
         <AiOutlineMail className="mr-2 text-lg" /> S'inscrire
       </Button>
+      </div>
+      </main>
     </div>
   );
 };

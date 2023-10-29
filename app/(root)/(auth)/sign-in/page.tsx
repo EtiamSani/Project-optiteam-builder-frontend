@@ -207,7 +207,7 @@ const page = () => {
             </CardContent>
               <CardFooter>
                 <div className='flex flex-col m-auto'>
-                <Button variant="yellow" onClick={() => handleSignUp(userData)}> <AiOutlineMail className='mr-2 text-lg'/> S'inscrire</Button>
+                {/* <Button variant="yellow" onClick={() => handleSignUp(userData)}> <AiOutlineMail className='mr-2 text-lg'/> S'inscrire</Button> */}
                 <Separator className="my-4" />
                 <GoogleOAuthProvider clientId={clientId}> 
                   <div>
