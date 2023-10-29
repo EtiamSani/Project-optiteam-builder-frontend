@@ -146,10 +146,10 @@ const page = () => {
               <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter <PiSignInBold className='text-2xl ml-2'/></Button>
             </div>
             <div className='flex w-8 items-center justify-center'>
-      <Separator className="my-4 mx-0" decorative={false} />
-      <span className='m-2'>ou</span>
-      <Separator className="my-4 mx-0" decorative={false} />
-    </div>
+              <Separator className="my-4 mx-0" decorative={false} />
+              <span className='m-2'>ou</span>
+              <Separator className="my-4 mx-0" decorative={false} />
+            </div>
             
             <div>
               <GoogleOAuthProvider clientId={clientId}> 
@@ -209,7 +209,11 @@ const page = () => {
               <CardFooter>
                 <div className='flex flex-col m-auto'>
                 {/* <Button variant="yellow" onClick={() => handleSignUp(userData)}> <AiOutlineMail className='mr-2 text-lg'/> S'inscrire</Button> */}
-                <Separator className="my-4" />
+                <div className='flex w-8 items-center justify-center'>
+                  <Separator className="my-4 mx-0" decorative={false} />
+                  <span className='m-2'>ou</span>
+                  <Separator className="my-4 mx-0" decorative={false} />
+                </div>
                 <GoogleOAuthProvider clientId={clientId}> 
                   <div>
                       <GoogleLogin
