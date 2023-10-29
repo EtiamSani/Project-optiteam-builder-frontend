@@ -24,6 +24,7 @@ import { Separator } from '@/components/ui/separator'
 import { AiOutlineMail } from 'react-icons/ai'
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import PasswordValidator from '@/components/PasswordValidator'
 
 
 const page = () => {
@@ -67,8 +68,16 @@ const page = () => {
   };
 
   const handleUserInputChange = (e: { target: { value: string; id: string } }) => {
+    // const { value, id } = e.target;
+    // setUserData((prevUserData) => ({ ...prevUserData, [id]: value })); 
     const { value, id } = e.target;
-    setUserData((prevUserData) => ({ ...prevUserData, [id]: value })); 
+
+  // Créez un nouvel objet userData avec le champ "password" mis à jour
+  setUserData((prevUserData) => ({
+    ...prevUserData,
+    [id]: value,
+    password: id === 'password' ? value : prevUserData.password,
+  }));
   };
 
   const handleSaveTeam = async (teamData: any) => {
@@ -191,8 +200,9 @@ const page = () => {
                 <Input id="email" value={userData.email} onChange={handleUserInputChange} />
               </div>
               <div className="space-y-1">
-                <Label htmlFor="password">Mot de passe</Label>
-                <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange}/>
+                {/* <Label htmlFor="password">Mot de passe</Label>
+                <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange}/> */}
+                <PasswordValidator userData={userData} handleUserInputChange={handleUserInputChange} handleSignUp={handleSignUp}/>
               </div>
             </CardContent>
               <CardFooter>
