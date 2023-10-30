@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
+  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -19,7 +20,7 @@ import {
 } from "@/components/ui/tabs"
 import { createTeam, googleAuth, signin, signup } from '@/utils'
 import { useRouter } from 'next/navigation';
-import {FcGoogle} from 'react-icons/fc'
+import {IoChevronForwardCircleOutline} from 'react-icons/io5'
 import { Separator } from '@/components/ui/separator'
 import { PiSignInBold } from 'react-icons/pi'
 
@@ -140,15 +141,15 @@ const page = () => {
             <Label htmlFor="password" >Mot de passe</Label>
             <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange} />
           </div>
-          <div className="flex items-center space-x-2 ml-2">
+          <div className="flex items-center space-x-2 mt-2">
             <Checkbox id="terms" />
             <Label htmlFor="terms">Se souvenir de moi</Label>
           </div>
         </CardContent>
-        <CardFooter>
+        <CardFooter className='w-full'>
           <div className='flex flex-col m-auto  items-center'>
             <div className='m-auto'>
-              <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter <PiSignInBold className='text-2xl ml-2'/></Button>
+              <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter <PiSignInBold className='text-2xl ml-2 '/></Button>
             </div>
             <div className='flex w-8 items-center justify-center'>
               <Separator className="my-4 mx-0" decorative={false} />
@@ -175,6 +176,9 @@ const page = () => {
       <Card>
         <CardHeader>
           <CardTitle className='text-2xl'>Inscrivez-vous</CardTitle>
+          {!isTeamInputVisible ? (
+          <CardDescription>Commencer par donner un nom a votre équipe !</CardDescription>
+            ): <CardDescription>Dites nous en plus sur vous</CardDescription>}
         </CardHeader>
 
         {!isTeamInputVisible && (
@@ -186,8 +190,8 @@ const page = () => {
               </div>
             </CardContent>
               <CardFooter>
-                <div className='m-auto'>
-                  <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Continuer</Button>
+                <div className='m-auto mt-2'>
+                  <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Continuer<IoChevronForwardCircleOutline className="text-2xl ml-2"/></Button>
                 </div>
               </CardFooter>
               </>
@@ -212,12 +216,12 @@ const page = () => {
               </div>
             </CardContent>
               <CardFooter>
-                <div className='flex flex-col m-auto'>
+                <div className='flex flex-col items-center m-auto'>
                 {/* <Button variant="yellow" onClick={() => handleSignUp(userData)}> <AiOutlineMail className='mr-2 text-lg'/> S'inscrire</Button> */}
-                <div className='flex w-8 items-center justify-center'>
-                  <Separator className="my-4 mx-0" decorative={false} />
+                <div className='flex items-center mr-20'>
+                  <Separator className="my-4 " decorative={false} />
                   <span className='m-2'>ou</span>
-                  <Separator className="my-4 mx-0" decorative={false} />
+                  <Separator className="my-4 " decorative={false} />
                 </div>
                 <GoogleOAuthProvider clientId={clientId}> 
                   <div>
