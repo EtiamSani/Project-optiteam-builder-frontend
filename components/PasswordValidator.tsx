@@ -11,22 +11,22 @@ const PasswordValidator = ({userData, handleUserInputChange, handleSignUp}:any) 
   const [type, setType] = useState("password");
   const [validationRules, setValidationRules] = useState([
     {
-      label: "At least one lowercase letter",
+      label: "Au moins une lettre minuscule",
       regex: /(?=.*[a-z])/,
       validated: false,
     },
     {
-      label: "At least one uppercase letter",
+      label: "Au moins une lettre majuscule",
       regex: /(?=.*[A-Z])/,
       validated: false,
     },
-    { label: "At least one number", regex: /(?=.*[0-9])/, validated: false },
+    { label: "Au moins un chiffre", regex: /(?=.*[0-9])/, validated: false },
     {
-      label: "At least one special character",
+      label: "Au moins un caractère spécial",
       regex: /(?=.*[!@#\$%\^&*])/,
       validated: false,
     },
-    { label: "At least 8 characters", regex: /(?=.{8,})/, validated: false },
+    { label: "Au moins 8 caractères", regex: /(?=.{8,})/, validated: false },
   ]);
   const [overallValidation, setOverallValidation] = useState(false);
 
