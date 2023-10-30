@@ -25,6 +25,7 @@ import { PiSignInBold } from 'react-icons/pi'
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import PasswordValidator from '@/components/PasswordValidator'
+import { Checkbox } from '@/components/ui/checkbox'
 
 
 
@@ -138,6 +139,10 @@ const page = () => {
           <div className="space-y-1">
             <Label htmlFor="password" >Mot de passe</Label>
             <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange} />
+          </div>
+          <div className="flex items-center space-x-2 ml-2">
+            <Checkbox id="terms" />
+            <Label htmlFor="terms">Se souvenir de moi</Label>
           </div>
         </CardContent>
         <CardFooter>
