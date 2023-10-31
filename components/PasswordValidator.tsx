@@ -31,7 +31,6 @@ const PasswordValidator = ({userData, handleUserInputChange, handleSignUp}:any) 
   const [overallValidation, setOverallValidation] = useState(false);
 
   useEffect(() => {
-    // Check if all validation rules are met
     const allValid = validationRules.every((rule) => rule.validated);
     setOverallValidation(allValid);
   }, [validationRules]);
