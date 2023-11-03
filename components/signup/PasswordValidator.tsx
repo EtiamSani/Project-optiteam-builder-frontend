@@ -4,7 +4,7 @@ import { Label } from "@/components/ui/label";
 import { BsCheck2Circle } from 'react-icons/bs';
 import { FaRegCircleXmark } from 'react-icons/fa6';
 import { LiaEyeSlash, LiaEyeSolid } from 'react-icons/lia';
-import { Button } from './ui/button';
+import { Button } from '../ui/button';
 import { AiOutlineMail } from 'react-icons/ai';
 
 const PasswordValidator = ({userData, handleUserInputChange, handleSignUp}:any) => {

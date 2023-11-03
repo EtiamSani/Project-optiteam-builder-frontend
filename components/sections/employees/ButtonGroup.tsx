@@ -3,7 +3,7 @@ import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import React, { useState } from "react";
 import { AiOutlineTool } from "react-icons/ai";
 import { GrGroup, GrUser } from "react-icons/gr";
-import ModalFactory from "./modalFactory/ModalFactory";
+import ModalFactory from "../../modalFactory/ModalFactory";
 import SearchBar from "./SearchBar";
 
 interface ButtonGroupProps {

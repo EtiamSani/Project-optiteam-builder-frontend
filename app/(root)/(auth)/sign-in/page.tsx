@@ -1,32 +1,19 @@
 "use client"
 
-import React, { useEffect, useState } from 'react'
-import { Button } from "@/components/ui/button"
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
+import React, { useState } from 'react'
+
 import {
   Tabs,
-  TabsContent,
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
 import { createTeam, googleAuth, signin, signup } from '@/utils'
 import { useRouter } from 'next/navigation';
-import {IoChevronForwardCircleOutline} from 'react-icons/io5'
-import { Separator } from '@/components/ui/separator'
-import { PiSignInBold } from 'react-icons/pi'
 
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import PasswordValidator from '@/components/PasswordValidator'
-import { Checkbox } from '@/components/ui/checkbox'
+
+
+import SigninForm from '@/components/signin/SigninForm'
+import SignupForm from '@/components/signup/SignupForm'
 
 
 
@@ -71,10 +58,7 @@ const page = () => {
   };
 
   const handleUserInputChange = (e: { target: { value: string; id: string } }) => {
-    // const { value, id } = e.target;
-    // setUserData((prevUserData) => ({ ...prevUserData, [id]: value })); 
     const { value, id } = e.target;
-
   // Créez un nouvel objet userData avec le champ "password" mis à jour
   setUserData((prevUserData) => ({
     ...prevUserData,
@@ -127,118 +111,8 @@ const page = () => {
       <TabsTrigger value="account">Connexion</TabsTrigger>
       <TabsTrigger value="password">Inscription</TabsTrigger>
     </TabsList>
-    <TabsContent value="account">
-      <Card>
-        <CardHeader>
-          <CardTitle className='text-2xl'>Te revoilà !</CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          <div className="space-y-1">
-            <Label htmlFor="email">Email</Label>
-            <Input id="email" value={userData.email} onChange={handleUserInputChange} />
-          </div>
-          <div className="space-y-1">
-            <Label htmlFor="password" >Mot de passe</Label>
-            <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange} />
-          </div>
-          <div className="flex items-center space-x-2 mt-2">
-            <Checkbox id="terms" />
-            <Label htmlFor="terms">Se souvenir de moi</Label>
-          </div>
-        </CardContent>
-        <CardFooter className='w-full'>
-          <div className='flex flex-col m-auto  items-center'>
-            <div className='m-auto'>
-              <Button variant="yellow" onClick={() => handleLogin(userData)}>Connecter <PiSignInBold className='text-2xl ml-2 '/></Button>
-            </div>
-            <div className='flex w-8 items-center justify-center'>
-              <Separator className="my-4 mx-0" decorative={false} />
-              <span className='m-2'>ou</span>
-              <Separator className="my-4 mx-0" decorative={false} />
-            </div>
-            
-            <div>
-              <GoogleOAuthProvider clientId={clientId}> 
-                    <div>
-                        <GoogleLogin
-                          useOneTap
-                          shape='pill'
-                          onSuccess={handleGoogleLoginAndAuth}
-                        />
-                    </div>
-              </GoogleOAuthProvider>
-            </div>
-          </div>
-        </CardFooter>
-      </Card>
-    </TabsContent>
-    <TabsContent value="password">
-      <Card>
-        <CardHeader>
-          <CardTitle className='text-2xl'>Inscrivez-vous</CardTitle>
-          {!isTeamInputVisible ? (
-          <CardDescription>Commencer par donner un nom a votre équipe !</CardDescription>
-            ): <CardDescription>Dites nous en plus sur vous</CardDescription>}
-        </CardHeader>
-
-        {!isTeamInputVisible && (
-        <>
-        <CardContent className='space-y-2'>
-              <div className="space-y-1">
-                <Label htmlFor="name">Nom de l'équipe</Label>
-                <Input id="name" value={teamData.name} onChange={handleTeamInputChange}/>
-              </div>
-            </CardContent>
-              <CardFooter>
-                <div className='m-auto mt-2'>
-                  <Button variant="yellow" onClick={() => handleTeamSubmit(teamData)}>Continuer<IoChevronForwardCircleOutline className="text-2xl ml-2"/></Button>
-                </div>
-              </CardFooter>
-              </>
-        )}
-        {isTeamInputVisible && (
-
-        <>
-        <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="username">Pseudo</Label>
-                <Input id="username" value={userData.username} onChange={handleUserInputChange}/>
-              </div>
-
-              <div className="space-y-1">
-                <Label htmlFor="email">Email</Label>
-                <Input id="email" value={userData.email} onChange={handleUserInputChange} />
-              </div>
-              <div className="space-y-1">
-                {/* <Label htmlFor="password">Mot de passe</Label>
-                <Input id="password" type="password" value={userData.password} onChange={handleUserInputChange}/> */}
-                <PasswordValidator userData={userData} handleUserInputChange={handleUserInputChange} handleSignUp={handleSignUp}/>
-              </div>
-            </CardContent>
-              <CardFooter>
-                <div className='flex flex-col items-center m-auto'>
-                {/* <Button variant="yellow" onClick={() => handleSignUp(userData)}> <AiOutlineMail className='mr-2 text-lg'/> S'inscrire</Button> */}
-                <div className='flex items-center mr-20'>
-                  <Separator className="my-4 " decorative={false} />
-                  <span className='m-2'>ou</span>
-                  <Separator className="my-4 " decorative={false} />
-                </div>
-                <GoogleOAuthProvider clientId={clientId}> 
-                  <div>
-                      <GoogleLogin
-                        useOneTap
-                        onSuccess={handleGoogleLoginAndAuth}
-                        text='signup_with'
-                        shape='pill'
-                      />
-                  </div>
-                </GoogleOAuthProvider>
-                </div>
-              </CardFooter>
-              </>
-        )}
-      </Card>
-    </TabsContent>
+    <SigninForm userData={userData} handleUserInputChange={handleUserInputChange} handleLogin={handleLogin} handleGoogleLoginAndAuth={handleGoogleLoginAndAuth} />
+    <SignupForm isTeamInputVisible={isTeamInputVisible} teamData={teamData} handleTeamInputChange={handleTeamInputChange} handleTeamSubmit={handleTeamSubmit} userData={userData} handleUserInputChange={handleUserInputChange} handleGoogleLoginAndAuth={handleGoogleLoginAndAuth} handleSignUp={handleSignUp} clientId={clientId}/>
   </Tabs>
   )
 }
