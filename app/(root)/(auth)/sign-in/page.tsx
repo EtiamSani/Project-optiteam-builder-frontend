@@ -1,7 +1,6 @@
 "use client"
 
 import React, { useState } from 'react'
-
 import {
   Tabs,
   TabsList,
@@ -9,9 +8,6 @@ import {
 } from "@/components/ui/tabs"
 import { createTeam, googleAuth, signin, signup } from '@/utils'
 import { useRouter } from 'next/navigation';
-
-
-
 import SigninForm from '@/components/signin/SigninForm'
 import SignupForm from '@/components/signup/SignupForm'
 

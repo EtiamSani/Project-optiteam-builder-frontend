@@ -10,12 +10,11 @@ import { EditEmployeeProps, EmployeeProps } from "@/types"
 import { DialogTrigger } from "@radix-ui/react-dialog"
 import { Dialog } from "@/components/ui/dialog"
 import ModalEditEmployee from "../../modals/ModalEditEmployee"
-import ModalPicture from "../../modals/ModalPicture"
 import ModalAddSkills from "../../modals/ModalAddSkills"
 import {AiOutlineUsergroupAdd} from 'react-icons/ai'
-import { AddEmployeeToTeam, fetchEmployee } from "@/utils"
+import {AddEmployeeToTeam} from "@/utils"
 import ModalFactory from "../../modalFactory/ModalFactory"
-import SearchBar from "./SearchBar"
+
 
 
 interface EmployeeCardProps {
@@ -67,7 +66,6 @@ const EmployeeSection = ({ employee, onDeleteEmployee, onUpdateEmployee, updateP
               <AvatarFallback>{employee.firstname}</AvatarFallback>
             </Avatar>
               </DialogTrigger>
-            {/* <ModalPicture employeeId={employee.id} onUpdateProfilePicture={updateProfilePicture}/> */}
             {modalFactory.createEmployeeProfilePicture(
             employee.id,
             updateProfilePicture

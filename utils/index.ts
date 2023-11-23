@@ -218,7 +218,7 @@ export async function deleteEmployee(id: number) {
             throw new Error('Échec de la requête.');
           }
       
-          const result = await response.json();
+          const result = response.json();
           return result;
         } catch (error) {
           console.error('Erreur lors de la récupération des employés :', error);

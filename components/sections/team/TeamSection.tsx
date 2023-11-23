@@ -1,3 +1,4 @@
+
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
@@ -14,7 +15,6 @@ interface EmployeeCardProps {
 const TeamSection = ({ employee, handleDeleteEmployeeFromTeamUpdater }: EmployeeCardProps) => {
   const [deleteMessage, setDeleteMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(employee)
 
   const handleDeleteEmployeeFromTeam = async (employee: any) => {
     setIsLoading(true);

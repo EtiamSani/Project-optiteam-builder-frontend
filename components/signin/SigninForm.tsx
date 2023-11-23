@@ -1,10 +1,9 @@
 
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -12,19 +11,12 @@ import {
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import {
-  Tabs,
   TabsContent,
-  TabsList,
-  TabsTrigger,
 } from "@/components/ui/tabs"
-import { createTeam, googleAuth, signin, signup } from '@/utils'
-import { useRouter } from 'next/navigation';
-import {IoChevronForwardCircleOutline} from 'react-icons/io5'
 import { Separator } from '@/components/ui/separator'
 import { PiSignInBold } from 'react-icons/pi'
 
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
-import PasswordValidator from '@/components/signup/PasswordValidator'
 import { Checkbox } from '@/components/ui/checkbox'
 
 const clientId: string = process.env.OAUTH_GOOGLE_ID

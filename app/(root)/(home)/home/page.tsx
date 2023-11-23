@@ -5,7 +5,7 @@ import { EmployeeProps } from "@/types";
 import ButtonGroup from "../../../../components/sections/employees/ButtonGroup";
 import { useEffect, useState } from "react";
 import TeamSection from "../../../../components/sections/team/TeamSection";
-import MessageWithIcon from "@/components/sections/team/WarningMessage";
+import MessageWithIcon from "../../../../components/sections/team/WarningMessage";
 import { calculatePersonalityCounts, getMessage } from "@/utils/teamUtils";
 
 
