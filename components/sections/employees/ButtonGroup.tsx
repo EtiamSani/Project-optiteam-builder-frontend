@@ -93,7 +93,7 @@ const ButtonGroup = ({
 
       <div>
         <h3 className="text-md font-bold ml-4 my-5">Liste des employés</h3>
-        <SearchBar/>
+        <SearchBar placeholderTexte="Trouver un employé"/>
       </div>
     </div>
   );

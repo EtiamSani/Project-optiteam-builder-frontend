@@ -1,10 +1,14 @@
 import React from 'react'
 import { Input } from '../../ui/input'
 
-const SearchBar = () => {
+interface SearchBarProps {
+  placeholderTexte: string;
+}
+
+const SearchBar: React.FC<SearchBarProps> = ({ placeholderTexte }) => {
   return (
     <div className='w-[390px] mb-8 relative'>
-        <Input type="email" placeholder="Trouver un employé" />
+        <Input type="email" placeholder={placeholderTexte} className='bg-white-400 font-medium '/>
         <span className="absolute inset-y-0 right-5 pl-3 flex items-center">
         <svg
           xmlns="http://www.w3.org/2000/svg"
