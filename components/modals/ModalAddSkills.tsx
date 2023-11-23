@@ -38,7 +38,6 @@ const ModalAddSkills = ({ firstname, lastname, id }: ModalAddSkillsProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    "use server"
     const fetchData = async () => {
       try {
         const skills = await fetchSkills();
