@@ -1,4 +1,5 @@
 import { AddEmployeeProps, EditEmployeeProps, SaveSkillsProps } from "@/types";
+import { jwtDecode } from "jwt-decode";
 let storedEmployeeId: string | null = null;
 if (typeof window !== "undefined") {
   storedEmployeeId = localStorage.getItem('selectedEmployeeId');
@@ -7,7 +8,9 @@ if (typeof window !== "undefined") {
 
 export async function fetchEmployee() {
     try {
-      const response = await fetch(`${process.env.API_URL}/employees`, {
+      const userId = localStorage.getItem('userId');
+      console.log('ID user récupéré dans le token', userId)
+      const response = await fetch(`${process.env.API_URL}/employees/${userId}`, {
         cache: 'no-cache'
       });
   
@@ -290,6 +293,8 @@ export async function deleteEmployee(id: number) {
           if (response.ok) {
             const responseData = await response.json();
             const token = responseData.acces_token; 
+            console.log('rep du token', token)
+            localStorage.setItem('userId', token.id);
           } else {
             console.error('Erreur lors de la création de compte.');
             throw new Error('Erreur lors de la création de compte.');
@@ -316,6 +321,8 @@ export async function deleteEmployee(id: number) {
           if (response.ok) {
             const responseData = await response.json();
             const token = responseData.acces_token; 
+           
+            
             
             localStorage.setItem('accessToken', token);
             console.log('token mis dans localstorage !', token)
@@ -350,9 +357,12 @@ export async function deleteEmployee(id: number) {
             const googleToken = apiResponse.acces_token;
             localStorage.setItem('accessToken', googleToken);
             console.log('token mis dans localstorage !', googleToken);
+            const decodedToken = jwtDecode(googleToken)
+            const userId = decodedToken.userId
+            localStorage.setItem('userId', userId)
             return googleToken;
           } catch (error) {
             console.error('Erreur lors de la récupération du token :', error);
-            throw error; // Vous devriez propager l'erreur pour qu'elle soit gérée dans le composant appelant
+            throw error; 
           }
       }
