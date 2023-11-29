@@ -1,5 +1,6 @@
 import { AddEmployeeProps, EditEmployeeProps, SaveSkillsProps } from "@/types";
 import { jwtDecode } from "jwt-decode";
+import { decode } from "punycode";
 let storedEmployeeId: string | null = null;
 if (typeof window !== "undefined") {
   storedEmployeeId = localStorage.getItem('selectedEmployeeId');
@@ -8,9 +9,8 @@ if (typeof window !== "undefined") {
 
 export async function fetchEmployee() {
     try {
-      const userId = localStorage.getItem('userId');
-      console.log('ID user récupéré dans le token', userId)
-      const response = await fetch(`${process.env.API_URL}/employees/${userId}`, {
+      const teamId = localStorage.getItem('teamId')
+      const response = await fetch(`${process.env.API_URL}/employees/${teamId}`, {
         cache: 'no-cache'
       });
   
@@ -36,15 +36,20 @@ export async function deleteEmployee(id: number) {
     }
   }
 
-  export async function handleSubmit (employeeData : AddEmployeeProps, e:any) {
+  export async function handleSubmit (employeeData : AddEmployeeProps, e:any, teamId:number) {
+    console.log(teamId)
     e.preventDefault();
       try {
+      
         const response = await fetch(`${process.env.API_URL}/employees`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(employeeData),
+          body: JSON.stringify({
+            ...employeeData,
+            teamId: teamId 
+          })
         });
 
       } catch (error) {
@@ -164,7 +169,6 @@ export async function deleteEmployee(id: number) {
       }
 
       export async function fetchSkillsOfEmployee(employeeId : number) {
-        // console.log(employeeId)
         try {
           const response = await fetch(`${process.env.API_URL}/employees/${employeeId}`, {
             cache: 'no-cache'
@@ -358,8 +362,12 @@ export async function deleteEmployee(id: number) {
             localStorage.setItem('accessToken', googleToken);
             console.log('token mis dans localstorage !', googleToken);
             const decodedToken = jwtDecode(googleToken)
+            console.log(decodedToken)
             const userId = decodedToken.userId
+            const teamId = decodedToken.teamId
             localStorage.setItem('userId', userId)
+            localStorage.setItem('teamId', teamId)
+
             return googleToken;
           } catch (error) {
             console.error('Erreur lors de la récupération du token :', error);

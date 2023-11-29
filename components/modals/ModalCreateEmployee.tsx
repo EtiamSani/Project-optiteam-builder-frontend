@@ -23,6 +23,8 @@ interface ModalProps {
   const Modal: React.FC<ModalProps> = ({ onClose, onAddEmployee, updateEmployeeCount, employeeCount}) => {
     
     const [allEmployees, setAllEmployees] = useState<Employee[]>([]);
+
+    const defaultTeamId = localStorage.getItem('teamId');
     
     const resetModal = () => {
         setEmployeeData({
@@ -30,14 +32,25 @@ interface ModalProps {
           firstname: "",
           job: "",
           personality: "",
+          teamId:defaultTeamId
         });
       };
       
+
+      const [employeeData, setEmployeeData] = useState({
+        lastname: "",
+        firstname: "",
+        job: "",
+        personality:"", 
+        teamId: defaultTeamId
+      });
+      
     const handleAddEmployee = async (e:any) => {
+      const teamId = localStorage.getItem('teamId')
+      console.log('teamid dans le modal', teamId)
         try {
-          await handleSubmit(employeeData,e); 
+          await handleSubmit(employeeData, e, teamId); 
           setAllEmployees((prevEmployees) => [...prevEmployees, employeeData]);
-          // onClose();
           resetModal();
           updateEmployeeCount(1);
           console.log('handle add employee declenché')
@@ -51,12 +64,7 @@ interface ModalProps {
       }
       
       
-    const [employeeData, setEmployeeData] = useState({
-        lastname: "",
-        firstname: "",
-        job: "",
-        personality:"", 
-      });
+  
 
       const handleInputChange = (e: { target: { id: any; value: any } }) => {
         const { id, value } = e.target;
