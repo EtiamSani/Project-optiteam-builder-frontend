@@ -9,8 +9,8 @@ if (typeof window !== "undefined") {
 
 export async function fetchEmployee() {
     try {
-      const teamId = localStorage.getItem('teamId')
-      const response = await fetch(`${process.env.API_URL}/employees/${teamId}`, {
+      const userId = localStorage.getItem('userId')
+      const response = await fetch(`${process.env.API_URL}/employees/${userId}`, {
         cache: 'no-cache'
       });
   
@@ -36,20 +36,21 @@ export async function deleteEmployee(id: number) {
     }
   }
 
-  export async function handleSubmit (employeeData : AddEmployeeProps, e:any, teamId:number) {
-    console.log(teamId)
+  export async function handleSubmit (employeeData : AddEmployeeProps, e:any) {
     e.preventDefault();
-      try {
+    try {
+        console.log('employee data recu',employeeData)
+        const userIdAsNumber = parseInt(employeeData.userId, 10);
+        employeeData.userId = userIdAsNumber;
       
         const response = await fetch(`${process.env.API_URL}/employees`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({
-            ...employeeData,
-            teamId: teamId 
-          })
+          body: JSON.stringify(
+           employeeData
+          )
         });
 
       } catch (error) {

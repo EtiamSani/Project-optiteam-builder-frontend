@@ -24,7 +24,7 @@ interface ModalProps {
     
     const [allEmployees, setAllEmployees] = useState<Employee[]>([]);
 
-    const defaultTeamId = localStorage.getItem('teamId');
+    const defaultUserId = localStorage.getItem('userId');
     
     const resetModal = () => {
         setEmployeeData({
@@ -32,7 +32,7 @@ interface ModalProps {
           firstname: "",
           job: "",
           personality: "",
-          teamId:defaultTeamId
+          userId:defaultUserId
         });
       };
       
@@ -42,14 +42,15 @@ interface ModalProps {
         firstname: "",
         job: "",
         personality:"", 
-        teamId: defaultTeamId
+        userId:defaultUserId
       });
       
     const handleAddEmployee = async (e:any) => {
-      const teamId = localStorage.getItem('teamId')
-      console.log('teamid dans le modal', teamId)
+      // const userId = localStorage.getItem('userId')
+      // console.log('userId dans le modal', userId)
         try {
-          await handleSubmit(employeeData, e, teamId); 
+          console.log('employee data avant la fonction',employeeData)
+          await handleSubmit(employeeData, e); 
           setAllEmployees((prevEmployees) => [...prevEmployees, employeeData]);
           resetModal();
           updateEmployeeCount(1);
