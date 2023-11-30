@@ -1,22 +1,36 @@
 
 "use client"
+import { useEffect, useState } from "react";
 import DropDrownMenu from "./DropDrownMenu";
+import Image from 'next/image'
 
 const Navbar = () => {
-  const ifToken = () => {
-    const token = localStorage.getItem('token') || localStorage.getItem('accessToken');
-    return token;
- } 
+ 
+ 
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    
+    if (typeof window !== 'undefined') {
+      const storedToken = localStorage.getItem('token') || localStorage.getItem('accessToken');
+      if (storedToken) {
+        setToken(storedToken);
+      }
+    }
+  }, []);
  
 
   return (
-    <nav className="bg-[#F1B92A] p-4">
-      <div className="container mx-auto">
-        <div className="flex items-center justify-between">
-          <div className="text-white font-bold text-xl">OptiTeam Builder <span>🤝</span></div>
-          {ifToken() ?  <DropDrownMenu/> : null}
+    <nav className="bg-[#f0c454] p-6 flex justify-end">
+        <div className="flex align-center">
+            <div className="item-center mr-2">
+            <Image src="/LogoOBT.png" alt="Logo" width={50} height={50} />
+            </div>
+              <div className="text-white font-bold text-4xl mr-10">OTB</div>
+              <div className="mr-[90px] cursor-pointer">
+                {token ?  <DropDrownMenu/> : null}
+            </div>
         </div>
-      </div>
     </nav>
   );
 };
