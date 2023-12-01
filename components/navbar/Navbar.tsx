@@ -23,7 +23,7 @@ const Navbar = () => {
  
 
   return (
-    <nav className="bg-[#f0c454] p-6 flex justify-end">
+    <nav className="bg-[#f0c454] p-6 flex justify-start">
         <div className="flex align-center">
             <div className="item-center mr-2">
             <Image src="/LogoOBT.png" alt="Logo" width={50} height={50} />
