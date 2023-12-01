@@ -9,10 +9,25 @@ module.exports = {
     OAUTH_GOOGLE_ID:
       "789289297885-gcot7g5c0mtfh1cmehgahne5bjrsd68i.apps.googleusercontent.com",
   },
-  exportPathMap: async function () {
-    return {
-      "/": { page: "/sign-in" },
-      "/home": { page: "/home" },
-    };
+  // exportPathMap: async function () {
+  //   return {
+  //     // "/": { page: "/sign-in" },
+  //     // "/home": { page: "/home" },
+  //   };
+  // },
+
+  async redirects() {
+    return [
+      {
+        source: "/sign-in/page",
+        destination: "/sign-in",
+        permanent: true,
+      },
+      // {
+      //   source: "/",
+      //   destination: "/",
+      //   permanent: true,
+      // },
+    ];
   },
 };
