@@ -23,12 +23,9 @@ const Navbar = () => {
  
 
   return (
-    <nav className="bg-[#f0c454] p-6 flex justify-start">
-        <div className="flex align-center">
-            <div className="item-center mr-2">
-            <Image src="/LogoOBT.png" alt="Logo" width={50} height={50} />
-            </div>
-              <div className="text-white font-bold text-4xl mr-10 cursor-pointer"> <Link href="/">OTB</Link></div>
+    <nav className="bg-[#f0c454] p-6 flex ">
+        <div className="flex content-center items-center space-x-[1350px]">
+              <div className="text-white font-bold text-2xl mr-10 cursor-pointer"> <Link href="/">OptiTeam Builder.</Link></div>
               <div className="mr-[90px] cursor-pointer">
                 {token ?  <DropDrownMenu/> : <GetStartedButton/>}
             </div>
