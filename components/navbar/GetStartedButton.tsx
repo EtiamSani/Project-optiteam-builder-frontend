@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from '../ui/button'
 import Link from 'next/link'
+import { FaArrowRightToBracket } from "react-icons/fa6"
 
 const GetStartedButton = () => {
   return (
@@ -10,6 +11,7 @@ const GetStartedButton = () => {
     </Button>
     <Button>
         <Link href="/sign-in">Commencer ! </Link>
+        <FaArrowRightToBracket className="ml-2" />
     </Button>
     </div>
   )
