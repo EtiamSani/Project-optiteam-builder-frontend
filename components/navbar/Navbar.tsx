@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import DropDrownMenu from "./DropDrownMenu";
 import Image from 'next/image'
+import GetStartedButton from "./GetStartedButton";
+import Link from "next/link";
 
 const Navbar = () => {
  
@@ -26,9 +28,9 @@ const Navbar = () => {
             <div className="item-center mr-2">
             <Image src="/LogoOBT.png" alt="Logo" width={50} height={50} />
             </div>
-              <div className="text-white font-bold text-4xl mr-10">OTB</div>
+              <div className="text-white font-bold text-4xl mr-10 cursor-pointer"> <Link href="/">OTB</Link></div>
               <div className="mr-[90px] cursor-pointer">
-                {token ?  <DropDrownMenu/> : null}
+                {token ?  <DropDrownMenu/> : <GetStartedButton/>}
             </div>
         </div>
     </nav>
