@@ -12,12 +12,10 @@ const Navbar = () => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    
-    if (typeof window !== 'undefined') {
       const storedToken = localStorage.getItem('token') || localStorage.getItem('accessToken');
       if (storedToken) {
         setToken(storedToken);
-      }
+        console.log(token, 'token use')
     }
   }, []);
  

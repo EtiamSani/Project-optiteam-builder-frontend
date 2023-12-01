@@ -1,4 +1,5 @@
 import { Button } from '@/components/ui/button'
+import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
 
@@ -73,7 +74,7 @@ const page = () => {
             Optimisez facilement votre processus de constitution d'équipe.
             </h2>
             <p className='mt-4 text-lg text-gray-600'>
-              Mettez de l'humain au coeur de vos équipe
+              Avec OptiTeam Builder, mettez de l'humain au coeur de vos équipe
             </p>
           </div>
         </div>
@@ -81,7 +82,7 @@ const page = () => {
         <ol className='my-8 space-y-4 pt-8 md:flex md:space-x-12 md:space-y-0'>
           <li className='md:flex-1'>
             <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
-              <span className='text-sm font-medium text-blue-600'>
+              <span className='text-sm font-medium text-[#EEB730]'>
                 Etape 1
               </span>
               <span className='text-xl font-semibold'>
@@ -101,7 +102,7 @@ const page = () => {
           </li>
           <li className='md:flex-1'>
             <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
-              <span className='text-sm font-medium text-blue-600'>
+              <span className='text-sm font-medium text-[#EEB730]'>
                 Etape 2
               </span>
               <span className='text-xl font-semibold'>
@@ -115,7 +116,7 @@ const page = () => {
           </li>
           <li className='md:flex-1'>
             <div className='flex flex-col space-y-2 border-l-4 border-zinc-300 py-2 pl-4 md:border-l-0 md:border-t-2 md:pb-0 md:pl-0 md:pt-4'>
-              <span className='text-sm font-medium text-blue-600'>
+              <span className='text-sm font-medium text-[#EEB730]'>
                 Etape 3
               </span>
               <span className='text-xl font-semibold'>
@@ -127,6 +128,20 @@ const page = () => {
             </div>
           </li>
         </ol>
+
+        <div className='mb-12 mt-28 sm:mt-40 flex  items-left justify-center text-left ml-5'>
+          <div>
+            <h2 className='max-w-4xl text-3xl font-bold md:text-3xl lg:text-4xl'>
+            Débloquez le potentiel et booster la productivité de votre équipe ! 
+            </h2>
+            <p className='mt-5 max-w-prose text-zinc-700 sm:text-lg'>
+              Optimisez la communication, la collaboration et la productivité grâce à nos outils puissants.
+            </p>
+          </div>
+          <div className='ml-10'>
+            <Image src='/rocket-image-resized.png' alt='rocket image' width={230} height={220} quality={100}/>
+          </div>
+        </div>
         </div>
     </>
   )
