@@ -174,8 +174,7 @@ export async function deleteEmployee(id: number) {
         try {
           const response = await fetch(`${process.env.API_URL}/employees/employee/${employeeId}`, {
             cache: 'no-cache'
-          });
-          
+          })
       
           if (!response.ok) {
             throw new Error('Échec de la requête.');
