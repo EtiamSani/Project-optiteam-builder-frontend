@@ -16,10 +16,14 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { useRef } from "react";
+import { IoDiamondSharp } from "react-icons/io5";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 const DropDrownMenu = () => {
   const dropdownRef = useRef(null);
+  const router = useRouter();
 
   const handleLogout = () => {
     localStorage.clear();
@@ -45,12 +49,16 @@ const DropDrownMenu = () => {
           Billing
         </DropdownMenuItem>
         <DropdownMenuItem>
-          Paramètre de mon équipe
+          Paramètre équipe <IoDiamondSharp className='ml-2 text-blue-500' />
         </DropdownMenuItem>
       </DropdownMenuGroup>
       <DropdownMenuSeparator />
       <DropdownMenuGroup>
-        <DropdownMenuItem>Team</DropdownMenuItem>
+        <Link href="/home">
+        <DropdownMenuItem>
+          Mon équipe
+        </DropdownMenuItem>
+        </Link>
         <DropdownMenuSub>
           <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
           <DropdownMenuPortal>
