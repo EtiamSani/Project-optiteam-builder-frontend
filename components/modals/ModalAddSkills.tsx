@@ -58,8 +58,11 @@ const ModalAddSkills = ({ firstname, lastname, id }: ModalAddSkillsProps) => {
     skillId: number
   ) => {
     await addSkillsToEmployee(employeeId, skillId);
+    console.log(id)
     const skillsOfEmployee = await fetchSkillsOfEmployee(id);
+    console.log(skillsOfEmployee)
     setGetEmployeeSkills(skillsOfEmployee.skills);
+    console.log(skillId)
     setFilteredSkills((prevSkills) =>
       prevSkills.filter((skill) => skill.id !== skillId)
     );

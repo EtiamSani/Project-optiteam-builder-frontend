@@ -156,7 +156,7 @@ export async function deleteEmployee(id: number) {
             method: 'POST',
           });
           
-      
+       
           if (response.status === 201) {
             console.log('Employee deleted successfully.');
             await fetchEmployee();
@@ -170,16 +170,19 @@ export async function deleteEmployee(id: number) {
       }
 
       export async function fetchSkillsOfEmployee(employeeId : number) {
+        console.log('employeeId',employeeId )
         try {
-          const response = await fetch(`${process.env.API_URL}/employees/${employeeId}`, {
+          const response = await fetch(`${process.env.API_URL}/employees/employee/${employeeId}`, {
             cache: 'no-cache'
           });
+          
       
           if (!response.ok) {
             throw new Error('Échec de la requête.');
           }
       
           const result = await response.json();
+          console.log(result)
           return result;
         } catch (error) {
           console.error('Erreur lors de la récupération des compétences des employees :', error);
