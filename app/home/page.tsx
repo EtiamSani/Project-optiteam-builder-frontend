@@ -1,5 +1,5 @@
 "use client"
-import { deleteEmployee,fetchEmployee, fetchTeam, fetchTeamWithEmployees } from "@/utils"
+import { deleteEmployee,fetchEmployee, fetchTeam, fetchTeamWithEmployees } from "@/app"
 import EmployeeSection from "../../components/sections/employees/EmployeeSection"
 import { EmployeeProps } from "@/types";
 import ButtonGroup from "../../components/sections/employees/ButtonGroup";

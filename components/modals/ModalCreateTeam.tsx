@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button'
 import { DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { createTeam} from '@/utils'
+import { createTeam} from '@/app'
 import React, { useState } from 'react'
 import { SaveSkillsProps } from '@/types'
 
