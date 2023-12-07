@@ -36,6 +36,7 @@ const ModalAddSkills = ({ firstname, lastname, id }: ModalAddSkillsProps) => {
   const [deleteMessage, setDeleteMessage] = useState(false);
   const [addMessage, setAddMessage] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [shouldRefetch, setShouldRefetch] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -51,7 +52,7 @@ const ModalAddSkills = ({ firstname, lastname, id }: ModalAddSkillsProps) => {
     };
 
     fetchData();
-  }, [getSkills]);
+  }, [shouldRefetch, id]);
 
   const handleAddSkillToEmployee = async (
     employeeId: number,
@@ -65,6 +66,7 @@ const ModalAddSkills = ({ firstname, lastname, id }: ModalAddSkillsProps) => {
     setFilteredSkills((prevSkills) =>
       prevSkills.filter((skill) => skill.id !== skillId)
     );
+    setShouldRefetch(prevState => !prevState);
     setAddMessage(true);
     setTimeout(() => {
       setAddMessage(false);
