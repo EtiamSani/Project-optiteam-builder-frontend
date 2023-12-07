@@ -1,3 +1,4 @@
+
 import { AddEmployeeProps, EditEmployeeProps, SaveSkillsProps } from "@/types";
 import { jwtDecode } from "jwt-decode";
 import { decode } from "punycode";
@@ -6,9 +7,8 @@ if (typeof window !== "undefined") {
   storedEmployeeId = localStorage.getItem('selectedEmployeeId');
   
 }
-
 export async function fetchEmployee() {
-    try {
+  try {
       const userId = localStorage.getItem('userId')
       const response = await fetch(`${process.env.API_URL}/employees/${userId}`, {
         cache: 'no-cache'
