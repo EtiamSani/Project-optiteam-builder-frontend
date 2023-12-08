@@ -345,7 +345,7 @@ export async function deleteEmployee(id: number) {
       }
 
   export async function googleAuth(credentialResponse : any): Promise<any>{
-          const apiUrl = 'http://localhost:3001/auth/login/google'; // Remplacez par l'URL correcte de votre serveur
+          const apiUrl = 'http://localhost:3001/auth/login/google'; 
 
           try {
             const response = await fetch(apiUrl, {
@@ -370,6 +370,7 @@ export async function deleteEmployee(id: number) {
             const teamId = decodedToken.teamId
             localStorage.setItem('userId', userId)
             localStorage.setItem('teamId', teamId)
+
 
             return googleToken;
           } catch (error) {
