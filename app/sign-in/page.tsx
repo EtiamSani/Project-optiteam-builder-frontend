@@ -6,7 +6,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { createTeam, googleAuth, signin, signup } from '@/app'
+import { createTeam, googleAuth, signin, signup } from '@/app/actions'
 import { useRouter } from 'next/navigation';
 import SigninForm from '@/components/signin/SigninForm'
 import SignupForm from '@/components/signup/SignupForm'

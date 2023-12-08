@@ -15,7 +15,7 @@ import {
   deleteSkillFromEmployee,
   fetchSkills,
   fetchSkillsOfEmployee,
-} from "@/app";
+} from "@/app/actions";
 import React, { useEffect, useState } from "react";
 
 interface ModalAddSkillsProps {

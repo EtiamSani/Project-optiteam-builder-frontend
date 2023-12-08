@@ -12,7 +12,7 @@ import { Dialog } from "@/components/ui/dialog"
 import ModalEditEmployee from "../../modals/ModalEditEmployee"
 import ModalAddSkills from "../../modals/ModalAddSkills"
 import {AiOutlineUsergroupAdd} from 'react-icons/ai'
-import {AddEmployeeToTeam} from "@/app"
+import {AddEmployeeToTeam} from "@/app/actions"
 import ModalFactory from "../../modalFactory/ModalFactory"
 
 

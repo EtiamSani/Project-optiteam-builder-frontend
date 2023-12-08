@@ -16,7 +16,7 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
-import { createTeam, googleAuth, signin, signup } from '@/app'
+import { createTeam, googleAuth, signin, signup } from '@/app/actions'
 import { useRouter } from 'next/navigation';
 import {IoChevronForwardCircleOutline} from 'react-icons/io5'
 import { Separator } from '@/components/ui/separator'

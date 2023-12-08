@@ -1,5 +1,5 @@
 "use client"
-import { deleteEmployee,fetchEmployee, fetchTeam, fetchTeamWithEmployees } from "@/app"
+import { deleteEmployee,fetchEmployee, fetchTeam, fetchTeamWithEmployees } from "@/app/actions"
 import EmployeeSection from "../../components/sections/employees/EmployeeSection"
 import { EmployeeProps } from "@/types";
 import ButtonGroup from "../../components/sections/employees/ButtonGroup";
@@ -143,10 +143,12 @@ useEffect(() => {
         <h1>Mon équipe</h1> 
       </div> 
       <MessageWithIcon message={message} />
+      {/* Ceci doit etre un Composant Server */}
       <ButtonGroup onAddEmployee={handleAddEmployee} team={team} onUpdateTeamId={updateTeamId} updateEmployeeCount={updateEmployeeCount}/>
       <div className="flex flex-row">
       <div className="flex flex-col">
-        
+
+      {/* Ceci doit etre un Composant Server */}  
       {allEmployees.map((employee: EmployeeProps) => (
         <EmployeeSection key={employee.id} employee={employee} onDeleteEmployee={handleDeleteEmployee} onUpdateEmployee={handleUpdateEmployee} updateProfilePicture={updateProfilePicture}
         handleUpdateAddEmployeeToTeam={handleUpdateAddEmployeeToTeam} updateEmployeeInTeam={updateEmployeeInTeam} 
@@ -155,6 +157,7 @@ useEffect(() => {
       </div>
       
       <div className="ml-[100px] flex flex-wrap">
+        {/* Ceci doit etre un Composant Server */}
       {teamWithEmployees.map((employeeTeam: EmployeeProps) => (
         <TeamSection key={employeeTeam.id} employee={employeeTeam} handleDeleteEmployeeFromTeamUpdater={handleDeleteEmployeeFromTeamUpdater} 
         />

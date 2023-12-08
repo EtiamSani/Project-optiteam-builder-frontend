@@ -4,7 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Card } from '@/components/ui/card'
 import { EmployeeProps } from '@/types';
-import { deleteEmployeeFromTeam } from '@/app';
+import { deleteEmployeeFromTeam } from '@/app/actions';
 import React, { useState } from 'react'
 
 

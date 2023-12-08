@@ -1,7 +1,7 @@
 import { Button } from '@/components/ui/button'
 import { DialogContent, DialogFooter, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
-import { editEmployeePicture } from '@/app'
+import { editEmployeePicture } from '@/app/actions'
 import React, { useState } from 'react'
 
 interface ModalPictureProps {
